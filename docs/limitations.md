@@ -1,11 +1,27 @@
-# **Limitations**
+# **Fun stuff**
 
-## Debugging
+## Languages
+### ASL
+I've been learning ASL since early 2025 through [Lifeprint](https://www.lifeprint.com/) and [Queer ASL](https://www.queerasl.com/). 
 
-GitHub Pages error messages on a build are limited.
+Some useful resources:
+* [Handspeak receptive fingerspelling practice](https://www.handspeak.com/learn/413/)
+* [More receptive fingerspelling from Bill Vicars](https://asl.ms/) 
+* [More receptive fingerspelling from Deaf Youtuber ASL Meredith](https://www.youtube.com/@ASLMeredith/shorts) 
+* [ASL Speed Spell app](https://aslspeedspell.com/) 
 
-There is no flow for setting up this project locally, which also makes debugging harder. You could install and run Jekyll though if you need to.
+### Spanish
+I've been learning Spanish since the beginning of May 2025. Resources I've been using for Spanish:
+* Duolingo
+* [Anki](https://apps.ankiweb.net/) flashcards
+* Pimsleur
+* Dual English-subtitles titles on [Youtube](https://chromewebstore.google.com/detail/youtube-dual-subtitles/hkbdddpiemdeibjoknnofflfgbgnebcm) and [Disney+](https://chromewebstore.google.com/detail/double-subtitles-for-disn/nabelcoiaepnnjjgdgkjlgfjmfhjdpid?hl=en) for English shows dubbed into Spanish
+* Conjugation games: [Conjuguemos](https://conjuguemos.com/student/activities) on the web and the [Conjugato app](https://apps.apple.com/us/app/conjugato-learn-spanish-verbs/id1388189747) (iOS + Android)
+* Weekly lessons with a tutor on [italki](https://www.italki.com/dashboard)
 
+Other resources that look cool:
+* [Lingoda](https://learn.lingoda.com/en/spanish/m2m-register?redirect=%2Fen%2Fpackage%2F01J41M27J436R7667MZHV0BZSR%3Fcurrency%3DUSD%26trial%3Dtrue%26section%3Dspanish)
+* 
 
 ## Badges
 
