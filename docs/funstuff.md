@@ -3,7 +3,7 @@
 ## Tech stuff
 ### Command line tools
 * [Vim](https://www.vim.org/)
-* [OCRmyPDF (including skewed pages)](https://ocrmypdf.readthedocs.io/en/latest/cookbook.html)
+* [OCRmyPDF](https://ocrmypdf.readthedocs.io/en/latest/cookbook.html) for OCR, including de-skewing pages
 * [Fast PDF grep](https://pdfgrep.org/)
 * [qpdf](https://qpdf.sourceforge.io/) for pdf tools including programmatically splitting pdfs by pages
 
@@ -41,4 +41,4 @@ Other resources that look cool:
 * [Clozemaster](https://www.clozemaster.com/)
 
 ## Other
-* Pomodoro timer https://www.online-stopwatch.com/pomodoro-timer/
+* [Online pomodoro timer](https://www.online-stopwatch.com/pomodoro-timer/)
