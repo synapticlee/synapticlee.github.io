@@ -1,19 +1,13 @@
 ---
 permalink: /
 ---
+## Menu
+- [Writing](writing.md)
+- [Fun stuff](funstuff.md)
+
 # **About**
 
 I am Technology for Liberty Fellow at the ACLU of Massachusetts. In a past life, I spent some time in academia, studying the neuroscience of learning and decision-making using computational methods. 
-
-## Menu
-
-Some info on how to make a site like this and how it works.
-
-- [About](about.md)
-- [Features](features.md)
-- [Limitations](limitations.md)
-- [What about a Wiki?](wiki.md)
-
 
 ## Source
 
