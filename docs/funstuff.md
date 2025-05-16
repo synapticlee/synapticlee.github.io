@@ -4,7 +4,9 @@
 ### ASL
 I've been learning ASL since early 2025 through [Lifeprint](https://www.lifeprint.com/) and [Queer ASL](https://www.queerasl.com/). 
 
-Some useful resources:
+Some other useful resources:
+* Someone made [an anki deck of Lifeprint signs](https://ankiweb.net/shared/info/1789885356)
+* I played around with making [my own ASL flashcards](https://curious-duckanoo-5e4424.netlify.app/)
 * [Handspeak receptive fingerspelling practice](https://www.handspeak.com/learn/413/)
 * [More receptive fingerspelling from Bill Vicars](https://asl.ms/) 
 * [More receptive fingerspelling from Deaf Youtuber ASL Meredith](https://www.youtube.com/@ASLMeredith/shorts) 
