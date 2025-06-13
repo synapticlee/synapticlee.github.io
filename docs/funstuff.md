@@ -1,4 +1,4 @@
-[Home](README.md) | [Writing](writing.md) |  [Fun stuff](funstuff.md)
+[Home](/) | [Writing](writing.md) |  [Fun stuff](funstuff.md)
 
 # **Fun stuff**
 
