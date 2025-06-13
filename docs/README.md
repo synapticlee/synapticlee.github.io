@@ -1,8 +1,7 @@
 ---
 permalink: /
 ---
-## Navigation
-[Writing](writing.md) |  [Fun stuff](funstuff.md)
+[Home](/) | [Writing](writing.md) |  [Fun stuff](funstuff.md)
 
 # **About**
 
