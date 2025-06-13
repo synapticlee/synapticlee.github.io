@@ -1,6 +1,5 @@
-## Menu
-- [Writing](writing.md)
-- [Fun stuff](funstuff.md)
+## Navigation
+[Writing](writing.md) |  [Fun stuff](funstuff.md)
 
 ## Data for Justice
 As Technology for Liberty Fellow at the ACLU of Massachusetts, I run the [Data for Justice project](https://data.aclum.org/), publishing [accountability stories](https://data.aclum.org/blog/) with interactive visualizations.
