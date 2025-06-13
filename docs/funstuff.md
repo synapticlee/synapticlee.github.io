@@ -1,5 +1,4 @@
-## Navigation
-[Writing](writing.md) |  [Fun stuff](funstuff.md)
+[Home](README.md) | [Writing](writing.md) |  [Fun stuff](funstuff.md)
 
 # **Fun stuff**
 
