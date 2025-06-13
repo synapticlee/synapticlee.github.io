@@ -4,9 +4,7 @@
 As Technology for Liberty Fellow at the ACLU of Massachusetts, I run the [Data for Justice project](https://data.aclum.org/), publishing [accountability stories](https://data.aclum.org/blog/) with interactive visualizations.
 
 ### Data-driven stories
-[What we know, and what we don't know, about how the Boston Police Department uses its surveillance camera network](https://data.aclum.org/blog) (in preparation). 
-
-[We saved hundreds of Biden-era AI documents, so you don’t have to](https://data.aclum.org/2025/01/13/biden-era-ai-archive/) (January 13, 2025). 
+[What we know, and what we don't know, about how the Boston Police Department uses its surveillance camera network](https://data.aclum.org/blog) (in preparation).  
 
 [Eyes in the Sky: Big Brother is (still) watching](https://data.aclum.org/2024/06/24/government-drones-ma-2023/) (June 24, 2024).
 
@@ -16,6 +14,9 @@ As Technology for Liberty Fellow at the ACLU of Massachusetts, I run the [Data f
 
 ### Explainers
 [Yes, All Location Data: Separating fact from myth in industry talking points about “anonymous” location data](https://data.aclum.org/2024/02/28/yes-all-location-data/) (February 28, 2024). 
+
+### Tools
+[We saved hundreds of Biden-era AI documents, so you don’t have to](https://data.aclum.org/2025/01/13/biden-era-ai-archive/) (January 13, 2025).
 
 ## Op-eds
 [AI shouldn’t scare us – but fearmongering should](https://thefulcrum.us/media-technology/fear-of-ai) (December 27, 2023). *The Fulcrum*.
