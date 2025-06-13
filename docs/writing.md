@@ -28,4 +28,4 @@ As Technology for Liberty Fellow at the ACLU of Massachusetts, I run the [Data f
 [POV: NYPD’s robodogs are being paid for in the shadiest way possible](https://www.fastcompany.com/90894012/pov-nypd-is-robbing-new-yorkers-to-pay-for-robot-police-dogs). (May 11, 2023). *Fast Company*. 
 
 ## Academic publications 
-[Google Scholar here](https://scholar.google.com/citations?user=vATffHQAAAAJ&hl=en)
+[View my academic publications on Google Scholar.](https://scholar.google.com/citations?user=vATffHQAAAAJ&hl=en)
