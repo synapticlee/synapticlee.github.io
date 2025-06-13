@@ -1,3 +1,6 @@
+## Navigation
+[Writing](writing.md) |  [Fun stuff](funstuff.md)
+
 # **Fun stuff**
 
 ## Tech stuff
