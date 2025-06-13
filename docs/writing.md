@@ -3,7 +3,7 @@
 - [Fun stuff](funstuff.md)
 
 ## Data for Justice
-As Technology for Liberty Fellow at the ACLU of Massachusetts, I run the [Data for Justice project](https://data.aclum.org/), publishing [accountability stories](https://data.aclum.org/blog/) with interactive visualizations:
+As Technology for Liberty Fellow at the ACLU of Massachusetts, I run the [Data for Justice project](https://data.aclum.org/), publishing [accountability stories](https://data.aclum.org/blog/) with interactive visualizations.
 
 ### Data-driven stories
 [What we know, and what we don't know, about how the Boston Police Department uses its surveillance camera network](https://data.aclum.org/blog) (in preparation). 
