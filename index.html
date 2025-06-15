@@ -34,42 +34,221 @@
   ======================================================== -->
   <!-- Navbar CSS -->
   <style>
-    .navbar {
-      background-color: #fff; /* Set your desired background color */
+    /* .navbar {
+      background-color: #fff; 
     }
 
     .navbar-brand {
-      color: #333; /* Set your desired text color */
+      color: #333; 
     }
 
     .navbar-nav .nav-link {
-      color: #333; /* Set your desired text color */
+      color: #333; 
+    } */
+    
+    main {
+      /* margin: auto; */
+      margin-left: 150px;
     }
+    h2, h5 {
+      font-family: monospace;
+    }
+    h2 {
+      font-weight: 700;
+      font-size:2.2em;
+      letter-spacing: 0.05em;
+    }
+    body {
+      font-family: 'Reddit Sans', sans-serif;
+      background: #f5f5f5;
+      /* padding: 40px; */
+      display: flex;
+      justify-content: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 300px); /* 3 columns */
+      gap: 70px;
+    }
+
+    .card {
+      background: white;
+      /* border-radius: 8px; */
+      /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+      /* overflow: hidden; */
+      width: 310px;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      /* justify-content: space-between; */
+      flex-grow: 1;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #007acc;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #444;
+      font-size: 0.9em;
+      line-height: 1.2;
+      /* overflow: hidden; */
+      /* text-overflow: ellipsis; */
+      display: -webkit-box;
+    }
+
+    .card-meta {
+      font-size: 0.8em;
+      color: #777;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 1em; 
+      margin: 0 0 6px 0;
+      line-height: 1.2;
+    }
+
+    /* .card-title a {
+      color:#396168 !important;
+    }
+
+  a {
+      color:#1b818e !important;
+    } */
+ /* unvisited link */
+a:link {
+  color: #33707e;
+}
+
+/* visited link */
+/* a:visited {
+  color: rgb(68, 72, 68);
+} */
+
+/* mouse over link */
+a:hover {
+  color: rgb(135, 135, 135);
+}
+
+    body {
+      font-family: 'Reddit Sans', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 300px); /* 3 columns */
+      gap: 70px;
+    }
+
+    .card {
+      background: white;
+      /* border-radius: 8px; */
+      /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+      /* overflow: hidden; */
+      width: 310px;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      /* justify-content: space-between; */
+      flex-grow: 1;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #007acc;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #444;
+      font-size: 0.9em;
+      line-height: 1.2;
+      /* overflow: hidden; */
+      /* text-overflow: ellipsis; */
+      display: -webkit-box;
+    }
+
+    .card-meta {
+      font-size: 0.8em;
+      color: #777;
+      margin-bottom: 6px;
+    }
+
+    .card-title {
+      font-size: 1em; 
+      margin: 0 0 6px 0;
+      line-height: 1.2;
+    }
+
+    /* .card-title a {
+      color:#396168 !important;
+    }
+
+  a {
+      color:#1b818e !important;
+    } */
+ /* unvisited link */
+a:link {
+  color: #2d8f96;
+  font-weight: 700;
+}
+
+/* visited link */
+a:visited {
+  color: #2d8f96;
+}
+
+/* mouse over link */
+a:hover {
+  color: rgb(135, 135, 135);
+}
+
+/* selected link */
+/* a:active {
+  color: blue;
+}  */
   </style>
 </head>
 
 <body>
 
-  <!-- ======= Navbar ======= -->
-  <nav class="navbar navbar-expand-lg navbar-light custom-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Julie J Lee, PhD</a>
-
-      <!-- Navbar Toggle Button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Navbar Links -->
-      <div class="collapse navbar-collapse" id="main-navbar">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#">News</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
   <main id="main">
 
@@ -78,13 +257,12 @@
       <div class="container">
         <div class="row mb-5 align-items-center">
           <div class="col-md-12 col-lg-6 mb-4 mb-lg-0" data-aos="fade-up">
-            <p class="mb-0">I'm Technology for Liberty Fellow at the ACLU of Massachusetts, where I write <a href="http://data.aclum.org/blog">data-driven accountability stories</a> with interactive visualizations using public records data and web scraping. </p>
-            <br><p class="mb-0">
-              Before that, I had an entirely different career in cognitive science, 
-              studying reinforcement learning and decision-making using experiments and computational models. 
-              I have a PhD in Neuroscience from University College London.</p>
-<!--             <h4>Hey, I'm Julie Lee</h4> -->
-<!--             <p class="mb-0">Technologist, Researcher, Writer</p> -->
+            <h2>It's-a-me, Julie Lee</h2>
+            <!-- <h5>Technologist, Researcher, Storyteller</h5> <br><br> -->
+             <br>
+
+            <p class="mb-0">I'm <b>Technology for Liberty Fellow</b> at the <b>ACLU of Massachusetts</b>, where I work on issues at the intersection of technology and civil rights and civil liberties, especially topics like <b>surveillance technologies</b>, <b>policing</b> and <b>algorithmic harms</b>. <br><br>I oversee the <a href=https://data.aclum.org/>Data for Justice project</a>, publishing <b>data-driven accountability stories</b> and crafting <b>interactive visualizations.</b><br><br>
+              Previously, I had an entirely different career as an <a href="https://scholar.google.com/citations?user=vATffHQAAAAJ&hl=en">academic researcher</a> studying reinforcement learning and decision-making using experiments and computational models. I have a PhD in Neuroscience from University College London.</p>
           </div>
           <!-- <div class="col-md-12 col-lg-6 text-start text-lg-end" data-aos="fade-up" data-aos-delay="100">
             <div id="filters" class="filters">
@@ -96,99 +274,101 @@
             </div> 
           </div> -->
         </div>
-        <div id="portfolio-grid" class="row no-gutter" data-aos="fade-up" data-aos-delay="200">
-          <div class="item web col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="https://www.fastcompany.com/90894012/pov-nypd-is-robbing-new-yorkers-to-pay-for-robot-police-dogs" class="item-wrap fancybox">
-              <div class="work-info">
-                <h3>POV: NYPD's robodogs are being paid for in the shadiest way possible</h3>
-                <span>Fast Company</span>
-              </div>
-              <img class="img-fluid" src="https://i.imgur.com/GxBxlXe.png">
-            </a>
-          </div>
-          <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="https://visiblemagazine.com/chatgpt-for-therapy-houston-we-have-a-problem/" class="item-wrap fancybox">
-              <div class="work-info">
-                <h3>ChatGPT for therapy? Houston, we have a problem </h3>
-                <span>Visible Magazine</span>
-              </div>
-              <img class="img-fluid" src="https://i.imgur.com/RVNWIsK.png">
-            </a>
-          </div>
-          <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="https://slate.com/technology/2023/12/personal-data-storage-evernote-google-drive-icloud.html" class="item-wrap fancybox">
-              <div class="work-info">
-                <h3>Our Digital Lives Are Too Fragile</h3>
-                <span>Slate</span>
-              </div>
-              <img class="img-fluid" src="https://i.imgur.com/xcPUhaw.png">
-            </a>
-          </div>
-          <!-- <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <div class="work-info">
-                <h3>Cocooil</h3>
-                <span>Branding</span>
-              </div>
-              <img class="img-fluid" src="assets/img/img_3.jpg">
-            </a>
-          </div>
-          <div class="item design col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <div class="work-info">
-                <h3>Nike Shoe</h3>
-                <span>Design</span>
-              </div>
-              <img class="img-fluid" src="assets/img/img_4.jpg">
-            </a>
-          </div>
-          <div class="item photography col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <div class="work-info">
-                <h3>Kitchen Sink</h3>
-                <span>Photography</span>
-              </div>
-              <img class="img-fluid" src="assets/img/img_5.jpg">
-            </a>
-          </div>
-          <div class="item branding col-sm-6 col-md-4 col-lg-4 mb-4">
-            <a href="work-single.html" class="item-wrap fancybox">
-              <div class="work-info">
-                <h3>Amazon</h3>
-                <span>brandingn</span>
-              </div>
-              <img class="img-fluid" src="assets/img/img_6.jpg">
-            </a>
-          </div> -->
-        </div>
+
+</head>
+<body>
+
+  <div class="grid">
+    <div class="card">
+      <a href="https://data.aclum.org/2025/01/13/biden-era-ai-archive/"><img src="https://data.aclum.org/wp-content/uploads/2025/01/BidenEraHeaderImage3.png" alt=""></a>
+      <div class="card-content">
+       <div class="card-title"><a href="#">We saved hundreds of Biden-era AI documents, so you don’t have to</a></div>
+        <div class="card-meta">January 13, 2025 &mdash; The Data for Justice Project</div>
+        <p>In anticipation of the new administration, I scraped hundreds of documents from government websites, including executive orders, FTC complaints, spreadsheets and blogposts, using Playwright, wget and waybackpy.</p>
       </div>
+    </div>
+
+    <div class="card">
+      <a href =""><img src="https://data.aclum.org/wp-content/uploads/2024/06/DronesHeaderImage.png" alt=""></a>
+      <div class="card-content">
+        <div class="card-title"><a href="#">Eyes in the Sky: Big Brother is (still) watching</a></div>
+        <div class="card-meta">June 24, 2024 &mdash; The Data for Justice Project</div>
+        <p>I analyzed public records from the FAA to see which Massachusetts government agencies were using drones, finding that many of these models were prone to crashes. I also updated the <a href="https://data.aclum.org/government-drones-ma">dashboard</a> to have more functionality.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://data.aclum.org/wp-content/uploads/2024/04/ShotSpotterBlogpostHeader.png" alt="">
+      <div class="card-content">
+        <div class="card-title"><a href="https://data.aclum.org/2024/04/08/boston-shotspotter/">Boston Police Records Show Nearly 70 Percent of ShotSpotter Alerts Led to Dead Ends</a></div>
+        <div class="card-meta">April 8, 2024 &mdash; The Data for Justice Project</div>
+        <p>I conducted the largest analysis of Boston's ShotSpotter system to date, receiving significant press attention and spurring a <a href="https://www.markey.senate.gov/news/press-releases/senator-markey-colleagues-urge-dhs-to-investigate-federal-funding-of-shotspotter-gunshot-detection-system">letter</a> from Senator Markey, Senator Warren and Representative Pressley to the DHS Office of the Inspector General, urging an investigation under the Civil Rights Act.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://data.aclum.org/wp-content/uploads/2024/02/JoahnaKuiper-Littledata-houses-square-1280x1280-2.png?ver=1709148806" alt="">
+      <div class="card-content">
+  <div class="card-title"> <a href="https://data.aclum.org/2024/02/28/yes-all-location-data/">Yes, All Location Data: Separating fact from myth in industry talking points about “anonymous” location data</a> </div>
+        <div class="card-meta">February 28, 2024 &mdash; The Data for Justice Project</div>
+        <p>I wrote an explainer on how location data can be de-anonymized from just a few data points, referencing peer-reviewed academic research on privacy bounds.</p>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <img src="https://data.aclum.org/wp-content/uploads/2024/01/eviction_cases.png?ver=1705544944" alt="">
+      <div class="card-content">
+          <div class="card-title"> <a href="https://data.aclum.org/2024/01/16/eviction-cases-analysis/">Balancing the scales of justice: Why right to counsel in eviction cases is a racial justice and housing justice issue</a>
+            </div>
+        <div class="card-meta">January 16, 2024 &mdash; The Data for Justice Project</div>
+        <p>I analyzed eviction rates to support a proposed bill in the Massachusetts state legislature that sought to expand access to counsel in housing cases.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://compote.slate.com/images/80300cd6-2031-4f72-85a8-dd25b1158415.jpeg?crop=1560%2C1040%2Cx0%2Cy0&width=2200" alt="">
+      <div class="card-content">
+        <a href="https://slate.com/technology/2023/12/personal-data-storage-evernote-google-drive-icloud.html">Our Digital Lives Are Too Fragile</a>
+        <div class="card-meta">December 26, 2023 &mdash; Slate</div>
+        <p>Evernote killed its free tier, and I missed a coworker's birthday drinks trying to salvage my notes. Based on that experience, I wrote an essay on the fragility of our digital lives in the modern age.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.squarespace-cdn.com/content/v1/5c1bfc7eee175995a4ceb638/ad08a48f-2025-4dcf-9a68-9975ef89c3a4/WechatIMG75.jpg?format=2500w" alt="">
+      <div class="card-content">
+      <div class="card-title">
+        <a href="#">Roadblock to Care: Barriers to Out-of-State Travel for Abortion and Gender Affirming Care</a>
+        </div>
+        <div class="card-meta">July 18, 2023 &mdash; S.T.O.P. Research Reports</div>
+        <p>I researched ways in which out-of-state heathcare seekers could be surveilled through different forms of transportation and accommodation choices, writing this report with a large team of collaborators.</p>
+      </div>
+    </div>
+
+    
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Chatgpt-screenshot.png?20240513140134" alt="">
+      <div class="card-content">
+        <a href="https://visiblemagazine.com/chatgpt-for-therapy-houston-we-have-a-problem/">ChatGPT for therapy? Houston, we have a problem </a>
+        <div class="card-meta">October 20, 2023 &mdash; VISIBLE magazine</div>
+        <p>I wrote an op-ed on why ChatGPT shouldn't be used for therapy. This piece was drafted through the <a href="https://www.macfound.org/press/grantee-news/public-voices-fellows-to-shape-discourse-on-technology-in-the-public-interest">Public Voices Fellowship</a> on Technology in the Public Interest, an initiative of The OpEd Project</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="https://images.fastcompany.com/image/upload/f_webp,c_fit,w_1920,q_auto/wp-cms/uploads/2023/05/p-1-90894012-pov-nypd-is-robbing-new-yorkers-to-pay-for-robot-police-dogs.jpg" alt="">
+      <div class="card-content">
+        <a href="https://www.fastcompany.com/90894012/pov-nypd-is-robbing-new-yorkers-to-pay-for-robot-police-dogs">POV: NYPD’s robodogs are being paid for in the shadiest way possible</a>
+        <div class="card-meta">May 11, 2023 &mdash; Fast Company</div>
+        <p>After Mayor Eric Adams purchased a robot police dog with $750,000 in asset forfeiture funds, I wrote this op-ed as a deeper dive into asset forfeiture and how police are using these funds to buy surveillance techologies absent usual procurement processes.</p>
+      </div>
+    </div>
+
     </section><!-- End  Works Section -->
 
   </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-6">
-          <p class="mb-1">&copy; Copyright MyPortfolio. All Rights Reserved</p>
-          <div class="credits">
-            <!--
-            All the links in the footer should remain intact.
-            You can delete the links only if you purchased the pro version.
-            Licensing information: https://bootstrapmade.com/license/
-            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=MyPortfolio
-          -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-          </div>
-        </div>
-        <div class="col-sm-6 social text-md-end">
-          <a href="http://twitter.com/synapticlee"><span class="bi bi-twitter"></span></a>
-          <a href="https://www.linkedin.com/in/julie-j-lee/"><span class="bi bi-linkedin"></span></a>
-        </div>
-      </div>
-    </div>
-  </footer>
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
