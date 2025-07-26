@@ -1,93 +1,28 @@
-
+/* 1. Reset and base styles */
 html, body {
   height: 100%;
   width: 100%;
+  margin: 0;
 }
 
-/* 2. Body styles */
 body {
   font-family: 'Reddit Sans', sans-serif;
   background: #f5f5f5;
-  padding: 40px 20px; /* page padding */
+  padding: 40px 20px;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
 }
 
-/* 3. Center main */
+/* 2. Main container */
 main {
   width: 100%;
   max-width: 1200px;
-}
-
-/* 4. Top matter aligned left exactly with grid */
-.top-matter {
-  width: 60%;
-  padding-left: 0; /* no extra padding here */
-  margin-bottom: 50px;
-  color: #444;
-  text-align: left;
-}
-
-/* 5. Grid with exactly 3 equal columns, centered cards */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 50px;
-  width: 100%;
-  box-sizing: border-box;
-  justify-items: center; /* center cards inside cells */
-
-}
-.card:last-child {
-  margin-bottom: 100px;
-}
-
-
-/* 6. Cards fixed width and height */
-.card {
-  background: white;
-  width: 310px;
-  height: 420px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-  display: flex;
-  flex-direction: column;
-}
-
-/* ... your other card styles here ... */
-
-/* 7. Responsive: single column on mobile */
-@media (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    width: 100%;
-    max-width: 310px;
-    height: auto;
-  }
-
-  .top-matter {
-    max-width: 310px;
-  }
-}
-
-body {
-  font-family: 'Reddit Sans', sans-serif;
-  background: #f5f5f5;
-  margin: 0;
-  padding: 40px 20px; 
-}
-
-main {
-  max-width: 1200px;
-  width: 100%;
   margin: 0 auto;
-  padding: 0 20px; /* optional */
   box-sizing: border-box;
 }
 
+/* 3. Typography */
 h2 {
   font-family: monospace;
   font-weight: 700;
@@ -100,35 +35,42 @@ h5 {
   font-family: monospace;
 }
 
+/* 4. Top matter section */
 .top-matter {
-  max-width: 800px;      /* desktop max width */
+  max-width: 800px;
+  width: 60%;
   margin-bottom: 50px;
-  padding-left: 20px;    /* match grid’s side padding */
-  box-sizing: border-box;
+  padding-left: 0;
+  color: #444;
   text-align: left;
+  box-sizing: border-box;
 }
 
+/* 5. Grid layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 50px;
-  justify-items: center;
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
   box-sizing: border-box;
+  justify-items: center;
 }
 
+/* 6. Card styles */
 .card {
   background: white;
+  width: 310px;
   max-width: 310px;
-  width: 100%;
   height: 420px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
 }
+
+.card:last-child {
+  margin-bottom: 100px;
+}
+
 .card img {
   width: 100%;
   height: 180px;
@@ -136,12 +78,28 @@ h5 {
 }
 
 .card-content {
-  padding: 12px;
+  padding: 12px 12px 22px 12px; /* Added 10px extra bottom padding for tag spacing */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  justify-content: space-between;
 }
 
+.card-meta {
+  font-size: 0.8em;
+  color: #777;
+  margin-bottom: 6px;
+  margin-top: 6px;
+}
+
+.card p {
+  margin: 0 0 12px 0; /* Reduced spacing before tags */
+  color: #444;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+/* 7. Links */
 a {
   text-decoration: none;
   color: #2d8f96;
@@ -153,58 +111,33 @@ a:hover {
   color: rgb(135, 135, 135);
 }
 
-.card-meta {
-  font-size: 0.8em;
-  color: #777;
-  margin-bottom: 6px;
-  margin-top: 6px;
+/* 8. Tags */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 12px; /* Space above tags */
 }
 
-.card p {
-  margin: 0;
-  color: #444;
-  font-size: 0.9em;
-  line-height: 1.4;
+.tag {
+  background: #f3f4f6;
+  color: #6b7280;
+  padding: 6px 12px;
+  border-radius: 12px; /* Less rounded as requested */
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
 }
 
-
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  body {
-    padding: 20px 10px;
-  }
-
-  .top-matter {
-    color: #444;
-    max-width: 310px;     /* same as card width */
-    width: 100%;
-    line-height: 1.42;
-    margin: 0 auto 50px auto;
-    text-align: left;
-    }
-
-  h2 {
-    font-size: 2.5em;
-    margin-bottom: 0px;
-  }
-
-  .grid {
-    gap: 30px;
-    grid-template-columns: 1fr;
-  }
-
-  .card {
-    height: auto; /* Allow flexible height on mobile */
-  }
-  .card-meta{
-    margin-top: 5px;
-  }
+.tag:hover {
+  background: #e5e7eb;
 }
 
+/* 9. Navigation bar */
 .navbar {
   box-sizing: border-box;
-  padding: 20px 20px; /* smaller side padding to prevent overflow */
+  padding: 20px 20px;
   width: 100%;
   position: fixed;
   top: 0;
@@ -212,18 +145,15 @@ a:hover {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  /* background-color: rgba(255, 255, 255, 0.85); */
-  /* backdrop-filter: saturate(180%) blur(10px); */
   z-index: 10000;
   gap: 30px;
-  overflow-x: auto; /* allow horizontal scroll if needed */
+  overflow-x: auto;
 }
-/* Remove space between flex items by default */
+
 .navbar > * {
   margin: 0;
 }
 
-/* Brand and nav links will now sit next to each other on right */
 .navbar-brand {
   font-weight: 700;
   font-size: 1.4em;
@@ -231,7 +161,6 @@ a:hover {
   user-select: none;
 }
 
-/* Put nav links and social icons in a container to control spacing */
 .navbar-links {
   list-style: none;
   display: flex;
@@ -269,7 +198,6 @@ a:hover {
   filter: none;
 }
 
-/* Make sure content is spaced nicely on right */
 .navbar > .navbar-brand,
 .navbar > .navbar-links,
 .navbar > .social-icons {
@@ -278,13 +206,47 @@ a:hover {
 
 .fa-brands.fa-bluesky,
 .fa-brands.fa-linkedin {
-  color: gray;          /* gray color */
-  font-size: 24px;      /* adjust size as needed */
+  color: gray;
+  font-size: 24px;
   transition: color 0.3s ease;
 }
 
 .fa-brands.fa-bluesky:hover,
 .fa-brands.fa-linkedin:hover {
-  color: #0077b5;       /* LinkedIn blue on hover */
-  /* or any hover color you prefer */
+  color: #0077b5;
+}
+
+/* 10. Responsive design */
+@media (max-width: 600px) {
+  body {
+    padding: 20px 10px;
+  }
+
+  .top-matter {
+    max-width: 310px;
+    width: 100%;
+    line-height: 1.42;
+    margin: 0 auto 50px auto;
+    text-align: left;
+  }
+
+  h2 {
+    font-size: 2.5em;
+    margin-bottom: 0px;
+  }
+
+  .grid {
+    gap: 30px;
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 310px;
+    height: auto;
+  }
+
+  .card-meta {
+    margin-top: 5px;
+  }
 }
