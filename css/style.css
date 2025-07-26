@@ -78,7 +78,7 @@ h5 {
 }
 
 .card-content {
-  padding: 12px 12px 22px 12px; /* Added 10px extra bottom padding for tag spacing */
+  padding: 12px 12px 22px 12px; /* Extra bottom padding for tag space */
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -93,7 +93,7 @@ h5 {
 }
 
 .card p {
-  margin: 0 0 12px 0; /* Reduced spacing before tags */
+  margin: 0 0 12px 0;
   color: #444;
   font-size: 0.9em;
   line-height: 1.4;
@@ -116,14 +116,13 @@ a:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding-top: 12px; /* Space above tags */
 }
 
 .tag {
   background: #f3f4f6;
   color: #6b7280;
-  padding: 6px 12px;
-  border-radius: 12px; /* Less rounded as requested */
+  padding: 6px 6px;
+  border-radius: 5px;
   font-size: 12px;
   font-weight: 500;
   text-decoration: none;
@@ -220,6 +219,19 @@ a:hover {
 @media (max-width: 600px) {
   body {
     padding: 20px 10px;
+  }
+
+  .card-content {
+    padding: 12px;
+    position: relative;
+    padding-bottom: 50px; /* Space for absolutely positioned tags */
+  }
+  
+  .card-tags {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
   }
 
   .top-matter {
