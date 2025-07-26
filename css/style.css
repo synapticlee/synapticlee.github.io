@@ -221,6 +221,10 @@ a:hover {
     padding: 20px 10px;
   }
 
+  .navbar {
+    position: absolute; /* Change from fixed to absolute */
+  }
+
   .card-content {
     padding: 12px;
     position: relative;
