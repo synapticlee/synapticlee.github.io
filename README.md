@@ -4,7 +4,9 @@ Personal website
 
 ## Latest stories
 
-[Kickstarter Employees Launch Strike Over Four-Day Workweek, Pay Floor](https://medium.com/labor-new-york/kickstarter-employees-launch-strike-over-four-day-workweek-pay-floor-e1403519e3a5). October 3, 2025. *Labor New York.* 
+[‘COVID Days’ for NYC Teachers Ended, Even as Rates Were Rising](https://medium.com/labor-new-york/covid-days-for-nyc-teachers-ended-even-as-rates-were-rising-dc747243f63f). October 14, 2025. *Labor New York*. 
+
+[Kickstarter Employees Launch Strike Over Four-Day Workweek, Pay Floor](https://medium.com/labor-new-york/kickstarter-employees-launch-strike-over-four-day-workweek-pay-floor-e1403519e3a5). October 3, 2025. *Labor New York.* (Co-published in [Columbia News Service](https://columbianewsservice.com/2025/10/20/kickstarter-employees-launch-historic-remote-strike-over-four-day-workweek-pay-floor/))
 
 [Thousands Marched For Charter Schools Ahead of the Mayoral Election. Staff Say They Were Forced To Attend.](https://columbianewsservice.com/2025/09/19/thousands-marched-for-charter-schools-ahead-of-the-mayoral-election-staff-say-they-were-forced-to-attend/) September 19, 2025. *Columbia News Service*.
 
