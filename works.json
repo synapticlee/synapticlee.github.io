@@ -1,0 +1,137 @@
+[
+  {
+    "title": "‘COVID Days’ for NYC Teachers Ended, Even as Rates Were Rising",
+    "url": "https://medium.com/labor-new-york/covid-days-for-nyc-teachers-ended-even-as-rates-were-rising-dc747243f63f",
+    "image": "https://github.com/synapticlee/synapticlee.github.io/blob/main/images/IMG_1435.jpg?raw=true",
+    "date": "October 14, 2025",
+    "source": "Labor New York",
+    "description": "Wrote this story on how New York City public school teachers lost 'COVID days' all while COVID rates were still on the rise.",
+    "tags": ["Data visualization"]
+  },
+  {
+    "title": "Kickstarter Employees Launch Strike Over Four-Day Workweek, Pay Floor",
+    "url": "https://medium.com/labor-new-york/kickstarter-employees-launch-strike-over-four-day-workweek-pay-floor-e1403519e3a5/",
+    "image": "https://github.com/synapticlee/synapticlee.github.io/blob/main/images/laptoppower.png?raw=true",
+    "date": "October 2, 2025",
+    "source": "Labor New York",
+    "description": "Reported the historic strike of Kickstarter United, which was one of the first tech companies to unionize in 2020.",
+    "tags": []
+  },
+  {
+    "title": "Thousands Marched For Charter Schools Ahead of the Mayoral Election. Staff Say They Were Forced To Attend",
+    "url": "https://columbianewsservice.com/2025/09/19/thousands-marched-for-charter-schools-ahead-of-the-mayoral-election-staff-say-they-were-forced-to-attend/",
+    "image": "https://raw.githubusercontent.com/synapticlee/synapticlee.github.io/refs/heads/main/images/IMG_1810.JPG",
+    "date": "September 19, 2025",
+    "source": "Columbia News Service",
+    "description": "Follow-up story with additional reporting after attending the rally, which drew an attendance of 15,000 and had the rapper Common as a headliner.",
+    "tags": ["Investigative"]
+  },
+  {
+    "title": "‘Rally Attendance is Mandatory.’ Staff Say Charter Schools Are Forcing Advocacy Ahead of Mayoral Election",
+    "url": "https://medium.com/labor-new-york/rally-attendance-is-mandatory-staff-say-charter-schools-are-forcing-advocacy-ahead-of-election-80974d631e72",
+    "image": "https://github.com/synapticlee/synapticlee.github.io/blob/main/images/IMG_1659.JPG?raw=true",
+    "date": "September 17, 2025",
+    "source": "Labor New York",
+    "description": "Exclusive leaked documents and recordings went into my first solo reported story, cited in a letter by New York state senators.",
+    "tags": ["Investigative"]
+  },
+  {
+    "title": "'They Just Fired Everyone.' Staff at Hotel Bar Lose Jobs Days After Union Filing",
+    "url": "https://medium.com/labor-new-york/they-just-fired-everyone-staff-at-midtown-hotel-bar-lose-jobs-days-after-union-filing-e3025e8f4f15",
+    "image": "https://github.com/synapticlee/synapticlee.github.io/blob/main/images/IMG_9757.JPG?raw=true",
+    "date": "August 27, 2025",
+    "source": "Labor New York",
+    "description": "Hikari Mae Hida and I reported this story on the terminations of all staff at Rose Lane bar and restaurant, four days after filing a union petition with the NLRB.",
+    "tags": []
+  },
+  {
+    "title": "What we know (and what we don't know) about BPD’s surveillance camera network",
+    "url": "https://data.aclum.org/article/video.html",
+    "image": "https://data.aclum.org/article/img/bpd-header-cameras.png",
+    "date": "May 21, 2025",
+    "source": "The Data for Justice Project",
+    "description": "Boston Police Department has 1,300+ surveillance cameras at their disposal. I analyzed how these cameras being used and where they are deployed.",
+    "tags": ["Data visualization", "Scrollytelling"]
+  },
+  {
+    "title": "We saved hundreds of Biden-era AI documents, so you don’t have to",
+    "url": "https://data.aclum.org/2025/01/13/biden-era-ai-archive/",
+    "image": "https://data.aclum.org/wp-content/uploads/2025/01/BidenEraHeaderImage3.png",
+    "date": "January 13, 2025",
+    "source": "The Data for Justice Project",
+    "description": "In anticipation of the new administration, I archived hundreds of tech policy documents from government websites, including executive orders, FTC complaints, spreadsheets and blogposts.",
+    "tags": ["Web scraping", "APIs"]
+  },
+  {
+    "title": "Eyes in the Sky: Big Brother is (still) watching",
+    "url": "https://data.aclum.org/2024/06/24/government-drones-ma-2023/",
+    "image": "https://data.aclum.org/wp-content/uploads/2024/06/DronesHeaderImage.png",
+    "date": "June 24, 2024",
+    "source": "The Data for Justice Project",
+    "description": "I analyzed records from the FAA to see which Massachusetts government agencies were using drones, finding that many models were prone to crashes. I also updated the dashboard to have more functionality.",
+    "tags": ["Public records", "Data visualization", "Dashboard"]
+  },
+  {
+    "title": "Boston Police Records Show Nearly 70 Percent of ShotSpotter Alerts Led to Dead Ends",
+    "url": "https://data.aclum.org/2024/04/08/boston-shotspotter/",
+    "image": "https://data.aclum.org/wp-content/uploads/2024/04/ShotSpotterBlogpostHeader.png",
+    "date": "April 8, 2024",
+    "source": "The Data for Justice Project",
+    "description": "I conducted the largest analysis of Boston's ShotSpotter system to date, spurring a letter from Senator Markey, Senator Warren and Representative Pressley to the DHS Office of the Inspector General.",
+    "tags": ["Public records", "Data visualization", "NLP"]
+  },
+  {
+    "title": "Yes, All Location Data: Separating fact from myth in industry talking points about “anonymous” location data",
+    "url": "https://data.aclum.org/2024/02/28/yes-all-location-data/",
+    "image": "https://data.aclum.org/wp-content/uploads/2024/02/JoahnaKuiper-Littledata-houses-square-1280x1280-2.png?ver=1709148806",
+    "date": "February 28, 2024",
+    "source": "The Data for Justice Project",
+    "description": "I wrote an explainer on how location data can be de-anonymized from just a few data points, referencing peer-reviewed academic research on privacy bounds.",
+    "tags": ["Explainer", "Location data brokers"]
+  },
+  {
+    "title": "Balancing the scales of justice: Why right to counsel in eviction cases is a racial justice and housing justice issue",
+    "url": "https://data.aclum.org/2024/01/16/eviction-cases-analysis/",
+    "image": "https://data.aclum.org/wp-content/uploads/2024/01/eviction_cases.png?ver=1705544944",
+    "date": "January 16, 2024",
+    "source": "The Data for Justice Project",
+    "description": "I analyzed eviction rates to support a proposed bill in the Massachusetts state legislature that sought to expand access to counsel in housing cases.",
+    "tags": ["Data visualization", "Housing"]
+  },
+  {
+    "title": "Our Digital Lives Are Too Fragile",
+    "url": "https://slate.com/technology/2023/12/personal-data-storage-evernote-google-drive-icloud.html",
+    "image": "https://compote.slate.com/images/80300cd6-2031-4f72-85a8-dd25b1158415.jpeg?crop=1560%2C1040%2Cx0%2Cy0&width=2200",
+    "date": "December 26, 2023",
+    "source": "Slate",
+    "description": "Evernote killed its free tier, and I missed a coworker's birthday drinks trying to salvage my notes. Based on that experience, I wrote an essay on the fragility of our digital lives in the modern age.",
+    "tags": ["Opinion", "Digital ownership"]
+  },
+  {
+    "title": "Roadblock to Care: Barriers to Out-of-State Travel for Abortion and Gender Affirming Care",
+    "url": "https://www.stopspying.org/roadblock-to-care",
+    "image": "https://images.squarespace-cdn.com/content/v1/5c1bfc7eee175995a4ceb638/ad08a48f-2025-4dcf-9a68-9975ef89c3a4/WechatIMG75.jpg?format=2500w",
+    "date": "July 18, 2023",
+    "source": "S.T.O.P. Research Reports",
+    "description": "I researched ways in which out-of-state heathcare seekers could be surveilled through different forms of transportation and accommodation choices, writing this report with a large team of collaborators.",
+    "tags": ["Report", "Surveillance", "Reproductive healthcare"]
+  },
+  {
+    "title": "ChatGPT for therapy? Houston, we have a problem",
+    "url": "https://visiblemagazine.com/chatgpt-for-therapy-houston-we-have-a-problem/",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Chatgpt-screenshot.png?20240513140134",
+    "date": "October 20, 2023",
+    "source": "VISIBLE magazine",
+    "description": "I wrote an op-ed on why ChatGPT shouldn't be used for therapy. This piece was drafted through the Public Voices Fellowship on Technology in the Public Interest, an initiative of The OpEd Project.",
+    "tags": ["Opinion", "Mental health", "Artificial intelligence"]
+  },
+  {
+    "title": "POV: NYPD’s robodogs are being paid for in the shadiest way possible",
+    "url": "https://www.fastcompany.com/90894012/pov-nypd-is-robbing-new-yorkers-to-pay-for-robot-police-dogs",
+    "image": "https://images.fastcompany.com/image/upload/f_webp,c_fit,w_1920,q_auto/wp-cms/uploads/2023/05/p-1-90894012-pov-nypd-is-robbing-new-yorkers-to-pay-for-robot-police-dogs.jpg",
+    "date": "May 11, 2023",
+    "source": "Fast Company",
+    "description": "After Mayor Adams purchased a robot police dog with $750,000 in asset forfeiture funds, I wrote this op-ed to explain how police use these funds to buy surveillance techologies, dodging procurement oversight.",
+    "tags": ["Opinion", "Policing", "Surveillance"]
+  }
+]
