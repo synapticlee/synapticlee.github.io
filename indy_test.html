@@ -18,10 +18,10 @@
     --text-muted: #7a756b;
     --accent: #b8792e;
     --accent-dim: #9a6524;
-    --green: #3a8a4a;
-    --red: #c04a3d;
-    --blue: #3a7ca5;
-    --purple: #7a5faa;
+    --green: #2271b2;
+    --red: #d55e00;
+    --blue: #009e73;
+    --purple: #994f88;
     --tag-bg: rgba(184, 121, 46, 0.1);
     --tag-border: rgba(184, 121, 46, 0.3);
   }
@@ -41,33 +41,71 @@
     touch-action: manipulation;
   }
 
+  /* Nav */
+  .nav {
+    display: flex;
+    gap: 4px;
+  }
+  .nav a {
+    padding: 6px 16px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.15s;
+  }
+  .nav a:hover {
+    color: var(--text);
+    background: var(--surface-hover);
+  }
+  .nav a.active {
+    color: var(--accent);
+    background: var(--tag-bg);
+  }
+
+  /* Pages */
+  .page { display: none; }
+  .page.active {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .page.active .app {
+    flex: 1;
+    min-height: 0;
+  }
+  .page-empty {
+    display: none;
+    flex: 1;
+  }
+  .page-empty.active { display: flex; }
+
   /* Header */
   .header {
-    padding: 1.25rem 2rem 1rem;
+    padding: 1rem 2rem;
     border-bottom: 1px solid var(--border);
     background: linear-gradient(180deg, #ece8e1 0%, var(--bg) 100%);
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
   }
   .header h1 {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: var(--accent);
     letter-spacing: -0.02em;
-    margin-bottom: 0.15rem;
-  }
-  .header p {
-    color: var(--text-muted);
-    font-size: 0.88rem;
-    max-width: 700px;
-    line-height: 1.4;
   }
   .header .subtitle {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    margin-bottom: 0.25rem;
   }
 
   /* Layout */
@@ -317,8 +355,8 @@
   }
   .diet-badge {
     display: inline-block;
-    background: rgba(58, 138, 74, 0.1);
-    border: 1px solid rgba(58, 138, 74, 0.25);
+    background: rgba(34, 113, 178, 0.1);
+    border: 1px solid rgba(34, 113, 178, 0.25);
     padding: 1px 6px;
     border-radius: 99px;
     font-size: 0.68rem;
@@ -329,12 +367,12 @@
   /* Custom marker */
   .custom-marker {
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: var(--accent);
     border: 2.5px solid #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     transition: transform 0.15s;
   }
   .custom-marker:hover {
@@ -375,8 +413,8 @@
     color: var(--text-muted);
   }
   .legend-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -422,7 +460,7 @@
   }
   .locate-btn.active svg {
     stroke: var(--blue);
-    fill: rgba(58, 124, 165, 0.15);
+    fill: rgba(0, 158, 115, 0.15);
   }
   .locate-btn.loading {
     animation: pulse-border 1s ease infinite;
@@ -439,18 +477,29 @@
     border-radius: 50%;
     background: var(--blue);
     border: 3px solid #fff;
-    box-shadow: 0 0 0 4px rgba(58, 124, 165, 0.25), 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 0 0 4px rgba(0, 158, 115, 0.25), 0 2px 6px rgba(0,0,0,0.2);
     animation: pulse-dot 2s ease-in-out infinite;
   }
   @keyframes pulse-dot {
-    0%, 100% { box-shadow: 0 0 0 4px rgba(58, 124, 165, 0.25), 0 2px 6px rgba(0,0,0,0.2); }
-    50% { box-shadow: 0 0 0 10px rgba(58, 124, 165, 0.08), 0 2px 6px rgba(0,0,0,0.2); }
+    0%, 100% { box-shadow: 0 0 0 4px rgba(0, 158, 115, 0.25), 0 2px 6px rgba(0,0,0,0.2); }
+    50% { box-shadow: 0 0 0 10px rgba(0, 158, 115, 0.08), 0 2px 6px rgba(0,0,0,0.2); }
   }
 
   @media (max-width: 900px) {
     body {
       height: auto;
       overflow: auto;
+    }
+    .nav a {
+      padding: 6px 12px;
+      font-size: 0.82rem;
+    }
+    .header {
+      padding: 0.85rem 1.25rem;
+      flex-wrap: wrap;
+    }
+    .page.active {
+      overflow: visible;
     }
     .app {
       grid-template-columns: 1fr;
@@ -467,15 +516,10 @@
       padding: 1.25rem 1.25rem 1rem;
     }
     .header .subtitle {
-      font-size: 0.75rem;
+      font-size: 0.65rem;
     }
     .header h1 {
-      font-size: 1.6rem;
-      margin-bottom: 0.15rem;
-    }
-    .header p {
-      font-size: 0.88rem;
-      line-height: 1.45;
+      font-size: 1.35rem;
     }
 
     /* Filters — 2-col grid on mobile */
@@ -647,11 +691,18 @@
 <body>
 
 <div class="header">
-  <div class="subtitle">NICAR 2026 · Indianapolis</div>
-  <h1>Indy Restaurant Guide</h1>
-  <p>All spots within ~10–20 min drive of the JW Marriott. Filter by price, distance, cuisine, or meal. Click a row to highlight on the map.</p>
+  <div>
+    <div class="subtitle">NICAR 2026 · Indianapolis</div>
+    <h1>Indy Guide</h1>
+  </div>
+  <nav class="nav">
+    <a href="#" class="active" data-page="food">Food</a>
+    <a href="#" data-page="logistics">Logistics</a>
+    <a href="#" data-page="things-to-do">Things to Do</a>
+  </nav>
 </div>
 
+<div class="page active" id="page-food">
 <div class="app">
   <div class="map-panel">
     <div id="map"></div>
@@ -734,6 +785,13 @@
       </table>
     </div>
   </div>
+</div>
+</div>
+
+<div class="page-empty" id="page-logistics">
+</div>
+
+<div class="page-empty" id="page-things-to-do">
 </div>
 
 <script>
@@ -1094,10 +1152,10 @@ const restaurants = [
 
 // Color by price
 function priceColor(priceNum) {
-  if (priceNum <= 1) return '#3a8a4a';
-  if (priceNum <= 2) return '#3a7ca5';
-  if (priceNum <= 3) return '#7a5faa';
-  return '#c04a3d';
+  if (priceNum <= 1) return '#2271b2';
+  if (priceNum <= 2) return '#009e73';
+  if (priceNum <= 3) return '#994f88';
+  return '#d55e00';
 }
 
 function priceClass(priceNum) {
@@ -1122,9 +1180,9 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 const jwMarker = L.marker([39.7677, -86.1640], {
   icon: L.divIcon({
     className: '',
-    html: `<div style="width:18px;height:18px;border-radius:50%;background:#b8792e;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.2);"></div>`,
-    iconSize: [18, 18],
-    iconAnchor: [9, 9]
+    html: `<div style="width:24px;height:24px;border-radius:50%;background:#b8792e;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.25);"></div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12]
   })
 }).addTo(map).bindPopup('<div class="popup-name">JW Marriott</div><div class="popup-desc">Conference hotel — your home base</div>');
 
@@ -1135,8 +1193,8 @@ restaurants.forEach((r, i) => {
   const icon = L.divIcon({
     className: '',
     html: `<div class="custom-marker" id="marker-${i}" style="background:${color}"></div>`,
-    iconSize: [18, 18],
-    iconAnchor: [9, 9]
+    iconSize: [24, 24],
+    iconAnchor: [12, 12]
   });
 
   const marker = L.marker([r.lat, r.lng], { icon }).addTo(map);
@@ -1144,7 +1202,7 @@ restaurants.forEach((r, i) => {
     <div class="popup-name">${r.name}</div>
     <div class="popup-cuisine">${r.cuisine}</div>
     <div class="popup-price">${r.price}</div>
-    <div class="popup-desc">${r.notes}${r.dietary ? '<br><span style="color:#3a8a4a;font-size:0.75rem;">✓ Dietary-friendly</span>' : ''}</div>
+    <div class="popup-desc">${r.notes}${r.dietary ? '<br><span style="color:#2271b2;font-size:0.75rem;">✓ Dietary-friendly</span>' : ''}</div>
   `);
   markers[i] = marker;
 });
@@ -1208,12 +1266,7 @@ function renderTable() {
     }
   });
 
-  // Fit bounds to visible (skip on initial load to keep downtown view)
-  if (!isInitialLoad && filtered.length > 0) {
-    const bounds = L.latLngBounds(filtered.map(r => [r.lat, r.lng]));
-    bounds.extend([39.7677, -86.1640]); // include JW Marriott
-    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
-  }
+  // Fit bounds only skipped - map stays where user left it
   isInitialLoad = false;
 
   // Render rows
@@ -1370,6 +1423,21 @@ locateBtn.addEventListener('click', () => {
     },
     { enableHighAccuracy: true, timeout: 10000 }
   );
+});
+
+// Tab navigation
+document.querySelectorAll('.nav a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const page = link.dataset.page;
+    document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+    link.classList.add('active');
+    document.querySelectorAll('.page, .page-empty').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    if (page === 'food') {
+      map.invalidateSize();
+    }
+  });
 });
 
 // Initial render
