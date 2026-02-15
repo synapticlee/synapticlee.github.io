@@ -27,55 +27,63 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { height: 100%; }
 
   body {
     font-family: 'IBM Plex Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
-    min-height: 100vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
     -webkit-text-size-adjust: 100%;
     touch-action: manipulation;
   }
 
   /* Header */
   .header {
-    padding: 2.5rem 3rem 1.5rem;
+    padding: 1.25rem 2rem 1rem;
     border-bottom: 1px solid var(--border);
     background: linear-gradient(180deg, #ece8e1 0%, var(--bg) 100%);
+    flex-shrink: 0;
   }
   .header h1 {
     font-family: 'DM Serif Display', serif;
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     color: var(--accent);
     letter-spacing: -0.02em;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.15rem;
   }
   .header p {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     max-width: 700px;
-    line-height: 1.5;
+    line-height: 1.4;
   }
   .header .subtitle {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
   }
 
   /* Layout */
   .app {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    height: calc(100vh - 140px);
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
   }
 
   /* Map Panel */
   .map-panel {
     position: relative;
     border-right: 1px solid var(--border);
+    min-height: 0;
   }
   #map {
     width: 100%;
@@ -133,14 +141,16 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    min-height: 0;
   }
 
   /* Filters */
   .filters {
-    padding: 1rem 1.5rem;
+    padding: 0.75rem 1.25rem;
     display: flex;
     gap: 0.75rem;
     flex-wrap: wrap;
+    flex-shrink: 0;
     border-bottom: 1px solid var(--border);
     background: var(--surface);
     align-items: center;
@@ -161,12 +171,12 @@
     background: var(--bg);
     border: 1px solid var(--border);
     color: var(--text);
-    padding: 6px 10px;
+    padding: 5px 10px;
     border-radius: 6px;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 0.85rem;
     outline: none;
-    min-width: 130px;
+    min-width: 120px;
   }
   .filter-group select:focus, .filter-group input:focus {
     border-color: var(--accent);
@@ -204,6 +214,7 @@
   .table-scroll {
     flex: 1;
     overflow-y: auto;
+    min-height: 0;
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
   }
@@ -219,7 +230,7 @@
   th {
     background: var(--surface);
     text-align: left;
-    padding: 10px 14px;
+    padding: 8px 12px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 0.7rem;
     text-transform: uppercase;
@@ -242,9 +253,9 @@
     color: var(--accent);
   }
   td {
-    padding: 10px 14px;
+    padding: 8px 12px;
     border-bottom: 1px solid var(--border);
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     vertical-align: top;
   }
   tr {
@@ -306,8 +317,8 @@
   }
   .diet-badge {
     display: inline-block;
-    background: rgba(106, 191, 123, 0.12);
-    border: 1px solid rgba(106, 191, 123, 0.25);
+    background: rgba(58, 138, 74, 0.1);
+    border: 1px solid rgba(58, 138, 74, 0.25);
     padding: 1px 6px;
     border-radius: 99px;
     font-size: 0.68rem;
@@ -317,19 +328,13 @@
 
   /* Custom marker */
   .custom-marker {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
+    display: block;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: var(--accent);
     border: 2.5px solid #fff;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-    color: #fff;
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 700;
-    font-size: 11px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     transition: transform 0.15s;
   }
   .custom-marker:hover {
@@ -443,11 +448,16 @@
   }
 
   @media (max-width: 900px) {
+    body {
+      height: auto;
+      overflow: auto;
+    }
     .app {
       grid-template-columns: 1fr;
-      grid-template-rows: 45vh 1fr;
+      grid-template-rows: 45vh auto;
       height: auto;
-      min-height: calc(100vh - 120px);
+      min-height: 0;
+      overflow: visible;
     }
     .map-panel {
       border-right: none;
@@ -660,6 +670,7 @@
       <div class="legend-item"><div class="legend-dot" style="background: var(--blue)"></div> $$</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--purple)"></div> $$ – $$$</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--red)"></div> $$$$</div>
+      <div class="legend-item" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border)"><div class="legend-dot" style="background: var(--accent)"></div> JW Marriott</div>
     </div>
   </div>
   <div class="table-panel">
@@ -1017,7 +1028,7 @@ const restaurants = [
   {
     name: "Asian Snack",
     address: "3605 Commercial Drive",
-    lat: 39.7415, lng: -86.1183,
+    lat: 39.8182, lng: -86.2270,
     cuisine: "Chinese/Pan-Asian",
     price: "$",
     priceNum: 1,
@@ -1030,7 +1041,7 @@ const restaurants = [
   {
     name: "Macizo",
     address: "6335 Intech Commons Drive",
-    lat: 39.7248, lng: -86.1045,
+    lat: 39.8805, lng: -86.2714,
     cuisine: "Mexican/Peruvian",
     price: "$$",
     priceNum: 2,
@@ -1099,7 +1110,7 @@ function priceClass(priceNum) {
 // Initialize map
 const map = L.map('map', {
   zoomControl: true
-}).setView([39.7655, -86.1580], 13);
+}).setView([39.7700, -86.1560], 14);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
@@ -1111,9 +1122,9 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 const jwMarker = L.marker([39.7677, -86.1640], {
   icon: L.divIcon({
     className: '',
-    html: `<div style="width:30px;height:30px;border-radius:50%;background:#b8792e;border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,0.2);"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>`,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15]
+    html: `<div style="width:18px;height:18px;border-radius:50%;background:#b8792e;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.2);"></div>`,
+    iconSize: [18, 18],
+    iconAnchor: [9, 9]
   })
 }).addTo(map).bindPopup('<div class="popup-name">JW Marriott</div><div class="popup-desc">Conference hotel — your home base</div>');
 
@@ -1123,9 +1134,9 @@ restaurants.forEach((r, i) => {
   const color = priceColor(r.priceNum);
   const icon = L.divIcon({
     className: '',
-    html: `<div class="custom-marker" id="marker-${i}" style="background:${color}">${i + 1}</div>`,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15]
+    html: `<div class="custom-marker" id="marker-${i}" style="background:${color}"></div>`,
+    iconSize: [18, 18],
+    iconAnchor: [9, 9]
   });
 
   const marker = L.marker([r.lat, r.lng], { icon }).addTo(map);
@@ -1133,7 +1144,7 @@ restaurants.forEach((r, i) => {
     <div class="popup-name">${r.name}</div>
     <div class="popup-cuisine">${r.cuisine}</div>
     <div class="popup-price">${r.price}</div>
-    <div class="popup-desc">${r.notes}${r.dietary ? '<br><span style="color:#6abf7b;font-size:0.75rem;">✓ Dietary-friendly</span>' : ''}</div>
+    <div class="popup-desc">${r.notes}${r.dietary ? '<br><span style="color:#3a8a4a;font-size:0.75rem;">✓ Dietary-friendly</span>' : ''}</div>
   `);
   markers[i] = marker;
 });
@@ -1151,6 +1162,7 @@ cuisines.forEach(c => {
 // Sort state
 let sortCol = 'name';
 let sortAsc = true;
+let isInitialLoad = true;
 
 // Render table
 function renderTable() {
@@ -1196,12 +1208,13 @@ function renderTable() {
     }
   });
 
-  // Fit bounds to visible
-  if (filtered.length > 0) {
+  // Fit bounds to visible (skip on initial load to keep downtown view)
+  if (!isInitialLoad && filtered.length > 0) {
     const bounds = L.latLngBounds(filtered.map(r => [r.lat, r.lng]));
     bounds.extend([39.7677, -86.1640]); // include JW Marriott
     map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
   }
+  isInitialLoad = false;
 
   // Render rows
   const tbody = document.getElementById('table-body');
@@ -1306,8 +1319,9 @@ document.getElementById('filter-search').addEventListener('input', renderTable);
 // Reset map view
 document.getElementById('reset-map-btn').addEventListener('click', () => {
   document.querySelectorAll('tr.highlighted').forEach(el => el.classList.remove('highlighted'));
+  document.querySelectorAll('.mobile-card.highlighted').forEach(el => el.classList.remove('highlighted'));
   map.closePopup();
-  renderTable(); // re-fits bounds to current filter
+  map.setView([39.7700, -86.1560], 14, { animate: true });
 });
 
 // Geolocation
