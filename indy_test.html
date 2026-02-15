@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NICAR Indy Restaurant Guide</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ec;
+    --surface: #eae6df;
+    --surface-hover: #e0dbd3;
+    --border: #d1cbc2;
+    --text: #2c2a26;
+    --text-muted: #7a756b;
+    --accent: #b8792e;
+    --accent-dim: #9a6524;
+    --green: #3a8a4a;
+    --red: #c04a3d;
+    --blue: #3a7ca5;
+    --purple: #7a5faa;
+    --tag-bg: rgba(184, 121, 46, 0.1);
+    --tag-border: rgba(184, 121, 46, 0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+
+  /* Header */
+  .header {
+    padding: 2.5rem 3rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, #ece8e1 0%, var(--bg) 100%);
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    margin-bottom: 0.25rem;
+  }
+  .header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 700px;
+    line-height: 1.5;
+  }
+  .header .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Layout */
+  .app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100vh - 140px);
+  }
+
+  /* Map Panel */
+  .map-panel {
+    position: relative;
+    border-right: 1px solid var(--border);
+  }
+  #map {
+    width: 100%;
+    height: 100%;
+  }
+  .leaflet-popup-content-wrapper {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+    border-radius: 10px !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15) !important;
+  }
+  .leaflet-popup-tip {
+    background: var(--surface) !important;
+    border: 1px solid var(--border) !important;
+    border-top: none !important;
+    border-left: none !important;
+  }
+  .leaflet-popup-content {
+    margin: 14px 16px !important;
+    font-family: 'IBM Plex Sans', sans-serif !important;
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  .popup-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .popup-cuisine {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .popup-price {
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .popup-desc {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+  .leaflet-container {
+    background: #f4f1ec !important;
+  }
+
+  /* Table Panel */
+  .table-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Filters */
+  .filters {
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    align-items: center;
+  }
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .filter-group label {
+    font-size: 0.65rem;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+  .filter-group select, .filter-group input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    min-width: 130px;
+  }
+  .filter-group select:focus, .filter-group input:focus {
+    border-color: var(--accent);
+  }
+  .filter-group input::placeholder {
+    color: var(--text-muted);
+  }
+  .reset-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    align-self: flex-end;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .result-count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    align-self: flex-end;
+    margin-left: auto;
+  }
+
+  /* Table */
+  .table-scroll {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  th {
+    background: var(--surface);
+    text-align: left;
+    padding: 10px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  th:hover {
+    color: var(--accent);
+  }
+  th .sort-arrow {
+    margin-left: 4px;
+    opacity: 0.4;
+  }
+  th.sorted .sort-arrow {
+    opacity: 1;
+    color: var(--accent);
+  }
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+    vertical-align: top;
+  }
+  tr {
+    transition: background 0.1s;
+    cursor: pointer;
+  }
+  tr:hover {
+    background: var(--surface-hover);
+  }
+  tr.highlighted {
+    background: rgba(184, 121, 46, 0.1);
+  }
+  .name-cell {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .name-cell .address {
+    font-weight: 400;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .cuisine-tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .price-cell {
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    white-space: nowrap;
+  }
+  .price-1 { color: var(--green); }
+  .price-2 { color: var(--blue); }
+  .price-3 { color: var(--purple); }
+  .price-4 { color: var(--red); }
+
+  .distance-cell {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .meal-cell {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+  .notes-cell {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    max-width: 220px;
+    line-height: 1.4;
+  }
+  .diet-badge {
+    display: inline-block;
+    background: rgba(106, 191, 123, 0.12);
+    border: 1px solid rgba(106, 191, 123, 0.25);
+    padding: 1px 6px;
+    border-radius: 99px;
+    font-size: 0.68rem;
+    color: var(--green);
+    margin-top: 3px;
+  }
+
+  /* Custom marker */
+  .custom-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2.5px solid #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    color: #fff;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 11px;
+    transition: transform 0.15s;
+  }
+  .custom-marker:hover {
+    transform: scale(1.2);
+  }
+  .custom-marker.highlighted {
+    background: var(--red);
+    transform: scale(1.3);
+    z-index: 999 !important;
+  }
+
+  /* Legend */
+  .legend {
+    position: absolute;
+    bottom: 24px;
+    left: 16px;
+    z-index: 800;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.75rem;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+  .legend-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Locate button */
+  .locate-btn, .reset-map-btn {
+    position: absolute;
+    z-index: 800;
+    width: 38px;
+    height: 38px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.15s;
+  }
+  .locate-btn { top: 14px; right: 14px; }
+  .reset-map-btn { top: 60px; right: 14px; }
+  .locate-btn:hover, .reset-map-btn:hover {
+    border-color: var(--accent);
+    background: var(--surface-hover);
+  }
+  .reset-map-btn:hover span {
+    color: var(--accent) !important;
+  }
+  .locate-btn.active {
+    border-color: var(--blue);
+  }
+  .locate-btn svg, .reset-map-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--text-muted);
+    fill: none;
+    stroke-width: 2;
+    transition: stroke 0.15s;
+  }
+  .locate-btn:hover svg, .reset-map-btn:hover svg {
+    stroke: var(--accent);
+  }
+  .locate-btn.active svg {
+    stroke: var(--blue);
+    fill: rgba(58, 124, 165, 0.15);
+  }
+  .locate-btn.loading {
+    animation: pulse-border 1s ease infinite;
+  }
+  @keyframes pulse-border {
+    0%, 100% { border-color: var(--border); }
+    50% { border-color: var(--blue); }
+  }
+
+  /* User location dot */
+  .user-location-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--blue);
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 4px rgba(58, 124, 165, 0.25), 0 2px 6px rgba(0,0,0,0.2);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { box-shadow: 0 0 0 4px rgba(58, 124, 165, 0.25), 0 2px 6px rgba(0,0,0,0.2); }
+    50% { box-shadow: 0 0 0 10px rgba(58, 124, 165, 0.08), 0 2px 6px rgba(0,0,0,0.2); }
+  }
+
+  @media (max-width: 900px) {
+    .app {
+      grid-template-columns: 1fr;
+      grid-template-rows: 45vh 1fr;
+      height: auto;
+      min-height: calc(100vh - 120px);
+    }
+    .map-panel {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .header {
+      padding: 1.25rem 1.25rem 1rem;
+    }
+    .header .subtitle {
+      font-size: 0.75rem;
+    }
+    .header h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.15rem;
+    }
+    .header p {
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    /* Filters — 2-col grid on mobile */
+    .filters {
+      padding: 0.85rem 1rem;
+      gap: 0.6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+    }
+    .filter-group label {
+      font-size: 0.7rem;
+    }
+    .filter-group select, .filter-group input {
+      font-size: 16px; /* prevents iOS zoom */
+      padding: 10px 12px;
+      min-width: 0;
+      width: 100%;
+      border-radius: 8px;
+    }
+    .filter-group:nth-child(5) {
+      grid-column: 1 / -1; /* search spans full width */
+    }
+    .reset-btn {
+      padding: 10px 16px;
+      font-size: 0.78rem;
+    }
+    .result-count {
+      font-size: 0.78rem;
+      margin-left: 0;
+    }
+
+    /* Map controls */
+    .locate-btn, .reset-map-btn {
+      width: 44px;
+      height: 44px;
+    }
+    .locate-btn { top: 10px; right: 10px; }
+    .reset-map-btn { top: 62px; right: 10px; }
+    .locate-btn svg, .reset-map-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+    .reset-map-btn span {
+      font-size: 22px !important;
+    }
+    .legend {
+      bottom: 12px;
+      left: 10px;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      border-radius: 8px;
+    }
+    .legend-title { font-size: 0.68rem; }
+
+    /* Larger popups on mobile */
+    .leaflet-popup-content {
+      margin: 16px 18px !important;
+      font-size: 15px !important;
+    }
+    .popup-name { font-size: 1.15rem; }
+    .popup-cuisine { font-size: 0.85rem; }
+    .popup-desc { font-size: 0.88rem; }
+
+    /* Hide table, show cards */
+    table, thead { display: none; }
+    .table-scroll {
+      padding: 0.5rem 1rem 2rem;
+    }
+  }
+
+  .mobile-card-row {
+    display: none;
+  }
+  @media (max-width: 900px) {
+    .mobile-card-row {
+      display: table-row;
+    }
+    .mobile-card-row td {
+      padding: 0;
+      border: none;
+    }
+    .mobile-card-row:hover {
+      background: transparent;
+    }
+  }
+
+  /* Card layout for mobile */
+  .mobile-card {
+    display: none;
+  }
+  @media (max-width: 900px) {
+    .mobile-card {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.1s;
+      -webkit-tap-highlight-color: rgba(0,0,0,0.05);
+    }
+    .mobile-card:active {
+      background: var(--surface-hover);
+    }
+    .mobile-card.highlighted {
+      border-color: var(--accent);
+      background: rgba(184, 121, 46, 0.06);
+    }
+    .mobile-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .mobile-card-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.25;
+    }
+    .mobile-card-price {
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .mobile-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .mobile-card-meta .cuisine-tag {
+      font-size: 0.78rem;
+      padding: 3px 10px;
+    }
+    .mobile-card-distance {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .mobile-card-meal {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .mobile-card-notes {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+    .mobile-card-notes .diet-badge {
+      font-size: 0.75rem;
+      padding: 2px 8px;
+      margin-top: 6px;
+    }
+    .mobile-card-address {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="subtitle">NICAR 2026 · Indianapolis</div>
+  <h1>Indy Restaurant Guide</h1>
+  <p>All spots within ~10–20 min drive of the JW Marriott. Filter by price, distance, cuisine, or meal. Click a row to highlight on the map.</p>
+</div>
+
+<div class="app">
+  <div class="map-panel">
+    <div id="map"></div>
+    <button class="locate-btn" id="locate-btn" title="Show my location">
+      <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+      </svg>
+    </button>
+    <button class="reset-map-btn" id="reset-map-btn" title="Reset map view">
+      <span style="font-size:18px;color:var(--text-muted);line-height:1;">↺</span>
+    </button>
+    <div class="legend">
+      <div class="legend-title">Price</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--green)"></div> $</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--blue)"></div> $$</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--purple)"></div> $$ – $$$</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--red)"></div> $$$$</div>
+    </div>
+  </div>
+  <div class="table-panel">
+    <div class="filters">
+      <div class="filter-group">
+        <label>Price</label>
+        <select id="filter-price">
+          <option value="">All</option>
+          <option value="$">$</option>
+          <option value="$$">$$</option>
+          <option value="$$ to $$$">$$ – $$$</option>
+          <option value="$$$$">$$$$</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Max Distance</label>
+        <select id="filter-distance">
+          <option value="">Any</option>
+          <option value="5">≤ 5 min</option>
+          <option value="10">≤ 10 min</option>
+          <option value="15">≤ 15 min</option>
+          <option value="20">≤ 20 min</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Cuisine</label>
+        <select id="filter-cuisine">
+          <option value="">All</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Meal</label>
+        <select id="filter-meal">
+          <option value="">All</option>
+          <option value="Breakfast/Brunch">Breakfast/Brunch</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Late Night">Late Night</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Search</label>
+        <input type="text" id="filter-search" placeholder="Name or note…">
+      </div>
+      <button class="reset-btn" onclick="resetFilters()">Reset</button>
+      <div class="result-count" id="result-count"></div>
+    </div>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th data-sort="name">Name <span class="sort-arrow">↕</span></th>
+            <th data-sort="cuisine">Cuisine <span class="sort-arrow">↕</span></th>
+            <th data-sort="price">Price <span class="sort-arrow">↕</span></th>
+            <th data-sort="distance">Distance <span class="sort-arrow">↕</span></th>
+            <th data-sort="meal">Meal <span class="sort-arrow">↕</span></th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="table-body"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+window.addEventListener('load', function() {
+const restaurants = [
+  {
+    name: "Lincoln Square Pancake House",
+    address: "150 W. Market St.",
+    lat: 39.7685, lng: -86.1628,
+    cuisine: "American",
+    price: "$",
+    priceNum: 1,
+    distance: "10-min walk",
+    distanceNum: 2,
+    meals: ["Breakfast/Brunch"],
+    notes: "Cheap breakfast, big portions. Not quite a diner but a diner in spirit.",
+    dietary: false
+  },
+  {
+    name: "Café Patachou",
+    address: "225 W. Washington St.",
+    lat: 39.7673, lng: -86.1640,
+    cuisine: "American",
+    price: "$",
+    priceNum: 1,
+    distance: "<10-min walk",
+    distanceNum: 2,
+    meals: ["Breakfast/Brunch"],
+    notes: "Indy brunch/lunch staple. Great atmosphere. Gets busy quickly.",
+    dietary: true
+  },
+  {
+    name: "Garden Table",
+    address: "342 Massachusetts Ave.",
+    lat: 39.7728, lng: -86.1518,
+    cuisine: "American",
+    price: "$$",
+    priceNum: 2,
+    distance: "6-min drive",
+    distanceNum: 6,
+    meals: ["Breakfast/Brunch"],
+    notes: "Quintessential fru-fru brunch. Freshly squeezed juices, acai bowls. Great service.",
+    dietary: true
+  },
+  {
+    name: "Love Handle",
+    address: "877 Massachusetts Ave.",
+    lat: 39.7771, lng: -86.1425,
+    cuisine: "American",
+    price: "$$",
+    priceNum: 2,
+    distance: "10-min drive",
+    distanceNum: 10,
+    meals: ["Breakfast/Brunch"],
+    notes: "Cool, weird spot with big sandwiches. Menu changes all the time. Fun throwback vibe.",
+    dietary: false
+  },
+  {
+    name: "Milktooth",
+    address: "534 Virginia Ave.",
+    lat: 39.7567, lng: -86.1477,
+    cuisine: "American",
+    price: "$$",
+    priceNum: 2,
+    distance: "6-min drive",
+    distanceNum: 6,
+    meals: ["Breakfast/Brunch"],
+    notes: "Very acclaimed brunch. Dutch baby pancakes, beignets, wings. Gets busy fast.",
+    dietary: false
+  },
+  {
+    name: "Subito",
+    address: "34 N. Delaware St.",
+    lat: 39.7698, lng: -86.1537,
+    cuisine: "Soups/Sandwiches",
+    price: "$",
+    priceNum: 1,
+    distance: "6-min drive",
+    distanceNum: 6,
+    meals: ["Lunch"],
+    notes: "Lovely soup and sandwich spot. Weekdays only. The Revelo is wonderful.",
+    dietary: false
+  },
+  {
+    name: "Julieta",
+    address: "1060 N. Capitol Ave.",
+    lat: 39.7795, lng: -86.1667,
+    cuisine: "Mexican",
+    price: "$",
+    priceNum: 1,
+    distance: "7-min drive",
+    distanceNum: 7,
+    meals: ["Lunch"],
+    notes: "Walk-up taco counter with some of the best food in Indy. $5 tacos. Adjacent to Turner's Bar.",
+    dietary: false
+  },
+  {
+    name: "Workingman's Friend",
+    address: "234 N. Belmont Ave.",
+    lat: 39.7733, lng: -86.1838,
+    cuisine: "Burgers",
+    price: "$",
+    priceNum: 1,
+    distance: "7-min drive",
+    distanceNum: 7,
+    meals: ["Lunch"],
+    notes: "Legendary smashburgers. Cash only w/ ATM inside. Will be packed.",
+    dietary: false
+  },
+  {
+    name: "Yolis Supermarket",
+    address: "4202 S. Meridian St.",
+    lat: 39.7189, lng: -86.1610,
+    cuisine: "Mexican",
+    price: "$",
+    priceNum: 1,
+    distance: "11-min drive",
+    distanceNum: 11,
+    meals: ["Lunch"],
+    notes: "Taqueria inside a Mexican grocery store. Tons of taco and torta options.",
+    dietary: false
+  },
+  {
+    name: "Bluebeard",
+    address: "653 Virginia Ave.",
+    lat: 39.7553, lng: -86.1455,
+    cuisine: "New American",
+    price: "$$",
+    priceNum: 2,
+    distance: "6-min drive",
+    distanceNum: 6,
+    meals: ["Lunch", "Dinner"],
+    notes: "2026 restaurant of the year. Amazing pastas & meat dishes. Great lunch value.",
+    dietary: true
+  },
+  {
+    name: "Daisy Bar",
+    address: "1011 Massachusetts Ave.",
+    lat: 39.7785, lng: -86.1401,
+    cuisine: "Fusion",
+    price: "$$",
+    priceNum: 2,
+    distance: "11-min drive",
+    distanceNum: 11,
+    meals: ["Breakfast/Brunch", "Lunch", "Dinner"],
+    notes: "Fun café by day, small plates by night. Daytime offerings are stronger.",
+    dietary: true
+  },
+  {
+    name: "Shapiro's",
+    address: "808 S. Meridian St.",
+    lat: 39.7567, lng: -86.1619,
+    cuisine: "Deli",
+    price: "$$",
+    priceNum: 2,
+    distance: "4-min drive",
+    distanceNum: 4,
+    meals: ["Lunch"],
+    notes: "Jewish deli since the Taft administration. Immaculate Reuben. Kosher.",
+    dietary: false
+  },
+  {
+    name: "Yazsh",
+    address: "1705 E. Michigan St.",
+    lat: 39.7707, lng: -86.1360,
+    cuisine: "Bulgarian",
+    price: "$$",
+    priceNum: 2,
+    distance: "10-min drive",
+    distanceNum: 10,
+    meals: ["Lunch", "Dinner"],
+    notes: "Quaint Balkan and Mediterranean café. Excellent salads. Good coffee.",
+    dietary: false
+  },
+  {
+    name: "Axum",
+    address: "825 N. Pennsylvania St.",
+    lat: 39.7781, lng: -86.1559,
+    cuisine: "Ethiopian",
+    price: "$$",
+    priceNum: 2,
+    distance: "8-min drive",
+    distanceNum: 8,
+    meals: ["Dinner"],
+    notes: "Solid injera with stewed meats, lentils and veggies. Extremely filling.",
+    dietary: false
+  },
+  {
+    name: "Bosphorus",
+    address: "935 S. East St.",
+    lat: 39.7543, lng: -86.1488,
+    cuisine: "Turkish",
+    price: "$$",
+    priceNum: 2,
+    distance: "7-min drive",
+    distanceNum: 7,
+    meals: ["Dinner"],
+    notes: "Cozy Turkish spot. Massive portions. Surprising veg/vegan options. Staggering pita budget.",
+    dietary: true
+  },
+  {
+    name: "Fat Dan's Deli",
+    address: "410 E. Michigan St.",
+    lat: 39.7705, lng: -86.1484,
+    cuisine: "American",
+    price: "$",
+    priceNum: 1.5,
+    distance: "9-min drive",
+    distanceNum: 9,
+    meals: ["Dinner"],
+    notes: "Giant portions served on paper, no plates. Italian beef, Chicago dogs, burgers. Fun atmosphere.",
+    dietary: false
+  },
+  {
+    name: "Thaitanium",
+    address: "735 Massachusetts Ave.",
+    lat: 39.7755, lng: -86.1449,
+    cuisine: "Thai",
+    price: "$$",
+    priceNum: 2,
+    distance: "9-min drive",
+    distanceNum: 9,
+    meals: ["Dinner"],
+    notes: "Passable Thai food, lots of options, amazing iced coffee cocktail. For better Thai, try Bodhi.",
+    dietary: false
+  },
+  {
+    name: "Lil Dumplings Noodle Bar",
+    address: "926 Carrollton Ave.",
+    lat: 39.7790, lng: -86.1410,
+    cuisine: "Japanese/Pan-Asian",
+    price: "$$",
+    priceNum: 2,
+    distance: "10-min drive",
+    distanceNum: 10,
+    meals: ["Dinner"],
+    notes: "Ramen/dandan spot in The Garage food hall. Run by former celebrated chef. Best of the bunch.",
+    dietary: false
+  },
+  {
+    name: "Fernando's",
+    address: "888 Massachusetts Ave.",
+    lat: 39.7773, lng: -86.1422,
+    cuisine: "Brazilian/Mexican",
+    price: "$$ to $$$",
+    priceNum: 2.5,
+    distance: "10-min drive",
+    distanceNum: 10,
+    meals: ["Dinner"],
+    notes: "Well-made Latin food. Try the chicken stroganoff or feijoada. Great for apps and drinks.",
+    dietary: false
+  },
+  {
+    name: "St. Elmo",
+    address: "127 S. Illinois St.",
+    lat: 39.7660, lng: -86.1598,
+    cuisine: "Steakhouse",
+    price: "$$$$",
+    priceNum: 4,
+    distance: "12-min walk",
+    distanceNum: 3,
+    meals: ["Dinner"],
+    notes: "THE Indianapolis restaurant. Shrimp cocktail + steak = excellent dinner. Budget blower.",
+    dietary: false
+  },
+  {
+    name: "Petra",
+    address: "610 Massachusetts Ave.",
+    lat: 39.7741, lng: -86.1470,
+    cuisine: "Greek",
+    price: "$",
+    priceNum: 1,
+    distance: "9-min drive",
+    distanceNum: 9,
+    meals: ["Late Night"],
+    notes: "Late night option past midnight. Not great food, but it's food. Try the spicy gyro.",
+    dietary: false
+  },
+  {
+    name: "Borage",
+    address: "1609 N. Lynhurst Dr.",
+    lat: 39.7820, lng: -86.2348,
+    cuisine: "American",
+    price: "$$",
+    priceNum: 2,
+    distance: "15-min drive",
+    distanceNum: 15,
+    meals: ["Breakfast/Brunch"],
+    notes: "Café/bakery. Lovely breakfast platter, fun sandwiches. Dietary-friendly. Worth the drive.",
+    dietary: true
+  },
+  {
+    name: "Asian Snack",
+    address: "3605 Commercial Drive",
+    lat: 39.7415, lng: -86.1183,
+    cuisine: "Chinese/Pan-Asian",
+    price: "$",
+    priceNum: 1,
+    distance: "15-min drive",
+    distanceNum: 15,
+    meals: ["Lunch"],
+    notes: "Inside an international grocery. Pork buns, chive pies, firecracker chicken. Can't go wrong.",
+    dietary: false
+  },
+  {
+    name: "Macizo",
+    address: "6335 Intech Commons Drive",
+    lat: 39.7248, lng: -86.1045,
+    cuisine: "Mexican/Peruvian",
+    price: "$$",
+    priceNum: 2,
+    distance: "20-min drive",
+    distanceNum: 20,
+    meals: ["Lunch", "Dinner"],
+    notes: "Maybe Indy's most charming restaurant. Husband-and-wife from MX and Peru. Try the mole enchiladas.",
+    dietary: false
+  },
+  {
+    name: "Yaso Jamaican Grill",
+    address: "1501 Prospect St.",
+    lat: 39.7500, lng: -86.1389,
+    cuisine: "Jamaican",
+    price: "$$",
+    priceNum: 2,
+    distance: "11-min drive",
+    distanceNum: 11,
+    meals: ["Lunch", "Dinner"],
+    notes: "Excellent stewed meats, goat curry, jerk chicken. Has a drive-thru. Beloved by locals.",
+    dietary: false
+  },
+  {
+    name: "Ardys Concession",
+    address: "4141 S. East St.",
+    lat: 39.7162, lng: -86.1454,
+    cuisine: "Filipino",
+    price: "$$",
+    priceNum: 2,
+    distance: "13-min drive",
+    distanceNum: 13,
+    meals: ["Lunch"],
+    notes: "Fri–Sun only. Inside Philippine Cultural Center. Sisig and dinuguan are outstanding.",
+    dietary: false
+  },
+  {
+    name: "Tinker Street",
+    address: "402 E. 16th St.",
+    lat: 39.7851, lng: -86.1499,
+    cuisine: "New American",
+    price: "$$$",
+    priceNum: 3,
+    distance: "12-min drive",
+    distanceNum: 12,
+    meals: ["Dinner"],
+    notes: "Author's personal favorite for a fancy dinner. More interesting than St. Elmo.",
+    dietary: false
+  }
+];
+
+// Color by price
+function priceColor(priceNum) {
+  if (priceNum <= 1) return '#3a8a4a';
+  if (priceNum <= 2) return '#3a7ca5';
+  if (priceNum <= 3) return '#7a5faa';
+  return '#c04a3d';
+}
+
+function priceClass(priceNum) {
+  if (priceNum <= 1) return 'price-1';
+  if (priceNum <= 2) return 'price-2';
+  if (priceNum <= 3) return 'price-3';
+  return 'price-4';
+}
+
+// Initialize map
+const map = L.map('map', {
+  zoomControl: true
+}).setView([39.7655, -86.1580], 13);
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+  subdomains: 'abcd',
+  maxZoom: 19
+}).addTo(map);
+
+// JW Marriott marker
+const jwMarker = L.marker([39.7677, -86.1640], {
+  icon: L.divIcon({
+    className: '',
+    html: `<div style="width:30px;height:30px;border-radius:50%;background:#b8792e;border:2.5px solid #fff;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,0.2);"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff" stroke="none"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>`,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15]
+  })
+}).addTo(map).bindPopup('<div class="popup-name">JW Marriott</div><div class="popup-desc">Conference hotel — your home base</div>');
+
+// Create markers
+const markers = {};
+restaurants.forEach((r, i) => {
+  const color = priceColor(r.priceNum);
+  const icon = L.divIcon({
+    className: '',
+    html: `<div class="custom-marker" id="marker-${i}" style="background:${color}">${i + 1}</div>`,
+    iconSize: [30, 30],
+    iconAnchor: [15, 15]
+  });
+
+  const marker = L.marker([r.lat, r.lng], { icon }).addTo(map);
+  marker.bindPopup(`
+    <div class="popup-name">${r.name}</div>
+    <div class="popup-cuisine">${r.cuisine}</div>
+    <div class="popup-price">${r.price}</div>
+    <div class="popup-desc">${r.notes}${r.dietary ? '<br><span style="color:#6abf7b;font-size:0.75rem;">✓ Dietary-friendly</span>' : ''}</div>
+  `);
+  markers[i] = marker;
+});
+
+// Populate cuisine filter
+const cuisines = [...new Set(restaurants.map(r => r.cuisine))].sort();
+const cuisineSelect = document.getElementById('filter-cuisine');
+cuisines.forEach(c => {
+  const opt = document.createElement('option');
+  opt.value = c;
+  opt.textContent = c;
+  cuisineSelect.appendChild(opt);
+});
+
+// Sort state
+let sortCol = 'name';
+let sortAsc = true;
+
+// Render table
+function renderTable() {
+  const priceFilter = document.getElementById('filter-price').value;
+  const distFilter = parseInt(document.getElementById('filter-distance').value) || 999;
+  const cuisineFilter = document.getElementById('filter-cuisine').value;
+  const mealFilter = document.getElementById('filter-meal').value;
+  const searchFilter = document.getElementById('filter-search').value.toLowerCase();
+
+  let filtered = restaurants.map((r, i) => ({ ...r, idx: i })).filter(r => {
+    if (priceFilter && r.price !== priceFilter) return false;
+    if (r.distanceNum > distFilter) return false;
+    if (cuisineFilter && r.cuisine !== cuisineFilter) return false;
+    if (mealFilter && !r.meals.includes(mealFilter)) return false;
+    if (searchFilter && !r.name.toLowerCase().includes(searchFilter) && !r.notes.toLowerCase().includes(searchFilter) && !r.cuisine.toLowerCase().includes(searchFilter)) return false;
+    return true;
+  });
+
+  // Sort
+  filtered.sort((a, b) => {
+    let va, vb;
+    switch (sortCol) {
+      case 'name': va = a.name; vb = b.name; break;
+      case 'cuisine': va = a.cuisine; vb = b.cuisine; break;
+      case 'price': va = a.priceNum; vb = b.priceNum; break;
+      case 'distance': va = a.distanceNum; vb = b.distanceNum; break;
+      case 'meal': va = a.meals[0]; vb = b.meals[0]; break;
+      default: va = a.name; vb = b.name;
+    }
+    if (typeof va === 'string') {
+      return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+    }
+    return sortAsc ? va - vb : vb - va;
+  });
+
+  // Update visible markers
+  const visibleIdxs = new Set(filtered.map(r => r.idx));
+  restaurants.forEach((r, i) => {
+    if (visibleIdxs.has(i)) {
+      markers[i].addTo(map);
+    } else {
+      map.removeLayer(markers[i]);
+    }
+  });
+
+  // Fit bounds to visible
+  if (filtered.length > 0) {
+    const bounds = L.latLngBounds(filtered.map(r => [r.lat, r.lng]));
+    bounds.extend([39.7677, -86.1640]); // include JW Marriott
+    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+  }
+
+  // Render rows
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = filtered.map(r => `
+    <tr onclick="focusRestaurant(${r.idx})" data-idx="${r.idx}">
+      <td class="name-cell">
+        ${r.name}
+        <div class="address">${r.address}</div>
+      </td>
+      <td><span class="cuisine-tag">${r.cuisine}</span></td>
+      <td class="${priceClass(r.priceNum)} price-cell">${r.price}</td>
+      <td class="distance-cell">${r.distance}</td>
+      <td class="meal-cell">${r.meals.join(', ')}</td>
+      <td class="notes-cell">
+        ${r.notes}
+        ${r.dietary ? '<div class="diet-badge">Veg/Vegan/GF friendly</div>' : ''}
+      </td>
+    </tr>
+    <tr class="mobile-card-row"><td colspan="6">
+      <div class="mobile-card" onclick="focusRestaurant(${r.idx})" data-card-idx="${r.idx}">
+        <div class="mobile-card-header">
+          <div class="mobile-card-name">${r.name}</div>
+          <div class="mobile-card-price ${priceClass(r.priceNum)}">${r.price}</div>
+        </div>
+        <div class="mobile-card-address">${r.address}</div>
+        <div class="mobile-card-meta">
+          <span class="cuisine-tag">${r.cuisine}</span>
+          <span class="mobile-card-distance">${r.distance}</span>
+          <span class="mobile-card-meal">· ${r.meals.join(', ')}</span>
+        </div>
+        <div class="mobile-card-notes">
+          ${r.notes}
+          ${r.dietary ? '<div class="diet-badge">Veg/Vegan/GF friendly</div>' : ''}
+        </div>
+      </div>
+    </td></tr>
+  `).join('');
+
+  document.getElementById('result-count').textContent = `${filtered.length} of ${restaurants.length}`;
+
+  // Update header sort indicators
+  document.querySelectorAll('th[data-sort]').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.sort === sortCol);
+    const arrow = th.querySelector('.sort-arrow');
+    if (th.dataset.sort === sortCol) {
+      arrow.textContent = sortAsc ? '↑' : '↓';
+    } else {
+      arrow.textContent = '↕';
+    }
+  });
+}
+
+function focusRestaurant(idx) {
+  const r = restaurants[idx];
+  map.setView([r.lat, r.lng], 16, { animate: true });
+  markers[idx].openPopup();
+  document.querySelectorAll('tr.highlighted').forEach(el => el.classList.remove('highlighted'));
+  document.querySelectorAll('.mobile-card.highlighted').forEach(el => el.classList.remove('highlighted'));
+  const row = document.querySelector(`tr[data-idx="${idx}"]`);
+  if (row) row.classList.add('highlighted');
+  const card = document.querySelector(`.mobile-card[data-card-idx="${idx}"]`);
+  if (card) {
+    card.classList.add('highlighted');
+  }
+  // On mobile, scroll map into view
+  if (window.innerWidth <= 900) {
+    document.querySelector('.map-panel').scrollIntoView({ behavior: 'smooth' });
+  }
+}
+window.focusRestaurant = focusRestaurant;
+
+function resetFilters() {
+  document.getElementById('filter-price').value = '';
+  document.getElementById('filter-distance').value = '';
+  document.getElementById('filter-cuisine').value = '';
+  document.getElementById('filter-meal').value = '';
+  document.getElementById('filter-search').value = '';
+  renderTable();
+}
+window.resetFilters = resetFilters;
+
+// Sort handlers
+document.querySelectorAll('th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.sort;
+    if (sortCol === col) {
+      sortAsc = !sortAsc;
+    } else {
+      sortCol = col;
+      sortAsc = true;
+    }
+    renderTable();
+  });
+});
+
+// Filter handlers
+['filter-price', 'filter-distance', 'filter-cuisine', 'filter-meal'].forEach(id => {
+  document.getElementById(id).addEventListener('change', renderTable);
+});
+document.getElementById('filter-search').addEventListener('input', renderTable);
+
+// Reset map view
+document.getElementById('reset-map-btn').addEventListener('click', () => {
+  document.querySelectorAll('tr.highlighted').forEach(el => el.classList.remove('highlighted'));
+  map.closePopup();
+  renderTable(); // re-fits bounds to current filter
+});
+
+// Geolocation
+let userMarker = null;
+const locateBtn = document.getElementById('locate-btn');
+
+locateBtn.addEventListener('click', () => {
+  if (!navigator.geolocation) {
+    alert('Geolocation is not supported by your browser.');
+    return;
+  }
+
+  locateBtn.classList.add('loading');
+  locateBtn.classList.remove('active');
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const { latitude, longitude } = pos.coords;
+      locateBtn.classList.remove('loading');
+      locateBtn.classList.add('active');
+
+      if (userMarker) {
+        userMarker.setLatLng([latitude, longitude]);
+      } else {
+        userMarker = L.marker([latitude, longitude], {
+          icon: L.divIcon({
+            className: '',
+            html: '<div class="user-location-dot"></div>',
+            iconSize: [16, 16],
+            iconAnchor: [8, 8]
+          }),
+          zIndexOffset: 1000
+        }).addTo(map).bindPopup('<div class="popup-name">You are here</div>');
+      }
+
+      map.setView([latitude, longitude], 14, { animate: true });
+      userMarker.openPopup();
+    },
+    (err) => {
+      locateBtn.classList.remove('loading');
+      if (err.code === 1) {
+        alert('Location access denied. Please enable location permissions.');
+      } else {
+        alert('Unable to determine your location.');
+      }
+    },
+    { enableHighAccuracy: true, timeout: 10000 }
+  );
+});
+
+// Initial render
+renderTable();
+}); // end window.addEventListener('load')
+</script>
+
+</body>
+</html>
