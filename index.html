@@ -11,7 +11,7 @@
 
   <link href="https://cdn.jsdelivr.net/npm/twemoji@11.3.0/2/svg/1f50e.svg" rel="icon"> <!--magnifying glass emoji-->
 
-  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style.css?v=6" rel="stylesheet">
 
   <!-- for social links -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
@@ -51,18 +51,83 @@
           Previously, I was a <a href="https://scholar.google.com/citations?user=vATffHQAAAAJ&hl=en">postdoctoral researcher</a>, studying reinforcement learning and decision-making using computational methods. I have a PhD in neuroscience from University College London.</p>
       </div>
 
+      <!-- Featured Section -->
+      <section class="featured-section">
+        <h2 class="section-title">Featured Work</h2>
+        <div class="featured-grid" id="featured-container"></div>
+      </section>
 
-        <div class="grid" id="works-container"> </div>
+      <!-- Filter Bar -->
+      <section class="filter-section">
+        <div class="filter-label">Filter by topic:</div>
+        <div class="filter-tags" id="filter-tags-container">
+          <span class="filter-tag all active" data-tag="all">All Work</span>
+        </div>
+      </section>
+
+      <div class="results-info">
+        Showing <strong id="results-count">0</strong> items
+      </div>
+
+      <div class="grid" id="works-container"> </div>
          <script>
+          // Featured work IDs (you can customize these)
+          const featuredIds = [0, 7, 10]; // Indices of featured items in works.json
+
           // Fetch the JSON and generate cards
           fetch('works.json')
             .then(res => res.json())
             .then(works => {
-              const container = document.getElementById("works-container");
+              const featuredContainer = document.getElementById("featured-container");
+              const worksContainer = document.getElementById("works-container");
+              const filterTagsContainer = document.getElementById("filter-tags-container");
+              const resultsCount = document.getElementById("results-count");
 
+              // Collect all unique tags
+              const allTags = new Set();
               works.forEach(work => {
+                work.tags.forEach(tag => allTags.add(tag));
+              });
+
+              // Create filter tags
+              const sortedTags = Array.from(allTags).sort();
+              sortedTags.forEach(tag => {
+                const filterTag = document.createElement("span");
+                filterTag.className = "filter-tag";
+                filterTag.setAttribute("data-tag", tag);
+                filterTag.textContent = tag;
+                filterTagsContainer.appendChild(filterTag);
+              });
+
+              // Generate featured cards
+              featuredIds.forEach(index => {
+                const work = works[index];
+                if (!work) return;
+
                 const card = document.createElement("div");
-                card.className = "card";
+                card.className = "card featured-card";
+
+                card.innerHTML = `
+                  <span class="featured-badge">Featured</span>
+                  <a href="${work.url}" target="_blank"><img src="${work.image}" alt="${work.title}"></a>
+                  <div class="card-content">
+                    <div class="card-title"><a href="${work.url}" target="_blank">${work.title}</a></div>
+                    <div class="card-meta">${work.date} — ${work.source}</div>
+                    <p>${work.description}</p>
+                    <div class="card-tags">
+                      ${work.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                  </div>
+                `;
+
+                featuredContainer.appendChild(card);
+              });
+
+              // Generate all work cards (including featured ones)
+              works.forEach((work, index) => {
+                const card = document.createElement("div");
+                card.className = "card visible";
+                card.setAttribute("data-tags", JSON.stringify(work.tags));
 
                 card.innerHTML = `
                   <a href="${work.url}" target="_blank"><img src="${work.image}" alt="${work.title}"></a>
@@ -76,7 +141,45 @@
                   </div>
                 `;
 
-                container.appendChild(card);
+                worksContainer.appendChild(card);
+              });
+
+              // Initialize count
+              resultsCount.textContent = works.length;
+
+              // Filter functionality
+              const filterTags = document.querySelectorAll('.filter-tag');
+              const cards = document.querySelectorAll('#works-container .card');
+
+              filterTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                  // Remove active from all tags
+                  filterTags.forEach(t => t.classList.remove('active'));
+                  // Add active to clicked tag
+                  tag.classList.add('active');
+
+                  const selectedTag = tag.getAttribute('data-tag');
+                  let visibleCount = 0;
+
+                  cards.forEach(card => {
+                    const cardTags = JSON.parse(card.getAttribute('data-tags'));
+                    
+                    if (selectedTag === 'all') {
+                      card.classList.remove('hidden');
+                      card.classList.add('visible');
+                      visibleCount++;
+                    } else if (cardTags.includes(selectedTag)) {
+                      card.classList.remove('hidden');
+                      card.classList.add('visible');
+                      visibleCount++;
+                    } else {
+                      card.classList.add('hidden');
+                      card.classList.remove('visible');
+                    }
+                  });
+
+                  resultsCount.textContent = visibleCount;
+                });
               });
             })
             .catch(err => console.error("Error loading works.json:", err));
