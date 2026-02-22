@@ -71,8 +71,7 @@
     display: flex;
     flex: 1;
     min-height: 0;
-    overflow-y: auto;
-    flex-direction: column;
+    overflow: hidden;
   }
   .page.active .app {
     flex: 1;
@@ -123,20 +122,18 @@
 
   /* Layout */
   .app {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     flex: 1;
     min-height: 0;
+    overflow: hidden;
   }
 
   /* Map Panel */
   .map-panel {
     position: relative;
-    height: 57vh;
-    min-height: 300px;
-    flex-shrink: 0;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    min-height: 0;
   }
   #map {
     width: 100%;
@@ -204,9 +201,8 @@
   .table-panel {
     display: flex;
     flex-direction: column;
-    flex: 1;
+    overflow: hidden;
     min-height: 0;
-    width: 100%;
   }
 
   /* Filters */
@@ -277,11 +273,11 @@
 
   .directions-link {
     display: inline-block;
-    font-size: 0.72rem;
+    font-size: 0.6rem;
     color: var(--accent);
     text-decoration: none;
     font-family: 'IBM Plex Mono', monospace;
-    margin-top: 2px;
+    margin-top: 1px;
   }
   .directions-link:hover {
     text-decoration: underline;
@@ -307,7 +303,7 @@
   .table-scroll {
     flex: 1;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
     min-height: 0;
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
@@ -317,10 +313,6 @@
     border-collapse: collapse;
     table-layout: fixed;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
   thead {
     position: sticky;
     top: 0;
@@ -329,11 +321,11 @@
   th {
     background: var(--surface);
     text-align: left;
-    padding: 8px 12px;
+    padding: 5px 6px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.62rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: var(--text-muted);
     border-bottom: 1px solid var(--border);
     cursor: pointer;
@@ -352,9 +344,9 @@
     color: var(--accent);
   }
   td {
-    padding: 6px 8px;
+    padding: 4px 5px;
     border-bottom: 1px solid var(--border);
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     vertical-align: top;
   }
   tr {
@@ -370,70 +362,68 @@
   .name-cell {
     font-weight: 600;
     color: var(--text);
+    min-width: 90px;
+    max-width: 140px;
+    font-size: 0.78rem;
   }
   .name-cell .address {
     font-weight: 400;
-    font-size: 0.72rem;
+    font-size: 0.62rem;
     color: var(--text-muted);
-    margin-top: 2px;
+    margin-top: 1px;
   }
   .cuisine-tag {
     display: inline-block;
     background: var(--tag-bg);
     border: 1px solid var(--tag-border);
-    padding: 2px 8px;
+    padding: 1px 5px;
     border-radius: 99px;
-    font-size: 0.75rem;
+    font-size: 0.62rem;
     font-family: 'IBM Plex Mono', monospace;
     color: var(--accent);
     white-space: nowrap;
   }
-  .price-tag {
+  .cuisine-cell {
+    font-size: 0.68rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .price-cell {
     font-weight: 600;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.85rem;
+    white-space: nowrap;
+    font-size: 0.72rem;
   }
   .price-1 { color: var(--green); }
   .price-2 { color: var(--blue); }
   .price-3 { color: var(--purple); }
   .price-4 { color: var(--red); }
 
-  .details-cell {
+  .distance-cell {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
+    font-size: 0.65rem;
     color: var(--text-muted);
     white-space: nowrap;
-    line-height: 1.6;
-  }
-  .detail-line {
-    font-size: 0.72rem;
-  }
-  .notes-cell {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
-  .cuisine-cell {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent);
-  }
-  .dist-cell {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--text-muted);
   }
   .type-cell {
-    font-size: 0.72rem;
+    font-size: 0.65rem;
     color: var(--text-muted);
-    line-height: 1.5;
+    white-space: nowrap;
   }
   .hours-cell {
-    font-size: 0.72rem;
-  }
-  .no-hours {
-    color: var(--border);
+    font-size: 0.62rem;
     font-family: 'IBM Plex Mono', monospace;
+    color: var(--red);
+    max-width: 120px;
+    line-height: 1.3;
+    white-space: normal;
+  }
+  .notes-cell {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    max-width: 180px;
+    line-height: 1.3;
   }
   .hours-note {
     display: inline-block;
@@ -627,15 +617,14 @@
 
     /* Page & App layout */
     .page.active {
-      overflow-y: auto;
+      overflow: visible;
     }
     .app {
+      grid-template-columns: 1fr;
+      grid-template-rows: 45vh auto;
       height: auto;
       min-height: 0;
-    }
-    .map-panel {
-      height: 40vh;
-      min-height: 200px;
+      overflow: visible;
     }
     .map-panel {
       border-right: none;
@@ -682,59 +671,82 @@
       padding: 8px 1rem;
     }
 
-    /* Map controls — 48px touch targets */
+    /* Map controls — smaller on mobile */
     .locate-btn, .reset-map-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
     }
-    .locate-btn { top: 10px; right: 10px; }
-    .reset-map-btn { top: 66px; right: 10px; }
+    .locate-btn { top: 8px; right: 8px; }
+    .reset-map-btn { top: 50px; right: 8px; }
     .locate-btn svg, .reset-map-btn svg {
-      width: 22px;
-      height: 22px;
+      width: 16px;
+      height: 16px;
     }
     .reset-map-btn span {
-      font-size: 24px !important;
+      font-size: 18px !important;
     }
 
-    /* Legend */
+    /* Legend — collapsed by default on mobile */
     .legend {
-      bottom: 8px;
-      left: 8px;
-      padding: 6px 10px;
-      font-size: 0.65rem;
-      border-radius: 6px;
+      bottom: 6px;
+      left: 6px;
+      padding: 4px 8px;
+      font-size: 0.55rem;
+      border-radius: 5px;
+      max-width: 90px;
+      cursor: pointer;
     }
-    .legend-title { font-size: 0.58rem; }
-    .legend-item { margin-bottom: 2px; }
+    .legend-title {
+      font-size: 0.52rem;
+      pointer-events: none;
+    }
+    .legend-title::after {
+      content: ' ▸';
+      font-size: 0.5rem;
+    }
+    .legend.expanded .legend-title::after {
+      content: ' ▾';
+    }
+    .legend-item {
+      display: none;
+      margin-bottom: 1px;
+    }
+    .legend.expanded .legend-item {
+      display: flex;
+    }
+    .legend.expanded {
+      max-width: none;
+    }
     .legend-dot {
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
     }
 
     /* Smaller popups on mobile */
     .leaflet-popup-content {
-      margin: 10px 12px !important;
-      font-size: 12px !important;
+      margin: 8px 10px !important;
+      font-size: 11px !important;
     }
-    .popup-name { font-size: 0.95rem; }
-    .popup-cuisine { font-size: 0.72rem; }
-    .popup-desc { font-size: 0.78rem; line-height: 1.4; }
+    .leaflet-popup-content-wrapper {
+      max-width: 200px !important;
+    }
+    .popup-name { font-size: 0.85rem; }
+    .popup-cuisine { font-size: 0.65rem; margin-bottom: 3px; }
+    .popup-price { font-size: 0.78rem; margin-bottom: 2px; }
+    .popup-hours { font-size: 0.6rem; padding: 0px 5px; margin-bottom: 2px; }
+    .popup-desc { font-size: 0.7rem; line-height: 1.35; }
 
     /* Directions link in popup */
     .leaflet-popup-content a {
-      font-size: 0.82rem !important;
-      padding: 4px 0 2px;
+      font-size: 0.75rem !important;
+      padding: 3px 0 1px;
       display: inline-block;
     }
 
     /* Hide table on mobile, cards container handles display */
     .table-scroll {
       display: none;
-    }
-    .body {
-      overflow-y: auto;
     }
   }
 
@@ -941,22 +953,22 @@
     <div class="table-scroll">
       <table>
         <colgroup>
-          <col style="width: 22%">
-          <col style="width: 6%">
-          <col style="width: 13%">
-          <col style="width: 11%">
-          <col style="width: 11%">
-          <col style="width: 13%">
-          <col style="width: 24%">
+          <col style="width:18%"><!-- Name -->
+          <col style="width:11%"><!-- Cuisine -->
+          <col style="width:7%"><!-- Price -->
+          <col style="width:11%"><!-- Distance -->
+          <col style="width:10%"><!-- Type -->
+          <col style="width:15%"><!-- Hours -->
+          <col style="width:28%"><!-- Notes -->
         </colgroup>
         <thead>
           <tr>
             <th data-sort="name">Name <span class="sort-arrow">↕</span></th>
-            <th data-sort="price">Price <span class="sort-arrow">↕</span></th>
             <th data-sort="cuisine">Cuisine <span class="sort-arrow">↕</span></th>
-            <th data-sort="distance">Dist <span class="sort-arrow">↕</span></th>
+            <th data-sort="price">Price <span class="sort-arrow">↕</span></th>
+            <th data-sort="distance">Dist. <span class="sort-arrow">↕</span></th>
             <th data-sort="meal">Type <span class="sort-arrow">↕</span></th>
-            <th>Hours Notes</th>
+            <th>Hours</th>
             <th>Notes</th>
           </tr>
         </thead>
@@ -978,41 +990,41 @@
 window.addEventListener('load', function() {
 const restaurants = [
   // === BREAKFAST/BRUNCH ===
-  {name:"Lincoln Square Pancake House",address:"150 W. Market St.",lat:39.7685,lng:-86.1628,cuisine:"American",price:"$",priceNum:1,distance:"10-min walk",distanceNum:10,meals:["Breakfast/Brunch"],hours:"Open until 3pm",notes:"Cheap breakfast, big portions. Not quite a diner but a diner in spirit.",dietary:false,groups:false},
-  {name:"Café Patachou",address:"225 W. Washington St.",lat:39.7673,lng:-86.1640,cuisine:"American",price:"$",priceNum:1,distance:"<10-min walk",distanceNum:8,meals:["Breakfast/Brunch","Lunch"],hours:"Open until 3pm",notes:"Indy brunch/lunch staple. ~$15 entrées, self-serve coffee bar. Also at 1060 N. Capitol Ave. Gets busy quickly.",dietary:true,groups:false},
-  {name:"Garden Table",address:"342 Massachusetts Ave.",lat:39.7728,lng:-86.1518,cuisine:"American",price:"$$",priceNum:2,distance:"6-min drive",distanceNum:6,meals:["Breakfast/Brunch"],hours:"Open until 3pm",notes:"Quintessential fru-fru brunch. Freshly squeezed juices, acai bowls. Great service.",dietary:true,groups:false},
-  {name:"Love Handle",address:"877 Massachusetts Ave.",lat:39.7771,lng:-86.1425,cuisine:"American",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Breakfast/Brunch"],hours:"Open until 3pm · Closed Tue–Wed",notes:"Cool, weird spot with big sandwiches. Menu changes all the time. Fun throwback vibe.",dietary:false,groups:false},
-  {name:"Milktooth",address:"534 Virginia Ave.",lat:39.7567,lng:-86.1477,cuisine:"American",price:"$$",priceNum:2,distance:"6-min drive",distanceNum:6,meals:["Breakfast/Brunch"],hours:"Open until 3pm · Closed Tue–Thu",notes:"Very acclaimed brunch. Dutch baby pancakes, beignets, wings. Gets busy fast.",dietary:false,groups:false},
+  {name:"Lincoln Square Pancake House",address:"150 W. Market St.",lat:39.769,lng:-86.1614,cuisine:"American",price:"$",priceNum:1,distance:"10-min walk",distanceNum:10,meals:["Breakfast/Brunch"],hours:"Open until 3pm",notes:"Cheap breakfast, big portions. Not quite a diner but a diner in spirit.",dietary:false,groups:false},
+  {name:"Café Patachou",address:"225 W. Washington St.",lat:39.7669,lng:-86.16190,cuisine:"American",price:"$",priceNum:1,distance:"<10-min walk",distanceNum:8,meals:["Breakfast/Brunch","Lunch"],hours:"Open until 3pm",notes:"Indy brunch/lunch staple. ~$15 entrées, self-serve coffee bar. Also at 1060 N. Capitol Ave. Gets busy quickly.",dietary:true,groups:false},
+  {name:"Garden Table",address:"342 Massachusetts Ave.",lat:39.7721,lng:-86.1533,cuisine:"American",price:"$$",priceNum:2,distance:"6-min drive",distanceNum:6,meals:["Breakfast/Brunch"],hours:"Open until 3pm",notes:"Quintessential fru-fru brunch. Freshly squeezed juices, acai bowls. Great service.",dietary:true,groups:false},
+  {name:"Love Handle",address:"877 Massachusetts Ave.",lat:39.7792,lng:-86.1425,cuisine:"American",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Breakfast/Brunch"],hours:"Open until 3pm · Closed Tue–Wed",notes:"Cool, weird spot with big sandwiches. Menu changes all the time. Fun throwback vibe.",dietary:false,groups:false},
+  {name:"Milktooth",address:"534 Virginia Ave.",lat:39.7592,lng:-86.1465,cuisine:"American",price:"$$",priceNum:2,distance:"6-min drive",distanceNum:6,meals:["Breakfast/Brunch"],hours:"Open until 3pm · Closed Tue–Thu",notes:"Very acclaimed brunch. Dutch baby pancakes, beignets, wings. Gets busy fast.",dietary:false,groups:false},
   // === LUNCH ===
-  {name:"Subito",address:"34 N. Delaware St.",lat:39.7698,lng:-86.1537,cuisine:"Soups/Sandwiches",price:"$",priceNum:1,distance:"6-min drive",distanceNum:6,meals:["Lunch"],hours:"Open until 3pm · Weekdays only",notes:"Lovely soup and sandwich spot. The Revelo is a wonderful sandwich. $10–$15 lunch.",dietary:false,groups:false},
-  {name:"Julieta",address:"1060 N. Capitol Ave.",lat:39.7795,lng:-86.1667,cuisine:"Mexican",price:"$",priceNum:1,distance:"7-min drive",distanceNum:7,meals:["Lunch"],hours:"Closed Mon, Sun",notes:"Walk-up taco counter with some of the best food in Indy. $5 tacos. Order through window at Turner's Bar next door for groups.",dietary:false,groups:true},
-  {name:"Workingman's Friend",address:"234 N. Belmont Ave.",lat:39.7733,lng:-86.1838,cuisine:"Burgers",price:"$",priceNum:1,distance:"7-min drive",distanceNum:7,meals:["Lunch"],hours:"Open until 2:45pm · Closed Mon, Sun",notes:"Legendary smashburgers. Cash only w/ ATM inside. Will be packed.",dietary:false,groups:false},
-  {name:"Yolis Supermarket",address:"4202 S. Meridian St.",lat:39.7189,lng:-86.1610,cuisine:"Mexican",price:"$",priceNum:1,distance:"11-min drive",distanceNum:11,meals:["Lunch"],hours:"Closed Sat",notes:"Taqueria inside a Mexican grocery store. Tons of taco and torta options.",dietary:false,groups:false},
-  {name:"Bluebeard",address:"653 Virginia Ave.",lat:39.7553,lng:-86.1455,cuisine:"New American",price:"$$",priceNum:2,distance:"6-min drive",distanceNum:6,meals:["Lunch","Dinner"],hours:"Sun dinner only",notes:"2026 restaurant of the year. Great lunch value, amazing pastas and meat dishes at dinner.",dietary:true,groups:false},
-  {name:"Daisy Bar",address:"1011 Massachusetts Ave.",lat:39.7785,lng:-86.1401,cuisine:"Fusion",price:"$$",priceNum:2,distance:"11-min drive",distanceNum:11,meals:["Breakfast/Brunch","Lunch","Dinner"],hours:"Sun closes 4pm",notes:"Fun café by day, small plates by night. Daytime offerings are stronger. Nice coffee program.",dietary:true,groups:false},
-  {name:"Shapiro's",address:"808 S. Meridian St.",lat:39.7567,lng:-86.1619,cuisine:"Deli",price:"$$",priceNum:2,distance:"4-min drive",distanceNum:4,meals:["Lunch"],hours:"",notes:"Jewish deli since the Taft administration. Immaculate Reuben. Kosher. Big tables for groups.",dietary:false,groups:true},
-  {name:"Yazsh",address:"1705 E. Michigan St.",lat:39.7707,lng:-86.1360,cuisine:"Bulgarian",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Lunch","Dinner"],hours:"Closed Mon, Tue",notes:"Quaint Balkan and Mediterranean café. Excellent salads. Good coffee. Dinner closer to $25/plate.",dietary:false,groups:false},
+  {name:"Subito",address:"34 N. Delaware St.",lat:39.768,lng:-86.1546,cuisine:"Soups/Sandwiches",price:"$",priceNum:1,distance:"6-min drive",distanceNum:6,meals:["Lunch"],hours:"Open until 3pm · Weekdays only",notes:"Lovely soup and sandwich spot. The Revelo is a wonderful sandwich. $10–$15 lunch.",dietary:false,groups:false},
+  {name:"Julieta",address:"1060 N. Capitol Ave.",lat:39.7813,lng:-86.1619,cuisine:"Mexican",price:"$",priceNum:1,distance:"7-min drive",distanceNum:7,meals:["Lunch"],hours:"Closed Mon, Sun",notes:"Walk-up taco counter with some of the best food in Indy. $5 tacos. Order through window at Turner's Bar next door for groups.",dietary:false,groups:true},
+  {name:"Workingman's Friend",address:"234 N. Belmont Ave.",lat:39.7695,lng:-86.197,cuisine:"Burgers",price:"$",priceNum:1,distance:"7-min drive",distanceNum:7,meals:["Lunch"],hours:"Open until 2:45pm · Closed Mon, Sun",notes:"Legendary smashburgers. Cash only w/ ATM inside. Will be packed.",dietary:false,groups:false},
+  {name:"Yolis Supermarket",address:"4202 S. Meridian St.",lat:39.705,lng:-86.15890,cuisine:"Mexican",price:"$",priceNum:1,distance:"11-min drive",distanceNum:11,meals:["Lunch"],hours:"Closed Sat",notes:"Taqueria inside a Mexican grocery store. Tons of taco and torta options.",dietary:false,groups:false},
+  {name:"Bluebeard",address:"653 Virginia Ave.",lat:39.7576,lng:-86.146,cuisine:"New American",price:"$$",priceNum:2,distance:"6-min drive",distanceNum:6,meals:["Lunch","Dinner"],hours:"Sun dinner only",notes:"2026 restaurant of the year. Great lunch value, amazing pastas and meat dishes at dinner.",dietary:true,groups:false},
+  {name:"Daisy Bar",address:"1011 Massachusetts Ave.",lat:39.7813,lng:-86.1382,cuisine:"Fusion",price:"$$",priceNum:2,distance:"11-min drive",distanceNum:11,meals:["Breakfast/Brunch","Lunch","Dinner"],hours:"Sun closes 4pm",notes:"Fun café by day, small plates by night. Daytime offerings are stronger. Nice coffee program.",dietary:true,groups:false},
+  {name:"Shapiro's",address:"808 S. Meridian St.",lat:39.7563,lng:-86.1596,cuisine:"Deli",price:"$$",priceNum:2,distance:"4-min drive",distanceNum:4,meals:["Lunch"],hours:"",notes:"Jewish deli since the Taft administration. Immaculate Reuben. Kosher. Big tables for groups.",dietary:false,groups:true},
+  {name:"Yazsh",address:"1705 E. Michigan St.",lat:39.7742,lng:-86.13030,cuisine:"Bulgarian",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Lunch","Dinner"],hours:"Closed Mon, Tue",notes:"Quaint Balkan and Mediterranean café. Excellent salads. Good coffee. Dinner closer to $25/plate.",dietary:false,groups:false},
   // === DINNER ===
-  {name:"Axum",address:"825 N. Pennsylvania St.",lat:39.7781,lng:-86.1559,cuisine:"Ethiopian",price:"$$",priceNum:2,distance:"8-min drive",distanceNum:8,meals:["Dinner"],hours:"Closed Mon",notes:"Solid injera with stewed meats, lentils and veggies. ~$20/plate, extremely filling.",dietary:false,groups:false},
-  {name:"Bosphorus",address:"935 S. East St.",lat:39.7543,lng:-86.1488,cuisine:"Turkish",price:"$$",priceNum:2,distance:"7-min drive",distanceNum:7,meals:["Dinner"],hours:"Sun opens 4pm",notes:"Cozy Turkish spot. Massive portions. Surprising veg/vegan options. Staggering pita budget.",dietary:true,groups:false},
-  {name:"Fat Dan's Deli",address:"410 E. Michigan St.",lat:39.7705,lng:-86.1484,cuisine:"American",price:"$ to $$",priceNum:1.5,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Giant portions on paper, no plates. Italian beef, Chicago dogs, burgers. Fun atmosphere, good beer.",dietary:false,groups:false},
-  {name:"Thaitanium",address:"735 Massachusetts Ave.",lat:39.7755,lng:-86.1449,cuisine:"Thai",price:"$$",priceNum:2,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Passable Thai food, lots of options, amazing iced coffee cocktail. Accommodating to large groups — call ahead.",dietary:false,groups:true},
-  {name:"Lil Dumplings / The Garage",address:"926 Carrollton Ave.",lat:39.7790,lng:-86.1410,cuisine:"Japanese/Pan-Asian",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Ramen/dandan spot in The Garage food hall. Run by former celebrated chef. Ideal for big groups — multiple restaurants in one spot.",dietary:false,groups:true},
-  {name:"Fernando's",address:"888 Massachusetts Ave.",lat:39.7773,lng:-86.1422,cuisine:"Brazilian/Mexican",price:"$$ to $$$",priceNum:2.5,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Well-made Latin food. Try the chicken stroganoff or feijoada. Great for apps and drinks.",dietary:false,groups:false},
-  {name:"St. Elmo",address:"127 S. Illinois St.",lat:39.7660,lng:-86.1598,cuisine:"Steakhouse",price:"$$$$",priceNum:4,distance:"12-min walk",distanceNum:12,meals:["Dinner"],hours:"Dinner only (opens 4pm)",notes:"THE Indianapolis restaurant. Shrimp cocktail + steak = excellent dinner. Budget blower.",dietary:false,groups:false},
-  {name:"Tinker Street",address:"402 E. 16th St.",lat:39.7851,lng:-86.1499,cuisine:"New American",price:"$$$",priceNum:3,distance:"12-min drive",distanceNum:12,meals:["Dinner"],hours:"Dinner only (opens 5pm)",notes:"Author's personal favorite for a fancy dinner. More interesting than St. Elmo.",dietary:false,groups:false},
+  {name:"Axum",address:"825 N. Pennsylvania St.",lat:39.7787,lng:-86.1556,cuisine:"Ethiopian",price:"$$",priceNum:2,distance:"8-min drive",distanceNum:8,meals:["Dinner"],hours:"Closed Mon",notes:"Solid injera with stewed meats, lentils and veggies. ~$20/plate, extremely filling.",dietary:false,groups:false},
+  {name:"Bosphorus",address:"935 S. East St.",lat:39.7546,lng:-86.1493,cuisine:"Turkish",price:"$$",priceNum:2,distance:"7-min drive",distanceNum:7,meals:["Dinner"],hours:"Sun opens 4pm",notes:"Cozy Turkish spot. Massive portions. Surprising veg/vegan options. Staggering pita budget.",dietary:true,groups:false},
+  {name:"Fat Dan's Deli",address:"410 E. Michigan St.",lat:39.7741,lng:-86.1497,cuisine:"American",price:"$ to $$",priceNum:1.5,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Giant portions on paper, no plates. Italian beef, Chicago dogs, burgers. Fun atmosphere, good beer.",dietary:false,groups:false},
+  {name:"Thaitanium",address:"735 Massachusetts Ave.",lat:39.7769,lng:-86.146,cuisine:"Thai",price:"$$",priceNum:2,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Passable Thai food, lots of options, amazing iced coffee cocktail. Accommodating to large groups — call ahead.",dietary:false,groups:true},
+  {name:"Lil Dumplings / The Garage",address:"926 Carrollton Ave.",lat:39.7804,lng:-86.1439,cuisine:"Japanese/Pan-Asian",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Ramen/dandan spot in The Garage food hall. Run by former celebrated chef. Ideal for big groups — multiple restaurants in one spot.",dietary:false,groups:true},
+  {name:"Fernando's",address:"888 Massachusetts Ave.",lat:39.7796,lng:-86.1425,cuisine:"Brazilian/Mexican",price:"$$ to $$$",priceNum:2.5,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Well-made Latin food. Try the chicken stroganoff or feijoada. Great for apps and drinks.",dietary:false,groups:false},
+  {name:"St. Elmo",address:"127 S. Illinois St.",lat:39.7648,lng:-86.1598,cuisine:"Steakhouse",price:"$$$$",priceNum:4,distance:"12-min walk",distanceNum:12,meals:["Dinner"],hours:"Dinner only (opens 4pm)",notes:"THE Indianapolis restaurant. Shrimp cocktail + steak = excellent dinner. Budget blower.",dietary:false,groups:false},
+  {name:"Tinker Street",address:"402 E. 16th St.",lat:39.7886,lng:-86.1507,cuisine:"New American",price:"$$$",priceNum:3,distance:"12-min drive",distanceNum:12,meals:["Dinner"],hours:"Dinner only (opens 5pm)",notes:"Author's personal favorite for a fancy dinner. More interesting than St. Elmo.",dietary:false,groups:false},
   // === LATE NIGHT ===
-  {name:"Petra",address:"610 Massachusetts Ave.",lat:39.7741,lng:-86.1470,cuisine:"Greek",price:"$",priceNum:1,distance:"9-min drive",distanceNum:9,meals:["Late Night"],hours:"Fri–Sat open until 4am",notes:"Late night option past midnight. Not great food, but it's food. Try the spicy gyro.",dietary:false,groups:false},
+  {name:"Petra",address:"610 Massachusetts Ave.",lat:39.7758,lng:-86.14820,cuisine:"Greek",price:"$",priceNum:1,distance:"9-min drive",distanceNum:9,meals:["Late Night"],hours:"Fri–Sat open until 4am",notes:"Late night option past midnight. Not great food, but it's food. Try the spicy gyro.",dietary:false,groups:false},
   {name:"District Tap",address:"141 S. Meridian St.",lat:39.7645,lng:-86.1580,cuisine:"Pub",price:"$$",priceNum:2,distance:"14-min walk",distanceNum:14,meals:["Late Night"],hours:"",notes:"Standard pub fare, large drink selection. Within walking distance. Open until 1am Fri/Sat.",dietary:false,groups:false},
   {name:"The Dugout",address:"621 Virginia Ave.",lat:39.7582,lng:-86.1464,cuisine:"Pub",price:"$",priceNum:1,distance:"8-min drive",distanceNum:8,meals:["Late Night"],hours:"Sun closes 11:30pm",notes:"Big sports bar with decent food. Huge chicken tender portions. Solid chili dogs. Open until 1am.",dietary:false,groups:false},
   {name:"Pearl Street",address:"65 E. Pearl St.",lat:39.7662,lng:-86.1568,cuisine:"Pizza/Pub",price:"$$",priceNum:2,distance:"15-min walk",distanceNum:15,meals:["Late Night"],hours:"",notes:"Star reporter favorite. Eclectic pizzas, baked sandwiches. Kitchen til midnight Fri/Sat, bar til 3am.",dietary:false,groups:false},
   {name:"Slippery Noodle Inn",address:"372 S. Meridian St.",lat:39.7616,lng:-86.1585,cuisine:"Pub",price:"$$",priceNum:2,distance:"17-min walk",distanceNum:17,meals:["Late Night"],hours:"Sun opens 4pm",notes:"Indy's longest-running bar. Nice slice of history and not terrible food. Open until 2am Fri/Sat.",dietary:false,groups:false},
   // === WORTH A DRIVE ===
-  {name:"Borage",address:"1609 N. Lynhurst Dr.",lat:39.7820,lng:-86.2348,cuisine:"American",price:"$$",priceNum:2,distance:"15-min drive",distanceNum:15,meals:["Breakfast/Brunch"],hours:"Open until 2pm · Closed Mon",notes:"Café/bakery. Lovely breakfast platter, fun sandwiches. Extremely dietary-friendly. Worth the drive.",dietary:true,groups:false},
+  {name:"Borage",address:"1609 N. Lynhurst Dr.",lat:39.7877,lng:-86.2504,cuisine:"American",price:"$$",priceNum:2,distance:"15-min drive",distanceNum:15,meals:["Breakfast/Brunch"],hours:"Open until 2pm · Closed Mon",notes:"Café/bakery. Lovely breakfast platter, fun sandwiches. Extremely dietary-friendly. Worth the drive.",dietary:true,groups:false},
   {name:"Asian Snack",address:"3605 Commercial Drive",lat:39.8182,lng:-86.2270,cuisine:"Chinese/Pan-Asian",price:"$",priceNum:1,distance:"15-min drive",distanceNum:15,meals:["Lunch"],hours:"Closed Tue",notes:"Inside an international grocery. Pork buns, chive pies, firecracker chicken. Can't go wrong.",dietary:false,groups:false},
-  {name:"Macizo",address:"6335 Intech Commons Drive",lat:39.8805,lng:-86.2714,cuisine:"Mexican/Peruvian",price:"$$",priceNum:2,distance:"20-min drive",distanceNum:20,meals:["Lunch","Dinner"],hours:"Closed Sun",notes:"Maybe Indy's most charming restaurant. Husband-and-wife from MX and Peru. Try the mole enchiladas.",dietary:false,groups:false},
-  {name:"Yaso Jamaican Grill",address:"1501 Prospect St.",lat:39.7500,lng:-86.1389,cuisine:"Jamaican",price:"$$",priceNum:2,distance:"11-min drive",distanceNum:11,meals:["Lunch","Dinner"],hours:"Closed Mon, Tue",notes:"Excellent stewed meats, goat curry, jerk chicken. Has a drive-thru. Beloved by locals.",dietary:false,groups:false},
-  {name:"Ardys Concession",address:"4141 S. East St.",lat:39.7162,lng:-86.1454,cuisine:"Filipino",price:"$$",priceNum:2,distance:"13-min drive",distanceNum:13,meals:["Lunch","Dinner"],hours:"Thu–Sun only",notes:"Inside Philippine Cultural Center. Sisig and dinuguan are outstanding. Filipino BBQ kebabs famous from Indy 500.",dietary:false,groups:false},
+  {name:"Macizo",address:"6335 Intech Commons Drive",lat:39.8799,lng:-86.2721,cuisine:"Mexican/Peruvian",price:"$$",priceNum:2,distance:"20-min drive",distanceNum:20,meals:["Lunch","Dinner"],hours:"Closed Sun",notes:"Maybe Indy's most charming restaurant. Husband-and-wife from MX and Peru. Try the mole enchiladas.",dietary:false,groups:false},
+  {name:"Yaso Jamaican Grill",address:"1501 Prospect St.",lat:39.7520,lng:-86.1335,cuisine:"Jamaican",price:"$$",priceNum:2,distance:"11-min drive",distanceNum:11,meals:["Lunch","Dinner"],hours:"Closed Mon, Tue",notes:"Excellent stewed meats, goat curry, jerk chicken. Has a drive-thru. Beloved by locals.",dietary:false,groups:false},
+  {name:"Ardys Concession",address:"4141 S. East St.",lat:39.7056,lng:-86.1484,cuisine:"Filipino",price:"$$",priceNum:2,distance:"13-min drive",distanceNum:13,meals:["Lunch","Dinner"],hours:"Thu–Sun only",notes:"Inside Philippine Cultural Center. Sisig and dinuguan are outstanding. Filipino BBQ kebabs famous from Indy 500.",dietary:false,groups:false},
   {name:"Tlaolli",address:"2830 E. Washington St.",lat:39.7686,lng:-86.1154,cuisine:"Mexican",price:"$",priceNum:1,distance:"15-min drive",distanceNum:15,meals:["Lunch","Dinner"],hours:"Thu–Sat only",notes:"Uber-charming Mexican spot. Tons of vegetarian and vegan options. Street corn, vegan tamales and enchiladas especially fantastic.",dietary:true,groups:false},
   // === COFFEE ===
   {name:"Georgia Street Grind",address:"25 W. Georgia St.",lat:39.7641,lng:-86.1588,cuisine:"Coffee",price:"$",priceNum:1,distance:"14-min walk",distanceNum:14,meals:["Coffee"],hours:"Sat–Sun closes noon",notes:"Best black coffee downtown. Used to convention rushes. Spanish lattes. Grab-and-go.",dietary:false,groups:true},
@@ -1020,7 +1032,7 @@ const restaurants = [
   {name:"Tinker on Market",address:"380 E. Market St.",lat:39.7685,lng:-86.1510,cuisine:"Coffee",price:"$",priceNum:1,distance:"8-min drive",distanceNum:8,meals:["Coffee"],hours:"",notes:"Indy's biggest name in coffee. High-quality stuff. Limited seating — not great for big groups.",dietary:false,groups:false},
   {name:"Cosmic Cardinal Café",address:"101 W. Ohio St.",lat:39.7697,lng:-86.1602,cuisine:"Coffee",price:"$",priceNum:1,distance:"14-min walk",distanceNum:14,meals:["Coffee"],hours:"Weekdays only",notes:"In Lake City Bank building. Coffee and decent sandwiches. Can handle crowds.",dietary:false,groups:true},
   {name:"Monumental Coffee",address:"19 W. Ohio St.",lat:39.7698,lng:-86.1584,cuisine:"Coffee",price:"$",priceNum:1,distance:"17-min walk",distanceNum:17,meals:["Coffee"],hours:"Open until 2pm",notes:"Inside Sheraton City Centre hotel. Industrial feel.",dietary:false,groups:false},
-  {name:"Starbucks",address:"10 S. West St.",lat:39.7672,lng:-86.1643,cuisine:"Coffee",price:"$",priceNum:1,distance:"In JW Marriott",distanceNum:1,meals:["Coffee"],hours:"",notes:"In JW Marriott. Also at 1 S. Capitol Ave. (Hyatt, 10-min walk) and 30 S. Meridian St. (13-min walk).",dietary:false,groups:false},
+  {name:"Starbucks",address:"10 S. West St.",lat:39.7665,lng:-86.1676,cuisine:"Coffee",price:"$",priceNum:1,distance:"In JW Marriott",distanceNum:1,meals:["Coffee"],hours:"",notes:"In JW Marriott. Also at 1 S. Capitol Ave. (Hyatt, 10-min walk) and 30 S. Meridian St. (13-min walk).",dietary:false,groups:false},
   {name:"Calvin Fletcher's",address:"647 Virginia Ave.",lat:39.7577,lng:-86.1460,cuisine:"Coffee",price:"$",priceNum:1,distance:"8-min drive",distanceNum:8,meals:["Coffee"],hours:"Closed Sun",notes:"Groovy Fletcher Place coffee shop. Best move for espresso snobs alongside Tinker and Georgia Street.",dietary:false,groups:false},
   {name:"Parlor Public House",address:"600 E. Ohio St.",lat:39.7701,lng:-86.1471,cuisine:"Coffee/Cocktails",price:"$$",priceNum:2,distance:"8-min drive",distanceNum:8,meals:["Coffee"],hours:"Thu–Sat cocktails til midnight",notes:"Swanky coffee-to-cocktails spot. Cozy tables and couches. Good for 2–4 people.",dietary:false,groups:false},
   // === BARS ===
@@ -1058,7 +1070,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 }).addTo(map);
 
 // JW Marriott marker
-const jwMarker = L.marker([39.7677, -86.1640], {
+const jwMarker = L.marker([39.7663, -86.1684], {
   icon: L.divIcon({
     className: '',
     html: `<div style="width:24px;height:24px;border-radius:50%;background:#b8792e;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.25);"></div>`,
@@ -1162,17 +1174,17 @@ function renderTable() {
       <td class="name-cell">
         ${r.name}
         <div class="address">${r.address}</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" class="directions-link" onclick="event.stopPropagation();window.open(this.href);return false;">↗ Dir</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" class="directions-link" onclick="event.stopPropagation();window.open(this.href);return false;">↗ Directions</a>
       </td>
-      <td class="details-cell"><span class="${priceClass(r.priceNum)} price-tag">${r.price}</span></td>
       <td class="cuisine-cell">${r.cuisine}</td>
-      <td class="dist-cell">${r.distance}</td>
-      <td class="type-cell">${r.meals.join('<br>')}</td>
-      <td class="hours-cell">${r.hours ? '<span class="hours-note">' + r.hours + '</span>' : '<span class="no-hours">—</span>'}</td>
+      <td class="${priceClass(r.priceNum)} price-cell">${r.price}</td>
+      <td class="distance-cell">${r.distance}</td>
+      <td class="type-cell">${r.meals.join(', ')}</td>
+      <td class="hours-cell">${r.hours}</td>
       <td class="notes-cell">
         ${r.notes}
-        ${r.dietary ? '<div class="diet-badge">Veg/GF</div>' : ''}
-        ${r.groups ? '<div class="group-badge">Groups ✓</div>' : ''}
+        ${r.dietary ? '<div class="diet-badge">Veg/Vegan/GF</div>' : ''}
+        ${r.groups ? '<div class="group-badge">Groups OK</div>' : ''}
       </td>
     </tr>
   `).join('');
@@ -1272,6 +1284,13 @@ document.getElementById('reset-map-btn').addEventListener('click', () => {
   map.setView([39.7700, -86.1560], 14, { animate: true });
 });
 
+// Mobile legend toggle
+document.querySelector('.legend').addEventListener('click', function() {
+  if (window.innerWidth <= 900) {
+    this.classList.toggle('expanded');
+  }
+});
+
 // Geolocation
 let userMarker = null;
 const locateBtn = document.getElementById('locate-btn');
@@ -1337,7 +1356,6 @@ document.querySelectorAll('.nav a').forEach(link => {
 
 // Initial render
 renderTable();
-setTimeout(() => map.invalidateSize(), 100);
 }); // end window.addEventListener('load')
 </script>
 
