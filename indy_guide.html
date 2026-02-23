@@ -17,7 +17,6 @@
     --text: #2c2a26;
     --text-muted: #7a756b;
     --accent: #b8792e;
-    --accent-dim: #9a6524;
     --green: #2271b2;
     --red: #d55e00;
     --blue: #009e73;
@@ -122,8 +121,8 @@
 
   /* Layout */
   .app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     flex: 1;
     min-height: 0;
     overflow: hidden;
@@ -132,8 +131,10 @@
   /* Map Panel */
   .map-panel {
     position: relative;
-    border-right: 1px solid var(--border);
-    min-height: 0;
+    border-bottom: 1px solid var(--border);
+    height: 45vh;
+    min-height: 280px;
+    flex-shrink: 0;
   }
   #map {
     width: 100%;
@@ -173,7 +174,6 @@
     margin-bottom: 6px;
   }
   .popup-price {
-    color: var(--green);
     font-weight: 600;
     margin-bottom: 4px;
   }
@@ -203,6 +203,7 @@
     flex-direction: column;
     overflow: hidden;
     min-height: 0;
+    flex: 1;
   }
 
   /* Filters */
@@ -273,29 +274,13 @@
 
   .directions-link {
     display: inline-block;
-    font-size: 0.6rem;
+    font-size: 0.68rem;
     color: var(--accent);
     text-decoration: none;
     font-family: 'IBM Plex Mono', monospace;
-    margin-top: 1px;
+    margin-top: 2px;
   }
   .directions-link:hover {
-    text-decoration: underline;
-  }
-
-  .credit {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    padding: 6px 1.25rem;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-    flex-shrink: 0;
-  }
-  .credit a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-  .credit a:hover {
     text-decoration: underline;
   }
 
@@ -321,18 +306,20 @@
   th {
     background: var(--surface);
     text-align: left;
-    padding: 5px 6px;
+    padding: 6px 8px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.62rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     color: var(--text-muted);
     border-bottom: 1px solid var(--border);
-    cursor: pointer;
     user-select: none;
     white-space: nowrap;
   }
-  th:hover {
+  th[data-sort] {
+    cursor: pointer;
+  }
+  th[data-sort]:hover {
     color: var(--accent);
   }
   th .sort-arrow {
@@ -344,10 +331,11 @@
     color: var(--accent);
   }
   td {
-    padding: 4px 5px;
+    padding: 5px 8px;
     border-bottom: 1px solid var(--border);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     vertical-align: top;
+    overflow: hidden;
   }
   tr {
     transition: background 0.1s;
@@ -362,13 +350,12 @@
   .name-cell {
     font-weight: 600;
     color: var(--text);
-    min-width: 90px;
-    max-width: 140px;
-    font-size: 0.78rem;
+    min-width: 100px;
+    font-size: 0.8rem;
   }
   .name-cell .address {
     font-weight: 400;
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     color: var(--text-muted);
     margin-top: 1px;
   }
@@ -376,24 +363,22 @@
     display: inline-block;
     background: var(--tag-bg);
     border: 1px solid var(--tag-border);
-    padding: 1px 5px;
+    padding: 1px 6px;
     border-radius: 99px;
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     font-family: 'IBM Plex Mono', monospace;
     color: var(--accent);
     white-space: nowrap;
   }
   .cuisine-cell {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     font-family: 'IBM Plex Mono', monospace;
     color: var(--text-muted);
-    white-space: nowrap;
   }
   .price-cell {
     font-weight: 600;
     font-family: 'IBM Plex Mono', monospace;
-    white-space: nowrap;
-    font-size: 0.72rem;
+    font-size: 0.78rem;
   }
   .price-1 { color: var(--green); }
   .price-2 { color: var(--blue); }
@@ -402,28 +387,26 @@
 
   .distance-cell {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
     white-space: nowrap;
   }
   .type-cell {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     color: var(--text-muted);
-    white-space: nowrap;
   }
   .hours-cell {
-    font-size: 0.62rem;
+    font-size: 0.68rem;
     font-family: 'IBM Plex Mono', monospace;
     color: var(--red);
-    max-width: 120px;
-    line-height: 1.3;
+    max-width: 160px;
+    line-height: 1.35;
     white-space: normal;
   }
   .notes-cell {
-    font-size: 0.68rem;
+    font-size: 0.75rem;
     color: var(--text-muted);
-    max-width: 180px;
-    line-height: 1.3;
+    line-height: 1.35;
   }
   .hours-note {
     display: inline-block;
@@ -435,10 +418,6 @@
     font-family: 'IBM Plex Mono', monospace;
     color: var(--red);
     margin-bottom: 4px;
-  }
-  .name-cell .cuisine-tag {
-    display: inline-block;
-    margin-top: 3px;
   }
   .diet-badge {
     display: inline-block;
@@ -620,15 +599,13 @@
       overflow: visible;
     }
     .app {
-      grid-template-columns: 1fr;
-      grid-template-rows: 45vh auto;
       height: auto;
       min-height: 0;
       overflow: visible;
     }
     .map-panel {
-      border-right: none;
-      border-bottom: 1px solid var(--border);
+      height: 50vh;
+      min-height: 250px;
     }
 
     /* Filters — 2-col grid */
@@ -663,12 +640,6 @@
       font-size: 0.82rem;
       margin-left: 0;
       padding: 4px 0;
-    }
-
-    /* Credit */
-    .credit {
-      font-size: 0.82rem;
-      padding: 8px 1rem;
     }
 
     /* Map controls — smaller on mobile */
@@ -889,7 +860,7 @@
       <div class="legend-title">Price</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--green)"></div> $</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--blue)"></div> $$</div>
-      <div class="legend-item"><div class="legend-dot" style="background: var(--purple)"></div> $$ – $$$</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--purple)"></div> $$$</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--red)"></div> $$$$</div>
       <div class="legend-item" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border)"><div class="legend-dot" style="background: var(--accent)"></div> JW Marriott</div>
     </div>
@@ -941,11 +912,10 @@
           <option value="dietary">Veg/Vegan/GF friendly</option>
           <option value="groups">Good for groups</option>
         </select>
-        </select>
       </div>
       <div class="filter-group">
         <label>Search</label>
-        <input type="text" id="filter-search" placeholder="Name or note…">
+        <input type="text" id="filter-search" placeholder="Name, address, or note…">
       </div>
       <button class="reset-btn" onclick="resetFilters()">Reset</button>
       <div class="result-count" id="result-count"></div>
@@ -953,13 +923,13 @@
     <div class="table-scroll">
       <table>
         <colgroup>
-          <col style="width:18%"><!-- Name -->
+          <col style="width:15%"><!-- Name -->
           <col style="width:11%"><!-- Cuisine -->
           <col style="width:7%"><!-- Price -->
-          <col style="width:11%"><!-- Distance -->
-          <col style="width:10%"><!-- Type -->
-          <col style="width:15%"><!-- Hours -->
-          <col style="width:28%"><!-- Notes -->
+          <col style="width:10%"><!-- Distance -->
+          <col style="width:12%"><!-- Type -->
+          <col style="width:16%"><!-- Hours -->
+          <col style="width:29%"><!-- Notes -->
         </colgroup>
         <thead>
           <tr>
@@ -1007,10 +977,10 @@ const restaurants = [
   // === DINNER ===
   {name:"Axum",address:"825 N. Pennsylvania St.",lat:39.7787,lng:-86.1556,cuisine:"Ethiopian",price:"$$",priceNum:2,distance:"8-min drive",distanceNum:8,meals:["Dinner"],hours:"Closed Mon",notes:"Solid injera with stewed meats, lentils and veggies. ~$20/plate, extremely filling.",dietary:false,groups:false},
   {name:"Bosphorus",address:"935 S. East St.",lat:39.7546,lng:-86.1493,cuisine:"Turkish",price:"$$",priceNum:2,distance:"7-min drive",distanceNum:7,meals:["Dinner"],hours:"Sun opens 4pm",notes:"Cozy Turkish spot. Massive portions. Surprising veg/vegan options. Staggering pita budget.",dietary:true,groups:false},
-  {name:"Fat Dan's Deli",address:"410 E. Michigan St.",lat:39.7741,lng:-86.1497,cuisine:"American",price:"$ to $$",priceNum:1.5,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Giant portions on paper, no plates. Italian beef, Chicago dogs, burgers. Fun atmosphere, good beer.",dietary:false,groups:false},
+  {name:"Fat Dan's Deli",address:"410 E. Michigan St.",lat:39.7741,lng:-86.1497,cuisine:"American",price:"$–$$",priceNum:1.5,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Giant portions on paper, no plates. Italian beef, Chicago dogs, burgers. Fun atmosphere, good beer.",dietary:false,groups:false},
   {name:"Thaitanium",address:"735 Massachusetts Ave.",lat:39.7769,lng:-86.146,cuisine:"Thai",price:"$$",priceNum:2,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Passable Thai food, lots of options, amazing iced coffee cocktail. Accommodating to large groups — call ahead.",dietary:false,groups:true},
   {name:"Lil Dumplings / The Garage",address:"926 Carrollton Ave.",lat:39.7804,lng:-86.1439,cuisine:"Japanese/Pan-Asian",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Ramen/dandan spot in The Garage food hall. Run by former celebrated chef. Ideal for big groups — multiple restaurants in one spot.",dietary:false,groups:true},
-  {name:"Fernando's",address:"888 Massachusetts Ave.",lat:39.7796,lng:-86.1425,cuisine:"Brazilian/Mexican",price:"$$ to $$$",priceNum:2.5,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Well-made Latin food. Try the chicken stroganoff or feijoada. Great for apps and drinks.",dietary:false,groups:false},
+  {name:"Fernando's",address:"888 Massachusetts Ave.",lat:39.7796,lng:-86.1425,cuisine:"Brazilian/Mexican",price:"$$–$$$",priceNum:2.5,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Well-made Latin food. Try the chicken stroganoff or feijoada. Great for apps and drinks.",dietary:false,groups:false},
   {name:"St. Elmo",address:"127 S. Illinois St.",lat:39.7648,lng:-86.1598,cuisine:"Steakhouse",price:"$$$$",priceNum:4,distance:"12-min walk",distanceNum:12,meals:["Dinner"],hours:"Dinner only (opens 4pm)",notes:"THE Indianapolis restaurant. Shrimp cocktail + steak = excellent dinner. Budget blower.",dietary:false,groups:false},
   {name:"Tinker Street",address:"402 E. 16th St.",lat:39.7886,lng:-86.1507,cuisine:"New American",price:"$$$",priceNum:3,distance:"12-min drive",distanceNum:12,meals:["Dinner"],hours:"Dinner only (opens 5pm)",notes:"Author's personal favorite for a fancy dinner. More interesting than St. Elmo.",dietary:false,groups:false},
   // === LATE NIGHT ===
@@ -1094,7 +1064,7 @@ restaurants.forEach((r, i) => {
   marker.bindPopup(`
     <div class="popup-name">${r.name}</div>
     <div class="popup-cuisine">${r.cuisine}</div>
-    <div class="popup-price">${r.price}</div>
+    <div class="popup-price" style="color:${priceColor(r.priceNum)}">${r.price}</div>
     ${r.hours ? '<div class="popup-hours">' + r.hours + '</div>' : ''}
     <div class="popup-desc">${r.notes}${r.dietary ? '<br><span style="color:#009e73;font-size:0.72rem;">✓ Dietary-friendly</span>' : ''}${r.groups ? '<br><span style="color:#b8792e;font-size:0.72rem;">✓ Good for groups</span>' : ''}</div>
     <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" onclick="window.open(this.href);return false;" style="display:inline-block;margin-top:6px;font-size:0.78rem;color:var(--accent);text-decoration:none;font-family:'IBM Plex Sans',sans-serif;">↗ Directions</a>
@@ -1115,7 +1085,6 @@ cuisines.forEach(c => {
 // Sort state
 let sortCol = 'name';
 let sortAsc = true;
-let isInitialLoad = true;
 
 // Render table
 function renderTable() {
@@ -1133,7 +1102,7 @@ function renderTable() {
     if (mealFilter && !r.meals.includes(mealFilter)) return false;
     if (dietaryFilter === 'dietary' && !r.dietary) return false;
     if (dietaryFilter === 'groups' && !r.groups) return false;
-    if (searchFilter && !r.name.toLowerCase().includes(searchFilter) && !r.notes.toLowerCase().includes(searchFilter) && !r.cuisine.toLowerCase().includes(searchFilter)) return false;
+    if (searchFilter && !r.name.toLowerCase().includes(searchFilter) && !r.notes.toLowerCase().includes(searchFilter) && !r.cuisine.toLowerCase().includes(searchFilter) && !r.address.toLowerCase().includes(searchFilter)) return false;
     return true;
   });
 
@@ -1163,9 +1132,6 @@ function renderTable() {
       map.removeLayer(markers[i]);
     }
   });
-
-  // Fit bounds only skipped - map stays where user left it
-  isInitialLoad = false;
 
   // Render rows
   const tbody = document.getElementById('table-body');
@@ -1229,12 +1195,29 @@ function renderTable() {
 function focusRestaurant(idx) {
   const r = restaurants[idx];
   map.closePopup();
-  map.setView([r.lat, r.lng], 16, { animate: true });
-  map.once('moveend', () => {
+
+  // Check if we're already at this location
+  const currentCenter = map.getCenter();
+  const alreadyThere = Math.abs(currentCenter.lat - r.lat) < 0.0001 && Math.abs(currentCenter.lng - r.lng) < 0.0001 && map.getZoom() === 16;
+
+  if (alreadyThere) {
     markers[idx].openPopup();
-  });
+  } else {
+    map.setView([r.lat, r.lng], 16, { animate: true });
+    map.once('moveend', () => {
+      markers[idx].openPopup();
+    });
+    // Fallback in case moveend doesn't fire
+    setTimeout(() => {
+      if (!markers[idx].isPopupOpen()) markers[idx].openPopup();
+    }, 600);
+  }
+
   document.querySelectorAll('tr.highlighted').forEach(el => el.classList.remove('highlighted'));
   document.querySelectorAll('.mobile-card.highlighted').forEach(el => el.classList.remove('highlighted'));
+  document.querySelectorAll('.custom-marker.highlighted').forEach(el => el.classList.remove('highlighted'));
+  const markerEl = document.getElementById('marker-' + idx);
+  if (markerEl) markerEl.classList.add('highlighted');
   const row = document.querySelector(`tr[data-idx="${idx}"]`);
   if (row) row.classList.add('highlighted');
   const card = document.querySelector(`.mobile-card[data-card-idx="${idx}"]`);
@@ -1280,6 +1263,7 @@ document.getElementById('filter-search').addEventListener('input', renderTable);
 document.getElementById('reset-map-btn').addEventListener('click', () => {
   document.querySelectorAll('tr.highlighted').forEach(el => el.classList.remove('highlighted'));
   document.querySelectorAll('.mobile-card.highlighted').forEach(el => el.classList.remove('highlighted'));
+  document.querySelectorAll('.custom-marker.highlighted').forEach(el => el.classList.remove('highlighted'));
   map.closePopup();
   map.setView([39.7700, -86.1560], 14, { animate: true });
 });
