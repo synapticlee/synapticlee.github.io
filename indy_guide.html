@@ -79,6 +79,7 @@
   .page-empty {
     display: none;
     flex: 1;
+    overflow: hidden;
   }
   .page-empty.active { display: flex; }
 
@@ -826,6 +827,151 @@
       padding: 4px 0;
     }
   }
+
+  /* Content pages (Logistics / Things to Do) */
+  .content-page {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .content-page h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+    margin-top: 2rem;
+  }
+  .content-page h2:first-child { margin-top: 0; }
+  .content-page h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    margin-top: 1.25rem;
+  }
+  .content-page h2 + h3,
+  .content-page h2 + p + h3 {
+    margin-top: 0.75rem;
+  }
+  .content-page p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .content-page a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .content-page a:hover { text-decoration: underline; }
+  .content-page ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0.5rem;
+  }
+  /* Places to Wander plain list */
+  .content-page ul:not(.activity-list) li {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--text);
+    padding: 0.35rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: baseline;
+  }
+  .content-page ul:not(.activity-list) li strong { color: var(--text); font-weight: 600; }
+  .content-page ul:not(.activity-list) li .note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    flex-basis: 100%;
+    line-height: 1.45;
+  }
+  /* Activity list — no dividing lines */
+  .activity-list li {
+    padding: 0.3rem 0;
+  }
+  .activity-main {
+    font-size: 1rem;
+    line-height: 1.5;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .activity-main strong { font-weight: 600; color: var(--text); }
+  .activity-note {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin-top: 1px;
+  }
+  .content-page .meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .table-note {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+  }
+  .transport-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+  .transport-table th {
+    background: var(--surface);
+    text-align: left;
+    padding: 8px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .transport-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  .transport-table tr:last-child td { border-bottom: none; }
+  .cost-badge {
+    display: inline-block;
+    background: var(--tag-bg);
+    border: 1px solid var(--tag-border);
+    border-radius: 99px;
+    padding: 1px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .date-badge {
+    display: inline-block;
+    background: rgba(0,158,115,0.08);
+    border: 1px solid rgba(0,158,115,0.25);
+    border-radius: 99px;
+    padding: 1px 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--blue);
+    white-space: nowrap;
+  }
+  @media (max-width: 900px) {
+    .content-page { padding: 1.25rem 1rem; }
+    .transport-table { font-size: 0.78rem; }
+    .transport-table th, .transport-table td { padding: 6px 8px; }
+  }
 </style>
 </head>
 <body>
@@ -838,8 +984,8 @@
   </div>
   <nav class="nav">
     <a href="#" class="active" data-page="food">Food</a>
-    <a href="#" data-page="logistics">Logistics (TK)</a>
-    <a href="#" data-page="things-to-do">Things to Do (TK)</a>
+    <a href="#" data-page="logistics">Logistics</a>
+    <a href="#" data-page="things-to-do">Things to Do</a>
   </nav>
 </div>
 
@@ -951,9 +1097,180 @@
 </div>
 
 <div class="page-empty" id="page-logistics">
+  <div class="content-page">
+    <h2>Getting to/from the Airport</h2>
+    <p>Indianapolis International Airport (IND) is about 10 miles southwest of downtown.</p>
+    <table class="transport-table">
+      <thead><tr><th>Option</th><th>Cost</th><th>Time</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>IndyGo Bus Route 8</strong></td>
+          <td>$2.75</td>
+          <td>45–60 min</td>
+          <td>Most budget-friendly; runs every 30 min. Pay with the <a href="https://www.indygo.net/mykey/" target="_blank" rel="noopener">myKey app</a>. Pickup on the ground floor past rental car counters.</td>
+        </tr>
+        <tr>
+          <td><strong>Uber / Lyft</strong></td>
+          <td>$25–40</td>
+          <td>20–30 min</td>
+          <td>Most convenient; varies by demand. <a href="#">Find a rideshare buddy via IRE's form</a>. Same ground-floor pickup area.</td>
+        </tr>
+        <tr>
+          <td><strong>Taxi</strong></td>
+          <td>$45–55</td>
+          <td>20–30 min</td>
+          <td>Taxi stand on the ground floor at the end of the standard pickup/dropoff area.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Getting Around Downtown</h2>
+    <p>The JW Marriott sits on the western edge of downtown, connected directly to the Convention Center. Food and drink options are within a 10-min walk, but you'll want to venture further for more variety.</p>
+
+    <h3>Skywalk</h3>
+    <p>A skywalk system connects the JW Marriott, the Convention Center, and several nearby hotels — handy in bad weather. Note: there's ongoing construction, especially past the Convention Center. Fingers crossed for good weather.</p>
+
+    <h3>Public Transit</h3>
+    <p>Bus fare is $2.75 (two-hour pass, capped at $6/day). Pay with the <a href="https://www.indygo.net/mykey/" target="_blank" rel="noopener">myKey app</a>. Google Maps works great for trip planning. Not the most convenient option from the conference location, but it works.</p>
+
+    <h3>Bike Share & Scooters</h3>
+    <p><a href="https://pacersbikeshare.org/" target="_blank" rel="noopener">Pacers Bikeshare</a> has a station right across the street from the hotel — use the BCycle app. E-bikes are available for more but well worth it. Electric scooters (Bird and Lime) are also available throughout downtown.</p>
+
+    <h3>Rideshare</h3>
+    <p>Uber and Lyft are widely available. Typical downtown rides run $8–15. If you're traveling with a few people, rideshare is almost always better value than the bus.</p>
+
+    <h2>Practical Info</h2>
+
+    <h3>Weather</h3>
+    <p>March in Indiana is unpredictable — you might get winter and summer in the same weekend. Expect daytime temps in the 35–55°F range, with nights dipping into the 20s or 30s. Bring a raincoat or umbrella; snow is possible. Layer up for both outdoors and conference rooms.</p>
+
+    <h3>Shopping & Supplies</h3>
+    <p>Nearest pharmacy is CVS; nearest grocery stores are Kroger and Whole Foods.</p>
+  </div>
 </div>
 
 <div class="page-empty" id="page-things-to-do">
+  <div class="content-page">
+    <h2>Places to Wander</h2>
+    <ul>
+      <li><strong>Fountain Square</strong> <span class="note">Vibrant, historic cultural district with an eclectic vibe — restaurants, vintage shops, and bars.</span></li>
+      <li><strong>Fletcher Place</strong> <span class="note">Fountain Square's "older sister." Highly walkable with stunning Gothic Revival and Queen Anne architecture.</span></li>
+      <li><strong>Mass Ave</strong> <span class="note">Perfect for an afternoon stroll through shops or an evening bar crawl. A little something for everyone.</span></li>
+      <li><strong>Bottleworks District</strong> <span class="note">A fusion of industrial history and modern life — food hall (The Garage), upscale restaurants, bowling, niche shops, and the historic Bottleworks Hotel.</span></li>
+      <li><strong>Irvington</strong> <span class="note">Historic east-side neighborhood named after Washington Irving — unique restaurants and charming craftsman and colonial homes.</span></li>
+    </ul>
+
+    <h2>Shows</h2>
+    <table class="transport-table">
+      <thead><tr><th>Event</th><th>Type</th><th>Venue</th><th>Date</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Blithe Spirit</strong></td><td>Comedy</td><td>Scottish Rite · Downtown</td><td>Mar 5</td><td>$24</td></tr>
+        <tr><td><strong>Curtis Cook</strong></td><td>Comedy</td><td>Helium Comedy Club · Downtown</td><td>Mar 5</td><td>$16</td></tr>
+        <tr><td><strong>Arkansauce</strong></td><td>Bluegrass</td><td>Turn Table · Broad Ripple (20-min drive)</td><td>Mar 5</td><td>$22</td></tr>
+        <tr><td><strong>Indianapolis Symphony & Ballet: The Sleeping Beauty</strong></td><td>Dance</td><td>Butler University · Broad Ripple (20-min drive)</td><td>Mar 6</td><td>$24</td></tr>
+        <tr><td><strong>The Floozies + Too Many Zooz</strong></td><td>Brass house</td><td>Old National Centre · Downtown</td><td>Mar 6</td><td>$36</td></tr>
+        <tr><td><strong>Foxy Shazam</strong></td><td>Rock</td><td>Turn Table · Broad Ripple (20-min drive)</td><td>Mar 7</td><td>$39</td></tr>
+        <tr><td><strong>Chatterbox Jazz Club</strong>*</td><td>Jazz</td><td>Downtown</td><td>Every night (no Sundays)</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <p class="table-note">* Cozy, gritty institution. Don't bring too big a crowd.</p>
+
+    <h2>Sporting Events</h2>
+    <table class="transport-table">
+      <thead><tr><th>Event</th><th>Venue</th><th>Dates</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Big 10 Women's Basketball Tournament</strong></td>
+          <td>Gainbridge Fieldhouse · Downtown</td>
+          <td>Mar 5–8</td>
+          <td>Approx. $20 or more</td>
+        </tr>
+        <tr>
+          <td><strong>2026 U.S. Open: Bowling</strong></td>
+          <td>96th Street · 35-min drive</td>
+          <td>Mar 8</td>
+          <td>$45</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="table-note">Three Big 10 teams are currently in the top 10 nationally. All-tourney passes are available now; single-game tickets coming soon.</p>
+
+    <h2>Parks & Exercise</h2>
+    <p><strong>White River State Park</strong> and the <strong>Indianapolis Canal Walk</strong> are both right by the hotel — great for a morning run or stroll. Head west over the river for nice views of downtown. Pickleball and basketball courts are available in area parks.</p>
+    <p>If you want a proper workout, options nearby include the <strong>Irsay Family YMCA at CityWay</strong>, <strong>Invoke Yoga & Pilates Studio</strong>, and <strong>NIFS</strong> (all downtown), plus <strong>North Mass Boulder</strong> on the East Side (15-min drive).</p>
+
+    <h2>History & Museums</h2>
+    <ul class="activity-list">
+      <li>
+        <div class="activity-main"><strong>University Park & Veterans Memorial Plaza</strong> <span class="meta">Downtown</span></div>
+      </li>
+      <li>
+        <div class="activity-main"><strong>Indiana State Museum</strong> <span class="meta">Downtown</span> <span class="cost-badge">$22</span></div>
+      </li>
+      <li>
+        <div class="activity-main"><strong>Indiana Historical Society</strong> <span class="meta">Downtown</span> <span class="cost-badge">$15</span></div>
+      </li>
+      <li>
+        <div class="activity-main"><strong>Kurt Vonnegut Museum & Library</strong> <span class="meta">Downtown · Wed–Mon 10–6, Sun 12–5</span> <span class="cost-badge">$8–$12</span></div>
+        <div class="activity-note">Vonnegut was born and raised in Indianapolis. Pick up the museum's literary journal, <em>So It Goes No. 14: The Year of the Journalist.</em></div>
+      </li>
+    </ul>
+
+    <h2>Art</h2>
+    <ul class="activity-list">
+      <li>
+        <div class="activity-main"><strong>Eiteljorg Museum of American Indians and Western Art</strong> <span class="meta">Downtown</span> <span class="cost-badge">$22</span></div>
+      </li>
+      <li>
+        <div class="activity-main"><strong>Contemporary Art Museum (CAMi)</strong> <span class="meta">Downtown</span></div>
+      </li>
+      <li>
+        <div class="activity-main"><strong>Indianapolis Museum of Art</strong> <span class="meta">North of Downtown · 20-min drive</span> <span class="cost-badge">$25</span></div>
+      </li>
+      <li>
+        <div class="activity-main"><strong>First Fridays</strong> <span class="meta">Various venues · Downtown</span></div>
+        <div class="activity-note">Free art events at spots around the city on the first Friday of each month.</div>
+      </li>
+    </ul>
+
+    <h2>Activities & Events</h2>
+    <table class="transport-table">
+      <thead><tr><th>Activity</th><th>Where</th><th>Date</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Maple Syrup Season</strong></td><td>Southeast Indy · 25-min drive</td><td>Mar 5–8</td><td>$6</td></tr>
+        <tr><td><strong>Candle making</strong> at Penn & Beech</td><td>Downtown</td><td></td><td>$20+</td></tr>
+        <tr><td><strong>Paint a pair of sneakers</strong> at Kicasso</td><td>Broad Ripple · 20-min drive</td><td></td><td>$49+</td></tr>
+        <tr><td><strong>Vintage video games & pinball</strong> at Tappers</td><td>Downtown</td><td></td><td>$15+</td></tr>
+        <tr><td><strong>Drag Queen Sip & Paint</strong></td><td>Downtown</td><td>Mar 7</td><td>$48</td></tr>
+        <tr><td><strong>Cold Frames & Seed Starting</strong> <span style="font-size:0.8em;color:var(--text-muted)">Gardening class</span></td><td>Broad Ripple · 20-min drive</td><td>Mar 7</td><td>$20</td></tr>
+        <tr><td><strong>Athenaeum Bier & Building Tour</strong></td><td>Downtown</td><td>Mar 8</td><td>$43</td></tr>
+        <tr>
+          <td><strong>Indoor go-karting</strong></td>
+          <td>Speedway · 15-min drive</td>
+          <td>Mar 8</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="table-note">Speedway is the town within Indianapolis that hosts the largest single-day sporting event in the world. The Indianapolis Motor Speedway Museum is also worth a visit, even for non-racing fans.</p>
+
+    <h2>Shopping</h2>
+    <ul class="activity-list">
+      <li><div class="activity-main"><strong>Tomorrow Book Store</strong> <span class="meta">Downtown</span></div></li>
+      <li><div class="activity-main"><strong>Silver in the City</strong> <span class="meta">Downtown</span></div></li>
+      <li><div class="activity-main"><strong>Artisans</strong> <span class="meta">Downtown & Broad Ripple</span></div></li>
+      <li><div class="activity-main"><strong>Midland Arts & Antiques</strong> <span class="meta">Downtown</span></div></li>
+      <li><div class="activity-main"><strong>The Botanical Bar</strong> <span class="meta">East Side · 15-min drive</span></div></li>
+      <li>
+        <div class="activity-main"><strong>Dear Mom</strong> <span class="meta">East Side · 15-min drive</span></div>
+        <div class="activity-note">Eclectic shop for zines, books, snacks, and vintage clothing. Rabble coffee shop next door.</div>
+      </li>
+      <li>
+        <div class="activity-main"><strong>Loudmouth Books</strong> <span class="meta">Near North Side · 10-min drive</span></div>
+        <div class="activity-note">Promoters of banned books. There's also a sweet stationery store nearby.</div>
+      </li>
+    </ul>
+  </div>
 </div>
 
 <script>
