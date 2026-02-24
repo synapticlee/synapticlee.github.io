@@ -969,8 +969,28 @@
   }
   @media (max-width: 900px) {
     .content-page { padding: 1.25rem 1rem; }
-    .transport-table { font-size: 0.78rem; }
+    .content-page h2 { font-size: 1.3rem; }
+    .transport-table { font-size: 0.85rem; }
     .transport-table th, .transport-table td { padding: 6px 8px; }
+    /* Make tables horizontally scrollable on narrow screens */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 0.5rem;
+    }
+    .table-wrap .transport-table {
+      min-width: 480px;
+      margin-bottom: 0;
+    }
+    /* page-empty needs to scroll like a normal page on mobile */
+    .page-empty.active {
+      display: block;
+      overflow: visible;
+    }
+    .page-empty.active .content-page {
+      overflow: visible;
+      max-width: 100%;
+    }
   }
 </style>
 </head>
@@ -1100,6 +1120,7 @@
   <div class="content-page">
     <h2>Getting to/from the Airport</h2>
     <p>Indianapolis International Airport (IND) is about 10 miles southwest of downtown.</p>
+    <div class="table-wrap">
     <table class="transport-table">
       <thead><tr><th>Option</th><th>Cost</th><th>Time</th><th>Notes</th></tr></thead>
       <tbody>
@@ -1123,6 +1144,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
 
     <h2>Getting Around Downtown</h2>
     <p>The JW Marriott sits on the western edge of downtown, connected directly to the Convention Center. Food and drink options are within a 10-min walk, but you'll want to venture further for more variety.</p>
@@ -1161,6 +1183,7 @@
     </ul>
 
     <h2>Shows</h2>
+    <div class="table-wrap">
     <table class="transport-table">
       <thead><tr><th>Event</th><th>Type</th><th>Venue</th><th>Date</th><th>Cost</th></tr></thead>
       <tbody>
@@ -1173,9 +1196,11 @@
         <tr><td><strong>Chatterbox Jazz Club</strong>*</td><td>Jazz</td><td>Downtown</td><td>Every night (no Sundays)</td><td>—</td></tr>
       </tbody>
     </table>
+    </div>
     <p class="table-note">* Cozy, gritty institution. Don't bring too big a crowd.</p>
 
     <h2>Sporting Events</h2>
+    <div class="table-wrap">
     <table class="transport-table">
       <thead><tr><th>Event</th><th>Venue</th><th>Dates</th><th>Cost</th></tr></thead>
       <tbody>
@@ -1193,6 +1218,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
     <p class="table-note">Three Big 10 teams are currently in the top 10 nationally. All-tourney passes are available now; single-game tickets coming soon.</p>
 
     <h2>Parks & Exercise</h2>
@@ -1234,6 +1260,7 @@
     </ul>
 
     <h2>Activities & Events</h2>
+    <div class="table-wrap">
     <table class="transport-table">
       <thead><tr><th>Activity</th><th>Where</th><th>Date</th><th>Cost</th></tr></thead>
       <tbody>
@@ -1252,6 +1279,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
     <p class="table-note">Speedway is the town within Indianapolis that hosts the largest single-day sporting event in the world. The Indianapolis Motor Speedway Museum is also worth a visit, even for non-racing fans.</p>
 
     <h2>Shopping</h2>
