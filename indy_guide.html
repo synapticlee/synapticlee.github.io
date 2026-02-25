@@ -83,6 +83,16 @@
   }
   .page-empty.active { display: flex; }
 
+  /* When showing content pages, unlock body scroll */
+  body.content-mode {
+    height: auto;
+    overflow: auto;
+  }
+  body.content-mode .page-empty.active {
+    display: block;
+    overflow: visible;
+  }
+
   /* Header */
   .header {
     padding: 1rem 2rem;
@@ -831,7 +841,6 @@
   /* Content pages (Logistics / Things to Do) */
   .content-page {
     flex: 1;
-    overflow-y: auto;
     padding: 2rem;
     max-width: 860px;
     margin: 0 auto;
@@ -891,7 +900,7 @@
     flex-basis: 100%;
     line-height: 1.45;
   }
-  /* Activity list — no dividing lines */
+  /* Activity list */
   .activity-list li {
     padding: 0.3rem 0;
   }
@@ -972,7 +981,6 @@
     .content-page h2 { font-size: 1.3rem; }
     .transport-table { font-size: 0.85rem; }
     .transport-table th, .transport-table td { padding: 6px 8px; }
-    /* Make tables horizontally scrollable on narrow screens */
     .table-wrap {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -981,15 +989,6 @@
     .table-wrap .transport-table {
       min-width: 480px;
       margin-bottom: 0;
-    }
-    /* page-empty needs to scroll like a normal page on mobile */
-    .page-empty.active {
-      display: block;
-      overflow: visible;
-    }
-    .page-empty.active .content-page {
-      overflow: visible;
-      max-width: 100%;
     }
   }
 </style>
@@ -1678,7 +1677,11 @@ document.querySelectorAll('.nav a').forEach(link => {
     document.querySelectorAll('.page, .page-empty').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + page).classList.add('active');
     if (page === 'food') {
+      document.body.classList.remove('content-mode');
       map.invalidateSize();
+    } else {
+      document.body.classList.add('content-mode');
+      window.scrollTo(0, 0);
     }
   });
 });
