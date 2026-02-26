@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NICAR Indy Restaurant Guide</title>
+<meta name="description" content="Curated restaurant, bar, and coffee guide for NICAR 2026 in Indianapolis — with an interactive map, filters, and local tips.">
+<meta property="og:title" content="NICAR 2026 Indy Guide">
+<meta property="og:description" content="Curated restaurant, bar, and coffee guide for NICAR 2026 in Indianapolis — with an interactive map, filters, and local tips.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,6 +59,7 @@
     text-decoration: none;
     border-radius: 6px;
     transition: all 0.15s;
+    white-space: nowrap;
   }
   .nav a:hover {
     color: var(--text);
@@ -856,7 +862,7 @@
   .content-page h2:first-child { margin-top: 0; }
   .content-page h3 {
     font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 600;
     color: var(--text);
     margin-bottom: 0.5rem;
@@ -885,7 +891,7 @@
   /* Places to Wander plain list */
   .content-page ul:not(.activity-list) li {
     font-size: 1rem;
-    line-height: 1.55;
+    line-height: 1.6;
     color: var(--text);
     padding: 0.35rem 0;
     display: flex;
@@ -895,10 +901,10 @@
   }
   .content-page ul:not(.activity-list) li strong { color: var(--text); font-weight: 600; }
   .content-page ul:not(.activity-list) li .note {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-muted);
     flex-basis: 100%;
-    line-height: 1.45;
+    line-height: 1.6;
   }
   /* Activity list */
   .activity-list li {
@@ -906,7 +912,7 @@
   }
   .activity-main {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.6;
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
@@ -914,9 +920,9 @@
   }
   .activity-main strong { font-weight: 600; color: var(--text); }
   .activity-note {
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--text-muted);
-    line-height: 1.45;
+    line-height: 1.6;
     margin-top: 1px;
   }
   .content-page .meta {
@@ -925,7 +931,7 @@
     color: var(--text-muted);
   }
   .table-note {
-    font-size: 0.95rem;
+    font-size: 0.8rem !important;
     color: var(--text-muted);
     margin-top: -0.5rem;
     margin-bottom: 1rem;
@@ -934,14 +940,14 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1rem;
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   .transport-table th {
     background: var(--surface);
     text-align: left;
     padding: 8px 12px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-muted);
@@ -951,7 +957,7 @@
     padding: 8px 12px;
     border-bottom: 1px solid var(--border);
     vertical-align: top;
-    line-height: 1.5;
+    line-height: 1.6;
   }
   .transport-table tr:last-child td { border-bottom: none; }
   .cost-badge {
@@ -979,16 +985,46 @@
   @media (max-width: 900px) {
     .content-page { padding: 1.25rem 1rem; }
     .content-page h2 { font-size: 1.3rem; }
-    .transport-table { font-size: 0.85rem; }
-    .transport-table th, .transport-table td { padding: 6px 8px; }
-    .table-wrap {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      margin-bottom: 0.5rem;
+    .table-wrap { margin-bottom: 0.5rem; }
+    /* Stack all transport tables as cards on mobile */
+    .transport-table,
+    .transport-table tbody {
+      display: block;
+      width: 100%;
     }
-    .table-wrap .transport-table {
-      min-width: 480px;
-      margin-bottom: 0;
+    .transport-table { font-size: 0.88rem; }
+    .transport-table thead { display: none; }
+    .transport-table tbody tr {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      padding: 10px 12px;
+      background: var(--surface);
+    }
+    .transport-table tbody tr:last-child { border-bottom: 1px solid var(--border); }
+    .transport-table td {
+      display: block;
+      width: 100%;
+      padding: 3px 0;
+      border-bottom: none;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+    .transport-table td:first-child {
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding-bottom: 6px;
+      margin-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .transport-table td[data-label]::before {
+      content: attr(data-label) ": ";
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
   }
 </style>
@@ -997,44 +1033,43 @@
 
 <div class="header">
   <div>
-    <!-- <div class="subtitle">Built by Julie Lee with Claude.</div> -->
     <h1>NICAR 2026 Indy Guide</h1>
     <p>Curated by local organizing committee, with restaurant recs by IndyStar dining and drinks reporter <a href="https://www.indystar.com/staff/8379975001/bradley-hohulin/">Bradley Hohulin</a>. Web app built by Julie Lee with Claude.</p>
   </div>
-  <nav class="nav">
-    <a href="#" class="active" data-page="food">Food</a>
-    <a href="#" data-page="logistics">Logistics</a>
-    <a href="#" data-page="things-to-do">Things to Do</a>
+  <nav class="nav" role="tablist" aria-label="Page navigation">
+    <a href="#" class="active" data-page="food" role="tab" aria-selected="true" aria-controls="page-food" id="tab-food">Food</a>
+    <a href="#" data-page="logistics" role="tab" aria-selected="false" aria-controls="page-logistics" id="tab-logistics">Logistics</a>
+    <a href="#" data-page="things-to-do" role="tab" aria-selected="false" aria-controls="page-things-to-do" id="tab-things-to-do">Things to Do</a>
   </nav>
 </div>
 
-<div class="page active" id="page-food">
+<div class="page active" id="page-food" role="tabpanel" aria-labelledby="tab-food">
 <div class="app">
   <div class="map-panel">
-    <div id="map"></div>
-    <button class="locate-btn" id="locate-btn" title="Show my location">
+    <div id="map" role="application" aria-label="Interactive restaurant map of Indianapolis"></div>
+    <button class="locate-btn" id="locate-btn" title="Show my location" aria-label="Show my location">
       <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="3"/>
         <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
       </svg>
     </button>
-    <button class="reset-map-btn" id="reset-map-btn" title="Reset map view">
+    <button class="reset-map-btn" id="reset-map-btn" title="Reset map view" aria-label="Reset map view">
       <span style="font-size:18px;color:var(--text-muted);line-height:1;">↺</span>
     </button>
     <div class="legend">
-      <div class="legend-title">Price</div>
+      <div class="legend-title">Legend</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--green)"></div> $</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--blue)"></div> $$</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--purple)"></div> $$$</div>
       <div class="legend-item"><div class="legend-dot" style="background: var(--red)"></div> $$$$</div>
-      <div class="legend-item" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border)"><div class="legend-dot" style="background: var(--accent)"></div> JW Marriott</div>
+      <div class="legend-item" style="margin-top:6px;padding-top:6px;border-top:1px solid var(--border)"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="flex-shrink:0"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#b8792e" stroke="#b8792e" stroke-width="1" stroke-linejoin="round"/></svg> JW Marriott</div>
     </div>
   </div>
   <div class="table-panel">
     <div class="filters">
       <div class="filter-group">
         <label>Max Price</label>
-        <select id="filter-price">
+        <select id="filter-price" aria-label="Filter by maximum price">
           <option value="">All</option>
           <option value="1">$</option>
           <option value="2">$$</option>
@@ -1043,8 +1078,8 @@
         </select>
       </div>
       <div class="filter-group">
-        <label>Max Distance</label>
-        <select id="filter-distance">
+        <label>Max Distance (walk or drive)</label>
+        <select id="filter-distance" aria-label="Filter by maximum distance">
           <option value="">Any</option>
           <option value="5">≤ 5 min</option>
           <option value="10">≤ 10 min</option>
@@ -1054,13 +1089,13 @@
       </div>
       <div class="filter-group">
         <label>Cuisine</label>
-        <select id="filter-cuisine">
+        <select id="filter-cuisine" aria-label="Filter by cuisine type">
           <option value="">All</option>
         </select>
       </div>
       <div class="filter-group">
         <label>Type</label>
-        <select id="filter-meal">
+        <select id="filter-meal" aria-label="Filter by meal type">
           <option value="">All</option>
           <option value="Breakfast/Brunch">Breakfast/Brunch</option>
           <option value="Lunch">Lunch</option>
@@ -1072,7 +1107,7 @@
       </div>
       <div class="filter-group">
         <label>Features</label>
-        <select id="filter-dietary">
+        <select id="filter-dietary" aria-label="Filter by features">
           <option value="">All</option>
           <option value="dietary">Veg/Vegan/GF friendly</option>
           <option value="groups">Good for groups</option>
@@ -1080,10 +1115,10 @@
       </div>
       <div class="filter-group">
         <label>Search</label>
-        <input type="text" id="filter-search" placeholder="Name, address, or note…">
+        <input type="text" id="filter-search" placeholder="Name, address, or note…" aria-label="Search restaurants">
       </div>
       <button class="reset-btn" onclick="resetFilters()">Reset</button>
-      <div class="result-count" id="result-count"></div>
+      <div class="result-count" id="result-count" aria-live="polite"></div>
     </div>
     <div class="table-scroll">
       <table>
@@ -1115,7 +1150,7 @@
 </div>
 </div>
 
-<div class="page-empty" id="page-logistics">
+<div class="page-empty" id="page-logistics" role="tabpanel" aria-labelledby="tab-logistics">
   <div class="content-page">
     <h2>Getting to/from the Airport</h2>
     <p>Indianapolis International Airport (IND) is about 10 miles southwest of downtown.</p>
@@ -1125,21 +1160,21 @@
       <tbody>
         <tr>
           <td><strong>IndyGo Bus Route 8</strong></td>
-          <td>$2.75</td>
-          <td>45–60 min</td>
-          <td>Most budget-friendly; runs every 30 min. Pay with the <a href="https://www.indygo.net/mykey/" target="_blank" rel="noopener">myKey app</a>. Pickup on the ground floor past rental car counters.</td>
+          <td data-label="Cost">$2.75</td>
+          <td data-label="Time">45–60 min</td>
+          <td data-label="Notes">Most budget-friendly; runs every 30 min. Pay with the <a href="https://www.indygo.net/mykey/" target="_blank" rel="noopener">myKey app</a>. Pickup on the ground floor past rental car counters.</td>
         </tr>
         <tr>
           <td><strong>Uber / Lyft</strong></td>
-          <td>$25–40</td>
-          <td>20–30 min</td>
-          <td>Most convenient; varies by demand. <a href="#">Find a rideshare buddy via IRE's form</a>. Same ground-floor pickup area.</td>
+          <td data-label="Cost">$25–40</td>
+          <td data-label="Time">20–30 min</td>
+          <td data-label="Notes">Most convenient; varies by demand. <a href="https://docs.google.com/forms/d/e/1FAIpQLSei6P9I3dupDDF6Fni6G4n7oHx5vRWVAOpikKDLEkQ2fMPDcg/viewform" target="_blank" rel="noopener">Find a rideshare buddy via IRE's form</a>. Same ground-floor pickup area.</td>
         </tr>
         <tr>
           <td><strong>Taxi</strong></td>
-          <td>$45–55</td>
-          <td>20–30 min</td>
-          <td>Taxi stand on the ground floor at the end of the standard pickup/dropoff area.</td>
+          <td data-label="Cost">$45–55</td>
+          <td data-label="Time">20–30 min</td>
+          <td data-label="Notes">Taxi stand on the ground floor at the end of the standard pickup/dropoff area.</td>
         </tr>
       </tbody>
     </table>
@@ -1170,7 +1205,7 @@
   </div>
 </div>
 
-<div class="page-empty" id="page-things-to-do">
+<div class="page-empty" id="page-things-to-do" role="tabpanel" aria-labelledby="tab-things-to-do">
   <div class="content-page">
     <h2>Places to Wander</h2>
     <ul>
@@ -1186,13 +1221,13 @@
     <table class="transport-table">
       <thead><tr><th>Event</th><th>Type</th><th>Venue</th><th>Date</th><th>Cost</th></tr></thead>
       <tbody>
-        <tr><td><strong>Blithe Spirit</strong></td><td>Comedy</td><td>Scottish Rite · Downtown</td><td>Mar 5</td><td>$24</td></tr>
-        <tr><td><strong>Curtis Cook</strong></td><td>Comedy</td><td>Helium Comedy Club · Downtown</td><td>Mar 5</td><td>$16</td></tr>
-        <tr><td><strong>Arkansauce</strong></td><td>Bluegrass</td><td>Turn Table · Broad Ripple (20-min drive)</td><td>Mar 5</td><td>$22</td></tr>
-        <tr><td><strong>Indianapolis Symphony & Ballet: The Sleeping Beauty</strong></td><td>Dance</td><td>Butler University · Broad Ripple (20-min drive)</td><td>Mar 6</td><td>$24</td></tr>
-        <tr><td><strong>The Floozies + Too Many Zooz</strong></td><td>Brass house</td><td>Old National Centre · Downtown</td><td>Mar 6</td><td>$36</td></tr>
-        <tr><td><strong>Foxy Shazam</strong></td><td>Rock</td><td>Turn Table · Broad Ripple (20-min drive)</td><td>Mar 7</td><td>$39</td></tr>
-        <tr><td><strong>Chatterbox Jazz Club</strong>*</td><td>Jazz</td><td>Downtown</td><td>Every night (no Sundays)</td><td>—</td></tr>
+        <tr><td><strong>Blithe Spirit</strong></td><td data-label="Type">Comedy</td><td data-label="Venue">Scottish Rite · Downtown</td><td data-label="Date">Mar 5</td><td data-label="Cost">$24</td></tr>
+        <tr><td><strong>Curtis Cook</strong></td><td data-label="Type">Comedy</td><td data-label="Venue">Helium Comedy Club · Downtown</td><td data-label="Date">Mar 5</td><td data-label="Cost">$16</td></tr>
+        <tr><td><strong>Arkansauce</strong></td><td data-label="Type">Bluegrass</td><td data-label="Venue">Turn Table · Broad Ripple (20-min drive)</td><td data-label="Date">Mar 5</td><td data-label="Cost">$22</td></tr>
+        <tr><td><strong>Indianapolis Symphony & Ballet: The Sleeping Beauty</strong></td><td data-label="Type">Dance</td><td data-label="Venue">Butler University · Broad Ripple (20-min drive)</td><td data-label="Date">Mar 6</td><td data-label="Cost">$24</td></tr>
+        <tr><td><strong>The Floozies + Too Many Zooz</strong></td><td data-label="Type">Brass house</td><td data-label="Venue">Old National Centre · Downtown</td><td data-label="Date">Mar 6</td><td data-label="Cost">$36</td></tr>
+        <tr><td><strong>Foxy Shazam</strong></td><td data-label="Type">Rock</td><td data-label="Venue">Turn Table · Broad Ripple (20-min drive)</td><td data-label="Date">Mar 7</td><td data-label="Cost">$39</td></tr>
+        <tr><td><strong>Chatterbox Jazz Club</strong>*</td><td data-label="Type">Jazz</td><td data-label="Venue">Downtown</td><td data-label="Date">Every night (no Sundays)</td><td data-label="Cost">—</td></tr>
       </tbody>
     </table>
     </div>
@@ -1205,15 +1240,15 @@
       <tbody>
         <tr>
           <td><strong>Big 10 Women's Basketball Tournament</strong></td>
-          <td>Gainbridge Fieldhouse · Downtown</td>
-          <td>Mar 5–8</td>
-          <td>Approx. $20 or more</td>
+          <td data-label="Venue">Gainbridge Fieldhouse · Downtown</td>
+          <td data-label="Dates">Mar 5–8</td>
+          <td data-label="Cost">Approx. $20 or more</td>
         </tr>
         <tr>
           <td><strong>2026 U.S. Open: Bowling</strong></td>
-          <td>96th Street · 35-min drive</td>
-          <td>Mar 8</td>
-          <td>$45</td>
+          <td data-label="Venue">96th Street · 35-min drive</td>
+          <td data-label="Dates">Mar 8</td>
+          <td data-label="Cost">$45</td>
         </tr>
       </tbody>
     </table>
@@ -1263,18 +1298,18 @@
     <table class="transport-table">
       <thead><tr><th>Activity</th><th>Where</th><th>Date</th><th>Cost</th></tr></thead>
       <tbody>
-        <tr><td><strong>Maple Syrup Season</strong></td><td>Southeast Indy · 25-min drive</td><td>Mar 5–8</td><td>$6</td></tr>
-        <tr><td><strong>Candle making</strong> at Penn & Beech</td><td>Downtown</td><td></td><td>$20+</td></tr>
-        <tr><td><strong>Paint a pair of sneakers</strong> at Kicasso</td><td>Broad Ripple · 20-min drive</td><td></td><td>$49+</td></tr>
-        <tr><td><strong>Vintage video games & pinball</strong> at Tappers</td><td>Downtown</td><td></td><td>$15+</td></tr>
-        <tr><td><strong>Drag Queen Sip & Paint</strong></td><td>Downtown</td><td>Mar 7</td><td>$48</td></tr>
-        <tr><td><strong>Cold Frames & Seed Starting</strong> <span style="font-size:0.8em;color:var(--text-muted)">Gardening class</span></td><td>Broad Ripple · 20-min drive</td><td>Mar 7</td><td>$20</td></tr>
-        <tr><td><strong>Athenaeum Bier & Building Tour</strong></td><td>Downtown</td><td>Mar 8</td><td>$43</td></tr>
+        <tr><td><strong>Maple Syrup Season</strong></td><td data-label="Where">Southeast Indy · 25-min drive</td><td data-label="Date">Mar 5–8</td><td data-label="Cost">$6</td></tr>
+        <tr><td><strong>Candle making</strong> at Penn & Beech</td><td data-label="Where">Downtown</td><td data-label="Date"></td><td data-label="Cost">$20+</td></tr>
+        <tr><td><strong>Paint a pair of sneakers</strong> at Kicasso</td><td data-label="Where">Broad Ripple · 20-min drive</td><td data-label="Date"></td><td data-label="Cost">$49+</td></tr>
+        <tr><td><strong>Vintage video games & pinball</strong> at Tappers</td><td data-label="Where">Downtown</td><td data-label="Date"></td><td data-label="Cost">$15+</td></tr>
+        <tr><td><strong>Drag Queen Sip & Paint</strong></td><td data-label="Where">Downtown</td><td data-label="Date">Mar 7</td><td data-label="Cost">$48</td></tr>
+        <tr><td><strong>Cold Frames & Seed Starting</strong> <span style="font-size:0.8em;color:var(--text-muted)">Gardening class</span></td><td data-label="Where">Broad Ripple · 20-min drive</td><td data-label="Date">Mar 7</td><td data-label="Cost">$20</td></tr>
+        <tr><td><strong>Athenaeum Bier & Building Tour</strong></td><td data-label="Where">Downtown</td><td data-label="Date">Mar 8</td><td data-label="Cost">$43</td></tr>
         <tr>
           <td><strong>Indoor go-karting</strong></td>
-          <td>Speedway · 15-min drive</td>
-          <td>Mar 8</td>
-          <td>—</td>
+          <td data-label="Where">Speedway · 15-min drive</td>
+          <td data-label="Date">Mar 8</td>
+          <td data-label="Cost">—</td>
         </tr>
       </tbody>
     </table>
@@ -1314,17 +1349,17 @@ const restaurants = [
   {name:"Julieta",address:"1060 N. Capitol Ave.",lat:39.7813,lng:-86.1619,cuisine:"Mexican",price:"$",priceNum:1,distance:"7-min drive",distanceNum:7,meals:["Lunch"],hours:"Closed Mon, Sun",notes:"Walk-up taco counter with some of the best food in Indy. $5 tacos. Order through window at Turner's Bar next door for groups.",dietary:false,groups:true},
   {name:"Workingman's Friend",address:"234 N. Belmont Ave.",lat:39.7695,lng:-86.197,cuisine:"Burgers",price:"$",priceNum:1,distance:"7-min drive",distanceNum:7,meals:["Lunch"],hours:"Open until 2:45pm · Closed Mon, Sun",notes:"Legendary smashburgers. Cash only w/ ATM inside. Will be packed.",dietary:false,groups:false},
   {name:"Yolis Supermarket",address:"4202 S. Meridian St.",lat:39.705,lng:-86.15890,cuisine:"Mexican",price:"$",priceNum:1,distance:"11-min drive",distanceNum:11,meals:["Lunch"],hours:"Closed Sat",notes:"Taqueria inside a Mexican grocery store. Tons of taco and torta options.",dietary:false,groups:false},
-  {name:"Bluebeard",address:"653 Virginia Ave.",lat:39.7576,lng:-86.146,cuisine:"New American",price:"$$",priceNum:2,distance:"6-min drive",distanceNum:6,meals:["Lunch","Dinner"],hours:"Sun dinner only",notes:"2026 restaurant of the year. Great lunch value, amazing pastas and meat dishes at dinner.",dietary:true,groups:false},
+  {name:"Bluebeard",address:"653 Virginia Ave.",lat:39.7576,lng:-86.146,cuisine:"New American",price:"$$",priceNum:2,distance:"6-min drive",distanceNum:6,meals:["Lunch","Dinner"],hours:"Lunch + dinner; Sun dinner only",notes:"2026 restaurant of the year. Great lunch value, amazing pastas and meat dishes at dinner.",dietary:true,groups:false},
   {name:"Daisy Bar",address:"1011 Massachusetts Ave.",lat:39.7813,lng:-86.1382,cuisine:"Fusion",price:"$$",priceNum:2,distance:"11-min drive",distanceNum:11,meals:["Breakfast/Brunch","Lunch","Dinner"],hours:"Sun closes 4pm",notes:"Fun café by day, small plates by night. Daytime offerings are stronger. Nice coffee program.",dietary:true,groups:false},
   {name:"Shapiro's",address:"808 S. Meridian St.",lat:39.7563,lng:-86.1596,cuisine:"Deli",price:"$$",priceNum:2,distance:"4-min drive",distanceNum:4,meals:["Lunch"],hours:"",notes:"Jewish deli since the Taft administration. Immaculate Reuben. Kosher. Big tables for groups.",dietary:false,groups:true},
   {name:"Yazsh",address:"1705 E. Michigan St.",lat:39.7742,lng:-86.13030,cuisine:"Bulgarian",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Lunch","Dinner"],hours:"Closed Mon, Tue",notes:"Quaint Balkan and Mediterranean café. Excellent salads. Good coffee. Dinner closer to $25/plate.",dietary:false,groups:false},
   // === DINNER ===
   {name:"Axum",address:"825 N. Pennsylvania St.",lat:39.7787,lng:-86.1556,cuisine:"Ethiopian",price:"$$",priceNum:2,distance:"8-min drive",distanceNum:8,meals:["Dinner"],hours:"Closed Mon",notes:"Solid injera with stewed meats, lentils and veggies. ~$20/plate, extremely filling.",dietary:false,groups:false},
   {name:"Bosphorus",address:"935 S. East St.",lat:39.7546,lng:-86.1493,cuisine:"Turkish",price:"$$",priceNum:2,distance:"7-min drive",distanceNum:7,meals:["Dinner"],hours:"Sun opens 4pm",notes:"Cozy Turkish spot. Massive portions. Surprising veg/vegan options. Staggering pita budget.",dietary:true,groups:false},
-  {name:"Fat Dan's Deli",address:"410 E. Michigan St.",lat:39.7741,lng:-86.1497,cuisine:"American",price:"$–$$",priceNum:1.5,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Giant portions on paper, no plates. Italian beef, Chicago dogs, burgers. Fun atmosphere, good beer.",dietary:false,groups:false},
+  {name:"Fat Dan's Deli",address:"410 E. Michigan St.",lat:39.7741,lng:-86.1497,cuisine:"American",price:"$–$$",priceNum:2,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Giant portions on paper, no plates. Italian beef, Chicago dogs, burgers. Fun atmosphere, good beer.",dietary:false,groups:false},
   {name:"Thaitanium",address:"735 Massachusetts Ave.",lat:39.7769,lng:-86.146,cuisine:"Thai",price:"$$",priceNum:2,distance:"9-min drive",distanceNum:9,meals:["Dinner"],hours:"",notes:"Passable Thai food, lots of options, amazing iced coffee cocktail. Accommodating to large groups — call ahead.",dietary:false,groups:true},
   {name:"Lil Dumplings / The Garage",address:"926 Carrollton Ave.",lat:39.7804,lng:-86.1439,cuisine:"Japanese/Pan-Asian",price:"$$",priceNum:2,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Ramen/dandan spot in The Garage food hall. Run by former celebrated chef. Ideal for big groups — multiple restaurants in one spot.",dietary:false,groups:true},
-  {name:"Fernando's",address:"888 Massachusetts Ave.",lat:39.7796,lng:-86.1425,cuisine:"Brazilian/Mexican",price:"$$–$$$",priceNum:2.5,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Well-made Latin food. Try the chicken stroganoff or feijoada. Great for apps and drinks.",dietary:false,groups:false},
+  {name:"Fernando's",address:"888 Massachusetts Ave.",lat:39.7796,lng:-86.1425,cuisine:"Brazilian/Mexican",price:"$$–$$$",priceNum:3,distance:"10-min drive",distanceNum:10,meals:["Dinner"],hours:"",notes:"Well-made Latin food. Try the chicken stroganoff or feijoada. Great for apps and drinks.",dietary:false,groups:false},
   {name:"St. Elmo",address:"127 S. Illinois St.",lat:39.7648,lng:-86.1598,cuisine:"Steakhouse",price:"$$$$",priceNum:4,distance:"12-min walk",distanceNum:12,meals:["Dinner"],hours:"Dinner only (opens 4pm)",notes:"THE Indianapolis restaurant. Shrimp cocktail + steak = excellent dinner. Budget blower.",dietary:false,groups:false},
   {name:"Tinker Street",address:"402 E. 16th St.",lat:39.7886,lng:-86.1507,cuisine:"New American",price:"$$$",priceNum:3,distance:"12-min drive",distanceNum:12,meals:["Dinner"],hours:"Dinner only (opens 5pm)",notes:"Author's personal favorite for a fancy dinner. More interesting than St. Elmo.",dietary:false,groups:false},
   // === LATE NIGHT ===
@@ -1375,7 +1410,7 @@ function priceClass(priceNum) {
 // Initialize map
 const map = L.map('map', {
   zoomControl: true
-}).setView([39.7700, -86.1560], 14);
+}).setView([39.7663, -86.1684], 14);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
@@ -1387,11 +1422,11 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 const jwMarker = L.marker([39.7663, -86.1684], {
   icon: L.divIcon({
     className: '',
-    html: `<div style="width:24px;height:24px;border-radius:50%;background:#b8792e;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.25);"></div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12]
+    html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" style="filter:drop-shadow(0 2px 4px rgba(0,0,0,0.35));"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#b8792e" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14]
   })
-}).addTo(map).bindPopup('<div class="popup-name">JW Marriott</div><div class="popup-desc">Conference hotel — your home base</div>', { autoPan: false });
+}).addTo(map).bindPopup('<div class="popup-name">JW Marriott</div><div class="popup-desc">Conference hotel — your home base</div>', { autoPan: true });
 
 // Create markers
 const markers = {};
@@ -1411,7 +1446,7 @@ restaurants.forEach((r, i) => {
     <div class="popup-price" style="color:${priceColor(r.priceNum)}">${r.price}</div>
     ${r.hours ? '<div class="popup-hours">' + r.hours + '</div>' : ''}
     <div class="popup-desc">${r.notes}${r.dietary ? '<br><span style="color:#009e73;font-size:0.72rem;">✓ Dietary-friendly</span>' : ''}${r.groups ? '<br><span style="color:#b8792e;font-size:0.72rem;">✓ Good for groups</span>' : ''}</div>
-    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" onclick="window.open(this.href);return false;" style="display:inline-block;margin-top:6px;font-size:0.78rem;color:var(--accent);text-decoration:none;font-family:'IBM Plex Sans',sans-serif;">↗ Directions</a>
+    <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" onclick="window.open(this.href,'_blank','noopener');return false;" style="display:inline-block;margin-top:6px;font-size:0.78rem;color:var(--accent);text-decoration:none;font-family:'IBM Plex Sans',sans-serif;">↗ Directions</a>
   `, { autoPan: true, autoPanPadding: [40, 40], maxWidth: 240 });
   markers[i] = marker;
 });
@@ -1480,11 +1515,11 @@ function renderTable() {
   // Render rows
   const tbody = document.getElementById('table-body');
   tbody.innerHTML = filtered.map(r => `
-    <tr onclick="focusRestaurant(${r.idx})" data-idx="${r.idx}">
+    <tr onclick="focusRestaurant(${r.idx})" data-idx="${r.idx}" tabindex="0" role="button" aria-label="${r.name}">
       <td class="name-cell">
         ${r.name}
         <div class="address">${r.address}</div>
-        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" class="directions-link" onclick="event.stopPropagation();window.open(this.href);return false;">↗ Directions</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" class="directions-link" onclick="event.stopPropagation();window.open(this.href,'_blank','noopener');return false;">↗ Directions</a>
       </td>
       <td class="cuisine-cell">${r.cuisine}</td>
       <td class="${priceClass(r.priceNum)} price-cell">${r.price}</td>
@@ -1507,7 +1542,7 @@ function renderTable() {
         <div class="mobile-card-name">${r.name}</div>
         <div class="mobile-card-price ${priceClass(r.priceNum)}">${r.price}</div>
       </div>
-      <div class="mobile-card-address">${r.address} · <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" class="directions-link" onclick="event.stopPropagation();window.open(this.href);return false;">↗ Directions</a></div>
+      <div class="mobile-card-address">${r.address} · <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(r.name + ', ' + r.address + ', Indianapolis, Indiana')}" target="_blank" rel="noopener" class="directions-link" onclick="event.stopPropagation();window.open(this.href,'_blank','noopener');return false;">↗ Directions</a></div>
       <div class="mobile-card-meta">
         <span class="cuisine-tag">${r.cuisine}</span>
         <span class="mobile-card-distance">${r.distance}</span>
@@ -1567,7 +1602,9 @@ function focusRestaurant(idx) {
   const card = document.querySelector(`.mobile-card[data-card-idx="${idx}"]`);
   if (card) card.classList.add('highlighted');
   if (window.innerWidth <= 900) {
-    document.querySelector('.map-panel').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      document.querySelector('.map-panel').scrollIntoView({ behavior: 'smooth' });
+    }, 700);
   }
 }
 window.focusRestaurant = focusRestaurant;
@@ -1601,7 +1638,22 @@ document.querySelectorAll('th[data-sort]').forEach(th => {
 ['filter-price', 'filter-distance', 'filter-cuisine', 'filter-meal', 'filter-dietary'].forEach(id => {
   document.getElementById(id).addEventListener('change', renderTable);
 });
-document.getElementById('filter-search').addEventListener('input', renderTable);
+document.getElementById('filter-search').addEventListener('input', (function() {
+  let timer;
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(renderTable, 200);
+  };
+})());
+
+// Keyboard navigation for table rows
+document.getElementById('table-body').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    const row = e.target.closest('tr[data-idx]');
+    if (row) focusRestaurant(parseInt(row.dataset.idx));
+  }
+});
 
 // Reset map view
 document.getElementById('reset-map-btn').addEventListener('click', () => {
@@ -1609,7 +1661,7 @@ document.getElementById('reset-map-btn').addEventListener('click', () => {
   document.querySelectorAll('.mobile-card.highlighted').forEach(el => el.classList.remove('highlighted'));
   document.querySelectorAll('.custom-marker.highlighted').forEach(el => el.classList.remove('highlighted'));
   map.closePopup();
-  map.setView([39.7700, -86.1560], 14, { animate: true });
+  map.setView([39.7663, -86.1684], 14, { animate: true });
 });
 
 // Mobile legend toggle
@@ -1672,13 +1724,17 @@ document.querySelectorAll('.nav a').forEach(link => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     const page = link.dataset.page;
-    document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+    document.querySelectorAll('.nav a').forEach(a => {
+      a.classList.remove('active');
+      a.setAttribute('aria-selected', 'false');
+    });
     link.classList.add('active');
+    link.setAttribute('aria-selected', 'true');
     document.querySelectorAll('.page, .page-empty').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + page).classList.add('active');
     if (page === 'food') {
       document.body.classList.remove('content-mode');
-      map.invalidateSize();
+      setTimeout(() => map.invalidateSize(), 150);
     } else {
       document.body.classList.add('content-mode');
       window.scrollTo(0, 0);
