@@ -4,7 +4,13 @@ Personal website
 
 ## Latest stories
 
-[‘COVID Days’ for NYC Teachers Ended, Even as Rates Were Rising](https://medium.com/labor-new-york/covid-days-for-nyc-teachers-ended-even-as-rates-were-rising-dc747243f63f). October 14, 2025. *Labor New York*. 
+[Kickstarter Employees Fired In Retaliation for Strike, Union Says](https://columbianewsservice.com/2026/02/25/kickstarter-employees-fired-in-retaliation-for-strike-union-says/). February 25, 2026. *Columbia News Service*. 
+
+[Night Court at the Twilight of the Adams Administration](Night Court at the Twilight of the Adams Administration). December 18, 2025. *Secret Structures*. 
+
+[Mamdani Campaigners Are Optimistic About Winning Staten Island](https://cjspolitics.substack.com/p/mamdani-campaigners-are-optimistic). November 4, 2025. *Columbia Journalism Politics and Elections.*
+
+[‘COVID Days’ for NYC Teachers Ended, Even as Rates Were Rising](https://medium.com/labor-new-york/covid-days-for-nyc-teachers-ended-even-as-rates-were-rising-dc747243f63f). October 14, 2025. *Labor New York*. (Co-published in [Columbia News Service](https://columbianewsservice.com/2025/10/21/covid-days-for-nyc-teachers-ended-this-year-even-as-rates-were-rising/))
 
 [Kickstarter Employees Launch Strike Over Four-Day Workweek, Pay Floor](https://medium.com/labor-new-york/kickstarter-employees-launch-strike-over-four-day-workweek-pay-floor-e1403519e3a5). October 3, 2025. *Labor New York.* (Co-published in [Columbia News Service](https://columbianewsservice.com/2025/10/20/kickstarter-employees-launch-historic-remote-strike-over-four-day-workweek-pay-floor/))
 
