@@ -6,7 +6,7 @@ Personal website
 
 [Kickstarter Employees Fired In Retaliation for Strike, Union Says](https://columbianewsservice.com/2026/02/25/kickstarter-employees-fired-in-retaliation-for-strike-union-says/). February 25, 2026. *Columbia News Service*. 
 
-[Night Court at the Twilight of the Adams Administration](Night Court at the Twilight of the Adams Administration). December 18, 2025. *Secret Structures*. 
+[Night Court at the Twilight of the Adams Administration](https://medium.com/secret-structures/night-court-at-the-twilight-of-the-adams-administration-2d678c508022). December 18, 2025. *Secret Structures*. 
 
 [Mamdani Campaigners Are Optimistic About Winning Staten Island](https://cjspolitics.substack.com/p/mamdani-campaigners-are-optimistic). November 4, 2025. *Columbia Journalism Politics and Elections.*
 
