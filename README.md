@@ -2,6 +2,21 @@
 
 Personal website
 
+## Inc. stories
+[Meta’s Muse Glimmer Runs on a Laptop—and Will Keep Your Sensitive Files Out of the Cloud](https://www.inc.com/julie-lee/metas-muse-glimmer-runs-on-a-laptop-and-will-keep-your-sensitive-files-out-of-the-cloud/91388211)
+
+[The Bosses at These 2 Stores Are Bots. Their Management Style Is Nice but ‘Sometimes Dumb’](https://www.inc.com/julie-lee/the-bosses-at-these-2-stores-are-bots-their-management-style-is-nice-but-sometimes-dumb/91386567)
+
+[With Just 5 Words, OpenAI’s President Admitted the Problem With the New ChatGPT App](https://www.inc.com/julie-lee/with-just-5-words-openais-president-admitted-the-problem-with-the-new-chatgpt-app/91383362)
+
+[Claude’s Latest Upgrade Is Driving Some Users Crazy. These 3 Tweaks May Fix It](https://www.inc.com/julie-lee/claudes-latest-upgrade-is-driving-some-users-crazy-these-3-tweaks-may-fix-it/91382633)
+
+[After a Privacy Backlash, Elon Musk’s SpaceXAI Is Making a Major Change](https://www.inc.com/julie-lee/after-a-privacy-backlash-elon-musks-spacexai-is-making-a-major-change/91375710)
+
+[Elon Musk’s Grok Faces a Trust Crisis After Developers Flag a Major Privacy Concern](https://www.inc.com/julie-lee/elon-musks-grok-faces-a-trust-crisis-after-developers-flag-a-major-privacy-concern/91374258)
+
+[Anthropic Just Gave Its AI Coding Tool a Built-In Browser—Here’s Why Users Will Love It](https://www.inc.com/julie-lee/anthropic-just-gave-its-ai-coding-tool-a-built-in-browser-heres-why-users-will-love-it/91373492). 
+
 ## Latest stories
 
 [Kickstarter Employees Fired In Retaliation for Strike, Union Says](https://columbianewsservice.com/2026/02/25/kickstarter-employees-fired-in-retaliation-for-strike-union-says/). February 25, 2026. *Columbia News Service*. 
